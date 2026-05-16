@@ -93,7 +93,44 @@ npm install
 npm run dev
 npm run build
 npm run start
+npm run test:e2e
+npm run test:e2e:ui
 ```
+
+## Pruebas end-to-end
+
+El proyecto incluye pruebas de Playwright en `tests/osmai.spec.js`.
+
+Las pruebas validan:
+
+- Render del hero principal y navegacion.
+- Navegacion hacia las secciones de proyectos y planes.
+- Apertura de respuestas en FAQ.
+- Funcionamiento del chatbot y enlace de WhatsApp.
+
+Para correrlas localmente:
+
+```bash
+npm run build
+npm run test:e2e
+```
+
+Para abrir el modo visual de Playwright:
+
+```bash
+npm run test:e2e:ui
+```
+
+## CI/CD
+
+El repositorio incluye un workflow en `.github/workflows/ci.yml` que corre en cada `push` y `pull_request` hacia `main`.
+
+El workflow hace:
+
+- Instalacion con `npm ci`.
+- Instalacion de navegadores Playwright.
+- Build de Next.js.
+- Pruebas end-to-end con Playwright.
 
 ## Deploy manual en Vercel
 
