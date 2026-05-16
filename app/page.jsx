@@ -620,7 +620,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="footer">
+      <footer className="footer" id="footer">
         <img
           alt=""
           src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85"
