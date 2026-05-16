@@ -1062,6 +1062,7 @@ details[open] summary svg {
 .team-strip img {
   width: 100%;
   height: clamp(210px, 28vw, 360px);
+  max-height: 229px;
   object-fit: cover;
   filter: grayscale(1);
   border-radius: var(--radius);
