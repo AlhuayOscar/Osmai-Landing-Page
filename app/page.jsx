@@ -25,6 +25,7 @@ const navItems = [
   { label: "FAQ", href: "#faq" },
 ];
 //Cambio 2
+//Cambio 3 de otra rama
 const stats = [
   ["Web", "diseño y desarrollo"],
   ["Marca", "piezas visuales"],
