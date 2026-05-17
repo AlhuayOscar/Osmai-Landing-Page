@@ -24,7 +24,7 @@ const navItems = [
   { label: "Planes", href: "#planes" },
   { label: "FAQ", href: "#faq" },
 ];
-//Cambio
+//Cambio 2
 const stats = [
   ["Web", "diseño y desarrollo"],
   ["Marca", "piezas visuales"],
