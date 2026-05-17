@@ -2,9 +2,11 @@
 
 Landing page desarrollada con **Next.js 16** para **Osmai**, una propuesta de web design, diseño visual y desarrollo de software orientada a pequeñas y medianas empresas.
 
+
+
 El sitio presenta a Osmai como un equipo que combina la parte técnica de **Oscar**, creador, programador web y desarrollador de software, con la mirada visual de **Maira**, encargada de diseño, identidad y piezas gráficas.
 
-## Vista previa
+### Vista previa
 
 ![Hero de Osmai](docs/screenshots/hero.png)
 
