@@ -10,6 +10,7 @@ import {
   Search,
   Sparkles,
 } from "lucide-react";
+import ScrollAnimator from "./components/ScrollAnimator";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
@@ -145,6 +146,7 @@ function PrimaryLink({ href, children, variant = "primary" }) {
 export default function Home() {
   return (
     <main className="landing-shell">
+      <ScrollAnimator />
       <section className="hero-section" id="top">
         <div className="hero-background" aria-hidden="true">
           <div className="hero-image-frame">
