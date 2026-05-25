@@ -165,7 +165,7 @@ svg {
 .hero-nav-links {
   display: inline-flex;
   align-items: center;
-  gap: 48px;
+  gap: 18px;
   min-height: 40px;
   padding: 0 22px;
   border-radius: var(--radius-sm);
@@ -454,6 +454,77 @@ svg {
   color: rgba(17, 71, 239, 0.2);
 }
 
+.agency-section {
+  padding: 72px 0 88px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(14, 69, 255, 0.1), transparent 28%),
+    var(--page-white);
+}
+
+.agency-layout,
+.why-layout,
+.commerce-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 34px;
+  align-items: start;
+}
+
+.agency-note {
+  margin-top: 28px;
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--page-blue), var(--page-blue-deep));
+  color: var(--text);
+  box-shadow: var(--shadow-strong);
+}
+
+.agency-note strong {
+  display: block;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.05;
+}
+
+.agency-note p {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.55;
+}
+
+.specialty-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.specialty-card,
+.why-card,
+.case-study-card {
+  background: var(--card-white);
+  border: 1px solid var(--surface-line);
+  box-shadow: var(--shadow);
+}
+
+.specialty-card {
+  min-height: 230px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+}
+
+.specialty-card svg,
+.why-card span {
+  color: var(--text);
+  background: var(--page-blue);
+}
+
+.specialty-card svg {
+  width: 38px;
+  height: 38px;
+  padding: 9px;
+  border-radius: 50%;
+}
+
 .projects-section,
 .plans-section,
 .faq-section {
@@ -475,6 +546,14 @@ svg {
 
 .projects-copy .section-title p,
 .faq-layout .section-title p {
+  color: rgba(17, 71, 239, 0.72);
+}
+
+.agency-section .section-title span,
+.projects-section .section-title span,
+.commerce-section .section-title span,
+.plans-section .section-title span,
+.faq-section .section-title span {
   color: rgba(17, 71, 239, 0.72);
 }
 
@@ -548,8 +627,139 @@ svg {
   color: var(--ink);
 }
 
-.project-card p {
+.project-card p,
+.specialty-card p,
+.why-card p,
+.case-study-card p {
   margin-top: 14px;
+}
+
+.specialty-card h3,
+.why-card h3,
+.case-study-card h3 {
+  margin: 18px 0 0;
+  font-family: var(--font-display), sans-serif;
+  color: var(--ink);
+  line-height: 1.05;
+}
+
+.specialty-card h3 {
+  font-size: 1.55rem;
+}
+
+.specialty-card p,
+.why-card p,
+.case-study-card p,
+.commerce-list li {
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.project-cases {
+  margin-top: 70px;
+}
+
+.case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.case-study-card {
+  position: relative;
+  min-height: 390px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+}
+
+.case-image-placeholder {
+  min-height: 165px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(14, 69, 255, 0.92), rgba(11, 54, 200, 0.78)),
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.24), transparent 26%);
+}
+
+.case-image-placeholder span {
+  padding: 10px 13px;
+  border: 1px dashed rgba(255, 255, 255, 0.55);
+  border-radius: var(--radius-sm);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-study-card > div:last-of-type {
+  padding: 20px 6px 4px;
+}
+
+.case-study-card > div:last-of-type > span {
+  color: rgba(17, 71, 239, 0.72);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.case-study-card h3 {
+  font-size: 1.55rem;
+}
+
+.case-study-card > svg {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  color: rgba(17, 71, 239, 0.34);
+}
+
+.why-section {
+  padding: 84px 0;
+  background:
+    linear-gradient(180deg, rgba(14, 69, 255, 0.96), var(--page-blue-deep)),
+    var(--page-blue);
+  color: var(--text);
+}
+
+.why-section .section-title p {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.why-card {
+  min-height: 215px;
+  padding: 24px;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(12px);
+  box-shadow: none;
+}
+
+.why-card span {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.why-card h3 {
+  color: var(--text);
+  font-size: 1.55rem;
+}
+
+.why-card p {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .process-section {
@@ -589,6 +799,85 @@ svg {
 .process-card p {
   margin-top: 14px;
   color: rgba(255, 255, 255, 0.78);
+}
+
+.commerce-section {
+  padding: 84px 0 72px;
+  background: var(--page-white);
+}
+
+.commerce-layout {
+  align-items: center;
+}
+
+.commerce-visual {
+  min-height: 510px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.28), transparent 26%),
+    linear-gradient(180deg, var(--page-blue), var(--page-blue-deep));
+  box-shadow: var(--shadow-strong);
+  overflow: hidden;
+}
+
+.commerce-window {
+  width: min(78%, 430px);
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(18px);
+}
+
+.commerce-window span {
+  display: inline-flex;
+  margin-bottom: 16px;
+  color: var(--text);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.commerce-window div {
+  height: 92px;
+  margin-top: 12px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.commerce-window div:nth-child(3) {
+  width: 82%;
+}
+
+.commerce-window div:nth-child(4) {
+  width: 64%;
+}
+
+.commerce-list {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  margin: 26px 0 0;
+  list-style: none;
+}
+
+.commerce-list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: var(--card-white);
+  box-shadow: var(--shadow);
+}
+
+.commerce-list svg {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  color: var(--page-blue);
 }
 
 .plans-grid {
@@ -684,9 +973,8 @@ svg {
 }
 
 .footer-layout {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.85fr);
   gap: 24px;
   padding: 28px 32px;
   border-radius: var(--radius-xl);
@@ -708,15 +996,53 @@ svg {
   letter-spacing: 0;
 }
 
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.footer-columns div {
+  display: grid;
+  gap: 9px;
+}
+
+.footer-columns h3 {
+  margin: 0 0 6px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1rem;
+}
+
+.footer-columns a,
+.footer-columns span {
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.86rem;
+}
+
+.footer-columns .cta-link {
+  width: fit-content;
+  margin-top: 6px;
+}
+
 @media (max-width: 1100px) {
+  .agency-layout,
+  .why-layout,
+  .commerce-layout,
   .projects-layout,
   .faq-layout {
     grid-template-columns: 1fr;
   }
 
+  .case-study-grid,
   .projects-card-grid,
   .process-grid,
   .plans-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .footer-layout,
+  .footer-columns {
     grid-template-columns: 1fr;
   }
 }
@@ -752,12 +1078,20 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  .specialty-grid,
+  .why-grid,
+  .case-study-grid,
+  .projects-card-grid,
+  .process-grid,
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
   .service-card-body {
     grid-template-columns: 1fr;
   }
 
   .footer-layout {
-    flex-direction: column;
     align-items: start;
   }
 }
@@ -803,8 +1137,11 @@ svg {
 
   .intro-band,
   .cards-section,
+  .agency-section,
   .projects-section,
+  .why-section,
   .process-section,
+  .commerce-section,
   .plans-section,
   .faq-section {
     padding: 58px 0;
@@ -819,6 +1156,14 @@ svg {
 
   .projects-placeholder {
     min-height: 220px;
+  }
+
+  .commerce-visual {
+    min-height: 330px;
+  }
+
+  .case-study-card {
+    min-height: auto;
   }
 
   .faq-list summary {

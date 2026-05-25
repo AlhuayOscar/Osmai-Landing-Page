@@ -1,21 +1,32 @@
 import {
   ArrowRight,
+  BadgeCheck,
   Check,
   ChevronDown,
+  Clock,
+  ExternalLink,
+  Globe2,
   LayoutGrid,
+  Megaphone,
   MessageCircleMore,
   MonitorSmartphone,
   PenTool,
   Plus,
+  Rocket,
   Search,
+  ServerCog,
+  ShieldCheck,
+  ShoppingCart,
   Sparkles,
+  UsersRound,
 } from "lucide-react";
 import Reveal from "./components/Reveal";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
+  { label: "Especialidades", href: "#especialidades" },
   { label: "Proyectos", href: "#proyectos" },
-  { label: "Proceso", href: "#proceso" },
+  { label: "Elegirnos", href: "#elegirnos" },
   { label: "Planes", href: "#planes" },
   { label: "FAQ", href: "#faq" },
 ];
@@ -49,6 +60,39 @@ const serviceCards = [
   },
 ];
 
+const specialtyCards = [
+  {
+    icon: Sparkles,
+    title: "Naming",
+    text: "Si tu proyecto empieza desde cero, ordenamos nombre, tono y primer mensaje para que la marca tenga una base clara.",
+  },
+  {
+    icon: BadgeCheck,
+    title: "Identidad de marca",
+    text: "Construimos un sistema visual simple de sostener: logo, colores, usos, piezas y criterios para comunicar mejor.",
+  },
+  {
+    icon: Globe2,
+    title: "Sitios institucionales",
+    text: "Paginas de empresa, servicios, portfolio y contacto con estructura profesional y lista para posicionar.",
+  },
+  {
+    icon: ShoppingCart,
+    title: "E-commerce",
+    text: "Placeholders para tiendas, catalogos y flujos de compra que despues podemos conectar a pagos, stock o envios.",
+  },
+  {
+    icon: Megaphone,
+    title: "Social media",
+    text: "Bases para contenido, campanas y piezas digitales que mantengan coherencia con la web y la identidad.",
+  },
+  {
+    icon: Rocket,
+    title: "Marketing digital",
+    text: "Secciones preparadas para sumar Google Ads, Meta, SEO y llamados a la accion con seguimiento comercial.",
+  },
+];
+
 const projectCards = [
   {
     eyebrow: "Home principal",
@@ -64,6 +108,62 @@ const projectCards = [
     eyebrow: "Mensaje",
     title: "Titulares grandes",
     text: "La propuesta visual mantiene una lectura fuerte, simple y clara en desktop y mobile.",
+  },
+];
+
+const caseStudies = [
+  {
+    type: "Sitio institucional",
+    title: "Empresa de servicios",
+    text: "Home, servicios, beneficios, formulario y area visual preparada para fotos reales del equipo.",
+  },
+  {
+    type: "Catalogo online",
+    title: "Marca de productos",
+    text: "Grilla de productos, categorias, fichas y llamadas para consultar por WhatsApp o integrar carrito.",
+  },
+  {
+    type: "Identidad + web",
+    title: "Proyecto nuevo",
+    text: "Naming, tono, sistema grafico y landing de lanzamiento con contenido listo para campanas.",
+  },
+  {
+    type: "Software a medida",
+    title: "Herramienta interna",
+    text: "Dashboard, carga de datos, reportes y flujos privados para simplificar operaciones del negocio.",
+  },
+];
+
+const whyItems = [
+  {
+    icon: PenTool,
+    title: "Diseno a medida",
+    text: "No partimos de una plantilla generica: la estructura se adapta a tu mensaje, rubro y objetivo comercial.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Propiedad y claridad",
+    text: "Dejamos el sitio y los materiales pensados para que puedas usarlos, editarlos y seguir creciendo.",
+  },
+  {
+    icon: Clock,
+    title: "Tiempos pactados",
+    text: "Trabajamos por etapas visibles para que sepas que falta, que esta listo y que decision viene despues.",
+  },
+  {
+    icon: UsersRound,
+    title: "Atencion cercana",
+    text: "Acompanamiento real durante el proceso, con comunicacion directa y explicaciones sin vueltas.",
+  },
+  {
+    icon: Megaphone,
+    title: "Difusion",
+    text: "La web queda preparada para campanas, redes, SEO basico y llamados a la accion medibles.",
+  },
+  {
+    icon: ServerCog,
+    title: "Hosting y soporte",
+    text: "Podemos sumar mantenimiento, ajustes, mejoras y soporte para que te ocupes de tu negocio.",
   },
 ];
 
@@ -83,6 +183,13 @@ const processSteps = [
     title: "Completas los fondos",
     text: "Los bloques de imagen quedan marcados como placeholders para que reemplaces con tus visuales finales.",
   },
+];
+
+const commerceFeatures = [
+  "Catalogo editable con categorias y productos destacados",
+  "Bloques preparados para medios de pago, envios y promociones",
+  "Consultas por WhatsApp o carrito integrado segun la etapa del negocio",
+  "Paneles y automatizaciones posibles cuando la tienda necesite crecer",
 ];
 
 const plans = [
@@ -122,6 +229,11 @@ const faqs = [
     question: "Se puede seguir sumando paginas con este mismo look?",
     answer:
       "Si. La idea es dejar una base visual consistente para extender servicios, proyectos, planes o formularios.",
+  },
+  {
+    question: "Pueden sumar tienda online o catalogo mas adelante?",
+    answer:
+      "Si. Esta version deja contenido y placeholders para e-commerce, catalogos y flujos comerciales que pueden integrarse en una etapa posterior.",
   },
 ];
 
@@ -259,6 +371,42 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="agency-section" id="especialidades">
+        <div className="section-shell agency-layout">
+          <div className="agency-copy">
+            <SectionTitle
+              eyebrow="Expertos digitales"
+              title="Todo lo que necesita una marca para salir mejor parada online"
+              text="Tomamos la idea de una agencia integral y la llevamos al lenguaje Osmai: simple, moderno, azul, modular y listo para reemplazar placeholders por material real."
+            />
+            <Reveal className="agency-note" direction="left" delay={0.25}>
+              <strong>Mas de una sola landing.</strong>
+              <p>
+                La estructura queda preparada para crecer hacia identidad,
+                contenido, campanas, tienda online, soporte o software propio
+                sin perder coherencia visual.
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="specialty-grid">
+            {specialtyCards.map(({ icon: Icon, title, text }, index) => (
+              <Reveal
+                as="article"
+                className="specialty-card"
+                direction={index % 2 === 0 ? "up" : "right"}
+                delay={(index % 3) * 0.06}
+                key={title}
+              >
+                <Icon size={21} />
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="projects-section" id="proyectos">
         <div className="section-shell projects-layout">
           <div className="projects-copy">
@@ -296,6 +444,66 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        <div className="section-shell project-cases">
+          <SectionTitle
+            eyebrow="Casos de exito"
+            title="Proyectos placeholder para mostrar alcance sin depender todavia de imagenes finales"
+            text="Inspirado en una grilla de portfolio: cada card puede transformarse luego en una ficha real con captura, enlace y tecnologias usadas."
+          />
+
+          <div className="case-study-grid">
+            {caseStudies.map((item, index) => (
+              <Reveal
+                as="article"
+                className="case-study-card"
+                direction={index % 2 === 0 ? "left" : "right"}
+                delay={(index % 2) * 0.08}
+                key={item.title}
+              >
+                <div className="case-image-placeholder">
+                  <span>Imagen / captura</span>
+                </div>
+                <div>
+                  <span>{item.type}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+                <ExternalLink size={18} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="why-section" id="elegirnos">
+        <div className="section-shell why-layout">
+          <div>
+            <SectionTitle
+              eyebrow="Por que elegirnos"
+              title="Cercania, criterio tecnico y una web pensada para vender mejor"
+              text="La referencia trabaja mucho la confianza. En Osmai lo traducimos a beneficios concretos: propiedad, tiempos claros, soporte y una base que puede evolucionar."
+            />
+          </div>
+
+          <div className="why-grid">
+            {whyItems.map(({ icon: Icon, title, text }, index) => (
+              <Reveal
+                as="article"
+                className="why-card"
+                direction={index % 2 === 0 ? "left" : "right"}
+                delay={(index % 3) * 0.05}
+                key={title}
+              >
+                <span>
+                  <Icon size={20} />
+                </span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="process-section" id="proceso">
@@ -320,6 +528,35 @@ export default function Home() {
                 <p>{item.text}</p>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="commerce-section">
+        <div className="section-shell commerce-layout">
+          <Reveal className="commerce-visual" direction="left">
+            <div className="commerce-window">
+              <span>Catalogo / tienda</span>
+              <div />
+              <div />
+              <div />
+            </div>
+          </Reveal>
+
+          <div className="commerce-copy">
+            <SectionTitle
+              eyebrow="Tiendas online"
+              title="Impulsa tu negocio con catalogos, ventas y automatizaciones"
+              text="Dejamos esta seccion como punto de partida para e-commerce: productos, pagos, envios, consultas y mejoras de gestion cuando el proyecto lo necesite."
+            />
+            <Reveal as="ul" className="commerce-list" direction="right" delay={0.2}>
+              {commerceFeatures.map((feature) => (
+                <li key={feature}>
+                  <Check size={16} />
+                  {feature}
+                </li>
+              ))}
+            </Reveal>
           </div>
         </div>
       </section>
@@ -385,18 +622,36 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="section-shell footer-layout">
-          <Reveal direction="left">
+          <Reveal className="footer-main" direction="left">
             <a className="brandmark footer-brandmark" href="#top">
               <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
               <img className="brandmark-word" src="/img/osmaitext.svg" alt="Osmai" />
             </a>
             <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
           </Reveal>
-          <Reveal direction="right" delay={0.12}>
-            <PrimaryLink href="#top">
-              Volver arriba
-              <ArrowRight size={18} />
-            </PrimaryLink>
+
+          <Reveal className="footer-columns" direction="right" delay={0.12}>
+            <div>
+              <h3>Aumenta tus ventas</h3>
+              <a href="#especialidades">Diseno web</a>
+              <a href="#especialidades">Marketing digital</a>
+              <a href="#planes">Planes</a>
+            </div>
+            <div>
+              <h3>Soluciones</h3>
+              <a href="#elegirnos">UX y soporte</a>
+              <a href="#proyectos">Portfolio</a>
+              <a href="#faq">Preguntas</a>
+            </div>
+            <div>
+              <h3>Conectate</h3>
+              <span>Buenos Aires, Argentina</span>
+              <span>consultas@osmai.dev</span>
+              <PrimaryLink href="#top">
+                Volver arriba
+                <ArrowRight size={18} />
+              </PrimaryLink>
+            </div>
           </Reveal>
         </div>
       </footer>
