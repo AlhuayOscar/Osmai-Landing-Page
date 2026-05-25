@@ -52,64 +52,6 @@ svg {
   overflow-x: clip;
 }
 
-.scroll-animator-sentinel {
-  display: none;
-}
-
-:where(
-  .hero-image-frame,
-  .hero-nav,
-  .hero-copy > *,
-  .intro-band .section-title > *,
-  .service-card,
-  .projects-copy .section-title > *,
-  .projects-copy .cta-link,
-  .projects-placeholder,
-  .project-card,
-  .process-section .section-title > *,
-  .process-card,
-  .plans-section .section-title > *,
-  .plan-card,
-  .faq-section .section-title > *,
-  .faq-list details,
-  .footer-layout > *,
-  .reveal-item
-) {
-  opacity: 0;
-  filter: blur(10px);
-  transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 28px), 0) scale(var(--reveal-scale, 0.975));
-  transform-origin: center;
-  transition:
-    opacity 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-    filter 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-    transform 900ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
-  will-change: opacity, filter, transform;
-}
-
-:where(
-  .hero-image-frame,
-  .hero-nav,
-  .hero-copy > *,
-  .intro-band .section-title > *,
-  .service-card,
-  .projects-copy .section-title > *,
-  .projects-copy .cta-link,
-  .projects-placeholder,
-  .project-card,
-  .process-section .section-title > *,
-  .process-card,
-  .plans-section .section-title > *,
-  .plan-card,
-  .faq-section .section-title > *,
-  .faq-list details,
-  .footer-layout > *,
-  .reveal-item
-).is-visible {
-  opacity: 1;
-  filter: blur(0);
-  transform: translate3d(0, 0, 0) scale(1);
-}
-
 .section-shell {
   width: min(1180px, calc(100% - 36px));
   margin: 0 auto;
@@ -776,45 +718,6 @@ svg {
   .process-grid,
   .plans-grid {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  :where(
-    .hero-image-frame,
-    .hero-nav,
-    .hero-copy > *,
-    .intro-band .section-title > *,
-    .service-card,
-    .projects-copy .section-title > *,
-    .projects-copy .cta-link,
-    .projects-placeholder,
-    .project-card,
-    .process-section .section-title > *,
-    .process-card,
-    .plans-section .section-title > *,
-    .plan-card,
-    .faq-section .section-title > *,
-    .faq-list details,
-    .footer-layout > *,
-    .reveal-item
-  ) {
-    opacity: 1;
-    filter: none;
-    transform: none;
   }
 }
 
