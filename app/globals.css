@@ -129,12 +129,23 @@ svg {
 .brandmark {
   display: inline-flex;
   align-items: center;
-  width: 61px;
+  gap: 6px;
+  width: auto;
   height: 18px;
 }
 
+.brandmark-symbol {
+  width: 31px;
+  height: 12px;
+}
+
+.brandmark-word {
+  width: 41px;
+  height: 12px;
+}
+
 .brandmark img {
-  width: 100%;
+  flex: 0 0 auto;
   height: auto;
 }
 
