@@ -148,8 +148,12 @@ export default function Home() {
       <section className="hero-section" id="top">
         <div className="hero-background" aria-hidden="true">
           <div className="hero-background-glow" />
-          <div className="hero-image-placeholder">
-            <span>Agrega aqui tu imagen de portada</span>
+          <div className="hero-image-frame">
+            <img
+              className="hero-image"
+              src="/img/herosection.jpg"
+              alt=""
+            />
           </div>
         </div>
 
