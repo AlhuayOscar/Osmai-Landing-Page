@@ -154,7 +154,8 @@ export default function Home() {
 
         <nav className="hero-nav" aria-label="Navegacion principal">
           <a className="brandmark" href="#top" aria-label="Inicio de Osmai">
-            <img src="/img/osmaitext.svg" alt="Osmai" />
+            <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
+            <img className="brandmark-word" src="/img/osmaitext.svg" alt="Osmai" />
           </a>
 
           <div className="hero-nav-center">
@@ -343,7 +344,8 @@ export default function Home() {
         <div className="section-shell footer-layout">
           <div>
             <a className="brandmark footer-brandmark" href="#top">
-              <img src="/img/osmaitext.svg" alt="Osmai" />
+              <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
+              <img className="brandmark-word" src="/img/osmaitext.svg" alt="Osmai" />
             </a>
             <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
           </div>
