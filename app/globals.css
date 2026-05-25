@@ -129,21 +129,13 @@ svg {
 .brandmark {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  color: var(--text);
-  font-family: var(--font-display), sans-serif;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0;
+  width: 46px;
+  height: 18px;
 }
 
-.brandmark-dot {
-  width: 16px;
-  height: 9px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 50%, transparent 3px, currentColor 3.4px 5px, transparent 5.4px),
-    radial-gradient(circle at 68% 50%, transparent 3px, currentColor 3.4px 5px, transparent 5.4px);
+.brandmark img {
+  width: 100%;
+  height: auto;
 }
 
 .hero-nav-center {
