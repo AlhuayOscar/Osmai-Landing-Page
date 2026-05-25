@@ -147,13 +147,8 @@ export default function Home() {
     <main className="landing-shell">
       <section className="hero-section" id="top">
         <div className="hero-background" aria-hidden="true">
-          <div className="hero-background-glow" />
           <div className="hero-image-frame">
-            <img
-              className="hero-image"
-              src="/img/herosection.jpg"
-              alt=""
-            />
+            <img className="hero-image" src="/img/herosection.jpg" alt="" />
           </div>
         </div>
 
@@ -192,13 +187,13 @@ export default function Home() {
             </p>
 
             <div className="hero-actions">
-              <PrimaryLink href="#proyectos">
-                Empeza proyecto
-                <ArrowRight size={18} />
-              </PrimaryLink>
-              <PrimaryLink href="#servicios" variant="ghost">
+              <PrimaryLink href="#proyectos">Empezar proyecto</PrimaryLink>
+              <a className="hero-service-link" href="#servicios">
+                <span>
+                  <Sparkles size={13} />
+                </span>
                 Ver servicios
-              </PrimaryLink>
+              </a>
             </div>
 
             <div className="hero-stats" aria-label="Servicios principales de Osmai">
@@ -210,27 +205,6 @@ export default function Home() {
               ))}
             </div>
           </div>
-
-          <aside className="hero-panel" aria-label="Referencia visual del hero">
-            <div className="hero-panel-header">
-              <span>Placeholder visual</span>
-              <Sparkles size={16} />
-            </div>
-            <div className="hero-panel-screen">
-              <div className="hero-panel-screen-bar" />
-              <div className="hero-panel-screen-card large">
-                <span>Fondo principal</span>
-              </div>
-              <div className="hero-panel-screen-row">
-                <div className="hero-panel-screen-card small">
-                  <span>Mockup</span>
-                </div>
-                <div className="hero-panel-screen-card small">
-                  <span>Textura</span>
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
       </section>
 
