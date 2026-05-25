@@ -1,108 +1,72 @@
-import Script from "next/script";
+"use client";
+
+import { useEffect } from "react";
 
 const revealSelectors = [
-  ".hero-image-frame",
-  ".hero-nav",
-  ".hero-copy > *",
-  ".intro-band .section-title > *",
-  ".service-card",
-  ".projects-copy .section-title > *",
-  ".projects-copy .cta-link",
-  ".projects-placeholder",
-  ".project-card",
-  ".process-section .section-title > *",
-  ".process-card",
-  ".plans-section .section-title > *",
-  ".plan-card",
-  ".faq-section .section-title > *",
+  ".hero-content > *",
+  ".section-heading",
+  ".profile-card",
+  ".feature-card",
+  ".product-preview",
+  ".story-card",
+  ".benefit-card",
+  ".benefit-image",
+  ".event-card",
+  ".logo-wall span",
+  ".global-panel",
+  ".happy-photo",
+  ".mini-story",
+  ".price-card",
   ".faq-list details",
-  ".footer-layout > *",
+  ".team-strip img",
+  ".footer-content > *",
 ];
 
-const scrollAnimationScript = `
-(() => {
-  const revealSelectors = ${JSON.stringify(revealSelectors)};
+export default function ScrollAnimator() {
+  useEffect(() => {
+    const elements = Array.from(
+      document.querySelectorAll(revealSelectors.join(","))
+    );
 
-  const setRevealOrigin = (element) => {
-    if (element.classList.contains("hero-image-frame")) {
-      element.style.setProperty("--reveal-x", "0px");
-      element.style.setProperty("--reveal-y", "0px");
-      element.style.setProperty("--reveal-scale", "1.045");
-      return;
-    }
+    let lastScrollY = window.scrollY;
 
-    const rect = element.getBoundingClientRect();
-    const elementCenter = rect.left + rect.width / 2;
-    const screenCenter = window.innerWidth / 2;
-    const distanceFromCenter = elementCenter - screenCenter;
+    const updateDirection = () => {
+      const currentScrollY = window.scrollY;
+      document.documentElement.dataset.scrollDirection =
+        currentScrollY >= lastScrollY ? "down" : "up";
+      lastScrollY = currentScrollY;
+    };
 
-    if (Math.abs(distanceFromCenter) < 90) {
-      element.style.setProperty("--reveal-x", "0px");
-      element.style.setProperty("--reveal-y", "36px");
-      element.style.setProperty("--reveal-scale", "0.975");
-      return;
-    }
+    updateDirection();
+    window.addEventListener("scroll", updateDirection, { passive: true });
 
-    element.style.setProperty("--reveal-x", distanceFromCenter < 0 ? "-86px" : "86px");
-    element.style.setProperty("--reveal-y", "18px");
-    element.style.setProperty("--reveal-scale", "0.975");
-  };
-
-  const mountScrollAnimator = () => {
-    if (document.documentElement.dataset.scrollAnimator === "mounted") {
-      return;
-    }
-
-    document.documentElement.dataset.scrollAnimator = "mounted";
-
-    const elements = Array.from(document.querySelectorAll(revealSelectors.join(",")));
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
       {
-        threshold: 0.16,
-        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.14,
+        rootMargin: "0px 0px -8% 0px",
       }
     );
 
     elements.forEach((element, index) => {
       element.classList.add("reveal-item");
-      setRevealOrigin(element);
-      element.style.setProperty("--reveal-delay", \`\${index % 6 * 60}ms\`);
+      element.style.setProperty("--reveal-delay", `${(index % 5) * 55}ms`);
+      observer.observe(element);
     });
 
-    window.setTimeout(() => {
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          elements.forEach((element) => observer.observe(element));
-        });
+    return () => {
+      window.removeEventListener("scroll", updateDirection);
+      observer.disconnect();
+      elements.forEach((element) => {
+        element.classList.remove("reveal-item", "is-visible");
+        element.style.removeProperty("--reveal-delay");
       });
-    }, 500);
-  };
+    };
+  }, []);
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", mountScrollAnimator, { once: true });
-    return;
-  }
-
-  mountScrollAnimator();
-})();
-`;
-
-export default function ScrollAnimator() {
-  return (
-    <Script
-      id="scroll-animator"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{ __html: scrollAnimationScript }}
-    />
-  );
+  return null;
 }
