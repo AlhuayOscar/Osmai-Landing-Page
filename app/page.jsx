@@ -1,21 +1,15 @@
 import {
   ArrowRight,
-  BarChart3,
   Check,
   ChevronDown,
-  CirclePlay,
-  Globe2,
-  Layers3,
-  LockKeyhole,
-  MousePointer2,
-  Network,
-  Play,
-  ShieldCheck,
+  LayoutGrid,
+  MessageCircleMore,
+  MonitorSmartphone,
+  PenTool,
+  Plus,
+  Search,
   Sparkles,
-  Zap,
 } from "lucide-react";
-import Chatbot from "./components/Chatbot";
-import ScrollAnimator from "./components/ScrollAnimator";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
@@ -24,226 +18,115 @@ const navItems = [
   { label: "Planes", href: "#planes" },
   { label: "FAQ", href: "#faq" },
 ];
-//Cambio 2
-const stats = [
-  ["Web", "diseño y desarrollo"],
-  ["Marca", "piezas visuales"],
-  ["Software", "soluciones a medida"],
+
+const heroStats = [
+  { label: "WEB", value: "Marca digital" },
+  { label: "MARCA", value: "Visual y verbal" },
+  { label: "SOFTWARE", value: "Base escalable" },
 ];
 
-const features = [
+const serviceCards = [
   {
-    icon: Layers3,
-    title: "Diseño web",
+    icon: MonitorSmartphone,
+    title: "Diseno web",
     text: "Landing pages, sitios institucionales y experiencias digitales preparadas para convertir visitas en consultas.",
   },
   {
-    icon: Sparkles,
-    title: "Identidad visual",
-    text: "Logos, paletas, piezas para redes y sistemas visuales que hacen que tu empresa se vea profesional.",
+    icon: PenTool,
+    title: "Diseno grafico",
+    text: "Diseno y rediseno, creando de tu marca la identidad de recorrido, lugar y propuesta visual.",
   },
   {
-    icon: MousePointer2,
-    title: "UX y contenido",
+    icon: LayoutGrid,
+    title: "UX",
     text: "Ordenamos la informacion para que tus clientes entiendan rapido que haces y por que elegirte.",
   },
   {
-    icon: ShieldCheck,
+    icon: MessageCircleMore,
     title: "Soporte cercano",
-    text: "Oscar y Maira acompañan cada etapa con criterio tecnico, mirada visual y comunicacion simple.",
+    text: "Somos Oscar y Maira y te acompanamos en cada etapa con criterio tecnico, mirada visual y comunicacion simple.",
   },
 ];
 
-const benefitCards = [
+const projectCards = [
   {
-    icon: Zap,
-    title: "Presencia rapida",
-    text: "Tu negocio puede tener una web clara, moderna y lista para compartir sin procesos eternos.",
+    eyebrow: "Home principal",
+    title: "Hero con fondo editable",
+    text: "Dejamos el contenedor preparado para que sumes tu foto o render sin tocar la estructura.",
   },
   {
-    icon: Network,
-    title: "Todo conectado",
-    text: "Web, redes, catalogos, formularios y automatizaciones trabajando con una misma identidad.",
+    eyebrow: "Servicios",
+    title: "Cards modulares",
+    text: "Cada bloque puede crecer con mas items, links o ejemplos sin romper la composicion.",
   },
   {
-    icon: BarChart3,
-    title: "Pensado para vender",
-    text: "Cada seccion se arma con una intencion: explicar, generar confianza y facilitar el contacto.",
-  },
-  {
-    icon: Layers3,
-    title: "Escalable",
-    text: "Empezamos por lo esencial y dejamos una base preparada para crecer con mas funciones.",
-  },
-  {
-    icon: LockKeyhole,
-    title: "Trabajo prolijo",
-    text: "Buenas practicas, estructura clara, archivos ordenados y entregables faciles de mantener.",
+    eyebrow: "Mensaje",
+    title: "Titulares grandes",
+    text: "La propuesta visual mantiene una lectura fuerte, simple y clara en desktop y mobile.",
   },
 ];
 
-const services = [
+const processSteps = [
   {
-    title: "Sitios web para empresas",
-    label: "Web",
-    price: "Desde cero",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85",
+    step: "01",
+    title: "Definimos la estructura",
+    text: "Armamos la home y las secciones internas con una grilla clara y jerarquia visual estable.",
   },
   {
-    title: "Branding y piezas graficas",
-    label: "Diseño",
-    price: "A medida",
-    image:
-      "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=900&q=85",
+    step: "02",
+    title: "Aplicamos el estilo",
+    text: "Colores, botones, sombras y tipografia quedan listos para extender el sistema a nuevas pantallas.",
   },
   {
-    title: "Software y herramientas internas",
-    label: "Sistema",
-    price: "Flexible",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=85",
+    step: "03",
+    title: "Completas los fondos",
+    text: "Los bloques de imagen quedan marcados como placeholders para que reemplaces con tus visuales finales.",
   },
 ];
 
-const logos = [
-  "Comercios",
-  "Estudios",
-  "Servicios",
-  "Gastronomia",
-  "Salud",
-  "Educacion",
-  "Inmobiliarias",
-  "Profesionales",
-  "Tiendas",
-  "Emprendimientos",
-  "Consultoras",
-  "Pymes",
-];
-
-const processRows = [
-  ["Descubrimiento", "1 reunion", "Objetivos", "Brief"],
-  ["Diseño visual", "2-5 dias", "Pantallas", "Maira"],
-  ["Desarrollo web", "5-12 dias", "Next.js", "Oscar"],
-  ["Revision", "2 rondas", "Ajustes", "Equipo"],
-  ["Lanzamiento", "1 dia", "Publicacion", "Online"],
-];
-
-const pricing = [
+const plans = [
   {
-    name: "Esencial",
+    name: "Base",
     price: "Landing",
-    description: "Para negocios que necesitan una presencia clara y profesional para empezar.",
-    features: ["Una pagina principal", "Diseño responsive", "Formulario de contacto"],
+    text: "La pagina principal con el sistema visual listo para presentar la marca.",
+    features: ["Hero editable", "Secciones responsivas", "CTA y navegacion"],
   },
   {
-    name: "Impulso",
-    price: "Web Pro",
-    description: "Para pequeñas y medianas empresas que quieren verse mas solidas y vender mejor.",
-    features: ["Hasta 5 secciones", "Identidad visual aplicada", "SEO basico", "Integracion con WhatsApp"],
+    name: "Expandida",
+    price: "Web completa",
+    text: "La misma direccion visual extendida a mas paginas, modulos y contenido comercial.",
+    features: ["Mas secciones", "Bloques reutilizables", "Escala para portfolio o servicios"],
     featured: true,
   },
   {
-    name: "A medida",
-    price: "Software",
-    description: "Para empresas que necesitan funciones, paneles, catalogos o sistemas internos.",
-    features: ["Analisis del flujo", "Diseño de interfaz", "Desarrollo personalizado", "Soporte de lanzamiento"],
+    name: "Custom",
+    price: "Sistema",
+    text: "Una base pensada para sumar paneles, integraciones o herramientas internas despues.",
+    features: ["Arquitectura clara", "Listo para crecer", "Soporte para nuevas vistas"],
   },
 ];
 
 const faqs = [
   {
-    question: "Que tipo de empresas pueden trabajar con Osmai?",
+    question: "Puedo cambiar las imagenes despues?",
     answer:
-      "Trabajamos especialmente con pequeñas y medianas empresas que necesitan mejorar su presencia digital, ordenar su imagen o crear una herramienta web propia.",
+      "Si. La home deja zonas de fondo preparadas para que reemplaces cada placeholder con la imagen final que quieras usar.",
   },
   {
-    question: "Oscar desarrolla la web y el software?",
+    question: "El estilo queda adaptado a celular?",
     answer:
-      "Si. Oscar se encarga de la programacion web, el desarrollo de software, la estructura tecnica y la puesta online.",
+      "Si. La composicion se reorganiza para mobile con tipografia, botones y cards ajustadas a pantallas chicas.",
   },
   {
-    question: "Maira se encarga de los diseños?",
+    question: "Se puede seguir sumando paginas con este mismo look?",
     answer:
-      "Si. Maira lidera la parte visual: identidad, estilo, piezas graficas, composicion y criterio de diseño.",
-  },
-  {
-    question: "Pueden hacer solo diseño o solo desarrollo?",
-    answer:
-      "Si. Podemos trabajar una web completa, solo piezas de diseño, una mejora visual o un desarrollo especifico segun lo que necesite el negocio.",
+      "Si. La idea es dejar una base visual consistente para extender servicios, proyectos, planes o formularios.",
   },
 ];
 
-function Button({ children, variant = "primary", className = "", href = "#planes" }) {
+function SectionTitle({ eyebrow, title, text, centered = false }) {
   return (
-    <a className={`button button-${variant} ${className}`} href={href}>
-      {children}
-    </a>
-  );
-}
-
-function ProductPreview() {
-  const rows = [
-    ["Landing comercial", "92%", "Lista"],
-    ["Catalogo online", "78%", "Activo"],
-    ["Brand kit", "100%", "Nuevo"],
-    ["Panel interno", "64%", "Demo"],
-  ];
-
-  return (
-    <div className="product-preview" aria-label="Vista previa de proyectos Osmai">
-      <div className="preview-sidebar">
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="preview-main">
-        <div className="preview-topbar">
-          <div>
-            <small>Panel de proyecto</small>
-            <strong>Web, diseño y software</strong>
-          </div>
-          <div className="avatar-stack">
-            <img alt="Oscar programador web" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80" />
-            <img alt="Maira diseñadora" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" />
-            <img alt="Cliente Osmai" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=120&q=80" />
-          </div>
-        </div>
-        <div className="preview-grid">
-          <div className="preview-metric highlight">
-            <span>Conversion</span>
-            <strong>3.4x</strong>
-            <small>mas consultas con una web clara</small>
-          </div>
-          <div className="preview-metric">
-            <span>Entregables</span>
-            <strong>18</strong>
-            <small>pantallas y piezas</small>
-          </div>
-          <div className="preview-chart">
-            {["42%", "58%", "64%", "80%", "56%", "92%", "76%"].map((height) => (
-              <span key={height} style={{ height }} />
-            ))}
-          </div>
-        </div>
-        <div className="preview-table">
-          {rows.map(([name, value, status]) => (
-            <div className="preview-row" key={name}>
-              <span>{name}</span>
-              <strong>{value}</strong>
-              <em>{status}</em>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SectionHeading({ eyebrow, title, text, align = "left" }) {
-  return (
-    <div className={`section-heading align-${align}`}>
+    <div className={`section-title ${centered ? "is-centered" : ""}`}>
       <span>{eyebrow}</span>
       <h2>{title}</h2>
       {text ? <p>{text}</p> : null}
@@ -251,319 +134,198 @@ function SectionHeading({ eyebrow, title, text, align = "left" }) {
   );
 }
 
+function PrimaryLink({ href, children, variant = "primary" }) {
+  return (
+    <a className={`cta-link cta-link-${variant}`} href={href}>
+      {children}
+    </a>
+  );
+}
+
 export default function Home() {
   return (
-    <main>
-      <ScrollAnimator />
-      <section className="hero" id="top">
-        <img
-          className="hero-bg"
-          alt=""
-          src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2400&q=85"
-        />
-        <div className="hero-overlay" />
-        <nav className="nav" aria-label="Navegacion principal">
-          <a className="brand" href="#top" aria-label="Inicio de Osmai">
-            <span>O.</span>
-            Osmai
-          </a>
-          <div className="nav-links">
-            {navItems.map((item) => (
-              <a href={item.href} key={item.label}>
-                {item.label}
-              </a>
-            ))}
+    <main className="landing-shell">
+      <section className="hero-section" id="top">
+        <div className="hero-background" aria-hidden="true">
+          <div className="hero-background-glow" />
+          <div className="hero-image-placeholder">
+            <span>Agrega aqui tu imagen de portada</span>
           </div>
-          <a className="nav-action" href="#planes">
-            Pedir propuesta
+        </div>
+
+        <nav className="hero-nav" aria-label="Navegacion principal">
+          <a className="brandmark" href="#top" aria-label="Inicio de Osmai">
+            <span className="brandmark-dot" />
+            osmai
+          </a>
+
+          <div className="hero-nav-center">
+            <div className="hero-nav-links">
+              {navItems.map((item) => (
+                <a href={item.href} key={item.label}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            <button className="hero-search" type="button" aria-label="Buscar">
+              <Search size={15} />
+            </button>
+          </div>
+
+          <a className="hero-nav-cta" href="#planes">
+            Pedi propuesta
           </a>
         </nav>
 
         <div className="hero-content">
-          <p className="eyebrow">Web design y diseño integral</p>
-          <h1>Osmai</h1>
-          <p className="hero-copy">
-            Creamos sitios web, diseños visuales y soluciones de software para
-            pequeñas y medianas empresas que quieren verse mejor, vender mas y
-            trabajar con herramientas propias.
-          </p>
-          <div className="hero-actions">
-            <Button>
-              Empezar proyecto
-              <ArrowRight size={18} />
-            </Button>
-            <a className="video-link" href="#servicios">
-              <span>
-                <Play size={14} fill="currentColor" />
-              </span>
-              Ver servicios
-            </a>
-          </div>
-          <div className="hero-stats" aria-label="Servicios principales de Osmai">
-            {stats.map(([value, label]) => (
-              <div key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="hero-copy">
+            <p className="hero-eyebrow">Web design y diseno integral</p>
+            <h1>osmai</h1>
+            <p className="hero-description">
+              Creamos sitios web, disenos visuales y soluciones de software para
+              pequenas y medianas empresas que quieren mejorar su identidad
+              visual, vender mas y trabajar con herramientas propias.
+            </p>
 
-      <section className="intro section" id="servicios">
-        <div className="container intro-grid">
-          <div>
-            <SectionHeading
-              eyebrow="Que hacemos"
-              title="Diseño y tecnologia para que tu empresa se vea profesional"
-              text="Osmai combina programacion web, software y diseño visual para construir una presencia digital clara, moderna y facil de usar."
-            />
-            <div className="profile-card">
-              <img
-                alt="Oscar, creador y programador web de Osmai"
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=85"
-              />
-              <div>
-                <strong>Oscar</strong>
-                <span>Creador, programador web y software</span>
-              </div>
+            <div className="hero-actions">
+              <PrimaryLink href="#proyectos">
+                Empeza proyecto
+                <ArrowRight size={18} />
+              </PrimaryLink>
+              <PrimaryLink href="#servicios" variant="ghost">
+                Ver servicios
+              </PrimaryLink>
             </div>
-          </div>
 
-          <div className="feature-grid">
-            {features.map(({ icon: Icon, title, text }) => (
-              <article className="feature-card" key={title}>
-                <Icon size={22} />
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="platform-demo section" id="proyectos">
-        <div className="container demo-grid">
-          <div>
-            <SectionHeading
-              eyebrow="Proyecto completo"
-              title="De la idea inicial a una web lista para presentar tu negocio"
-              text="Diseñamos la experiencia, construimos la interfaz y dejamos una base tecnica solida para que tu empresa pueda crecer."
-            />
-            <div className="demo-actions">
-              <Button>
-                Solicitar diagnostico
-                <MousePointer2 size={18} />
-              </Button>
-              <Button variant="ghost" href="#proceso">
-                Ver proceso
-                <CirclePlay size={18} />
-              </Button>
-            </div>
-          </div>
-          <ProductPreview />
-        </div>
-      </section>
-
-      <section className="news section">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Ideas que venden"
-            title="Diseños que ayudan a tu negocio a explicar mejor lo que ofrece"
-          />
-          <div className="news-grid">
-            <article className="story-card story-left">
-              <img
-                alt="Persona trabajando en una laptop con una web empresarial"
-                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=900&q=85"
-              />
-              <div>
-                <span>Web</span>
-                <h3>Una presencia online clara cambia la primera impresion</h3>
-                <a href="#faq">
-                  Leer mas
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-            </article>
-            <article className="story-card story-right">
-              <img
-                alt="Diseñadora preparando piezas visuales"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=85"
-              />
-              <div>
-                <span>Diseño</span>
-                <h3>Una identidad consistente hace que tu marca se recuerde</h3>
-                <a href="#faq">
-                  Leer mas
-                  <ArrowRight size={16} />
-                </a>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="benefits section">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Beneficios"
-            title="Soluciones digitales pensadas para pymes"
-            text="Osmai ayuda a ordenar la imagen, mejorar la experiencia del cliente y crear herramientas que simplifican el trabajo diario."
-          />
-          <div className="benefit-grid">
-            {benefitCards.map(({ icon: Icon, title, text }) => (
-              <article className="benefit-card" key={title}>
-                <Icon size={24} />
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
-            ))}
-            <article className="benefit-image">
-              <img
-                alt="Equipo revisando diseño web y estrategia digital"
-                src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=1100&q=85"
-              />
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="events section">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Servicios"
-            title="Web, diseño y software para empresas en crecimiento"
-            text="Elegimos la solucion segun el momento del negocio: visibilidad, identidad, ventas o herramientas internas."
-          />
-          <div className="event-grid">
-            {services.map((service) => (
-              <article className="event-card" key={service.title}>
-                <img alt="" src={service.image} />
-                <div className="event-meta">
-                  <span>{service.label}</span>
-                  <strong>{service.price}</strong>
+            <div className="hero-stats" aria-label="Servicios principales de Osmai">
+              {heroStats.map((item) => (
+                <div key={item.label}>
+                  <strong>{item.label}</strong>
+                  <span>{item.value}</span>
                 </div>
-                <h3>{service.title}</h3>
-                <a href="#planes">
-                  Consultar
-                  <ArrowRight size={15} />
-                </a>
+              ))}
+            </div>
+          </div>
+
+          <aside className="hero-panel" aria-label="Referencia visual del hero">
+            <div className="hero-panel-header">
+              <span>Placeholder visual</span>
+              <Sparkles size={16} />
+            </div>
+            <div className="hero-panel-screen">
+              <div className="hero-panel-screen-bar" />
+              <div className="hero-panel-screen-card large">
+                <span>Fondo principal</span>
+              </div>
+              <div className="hero-panel-screen-row">
+                <div className="hero-panel-screen-card small">
+                  <span>Mockup</span>
+                </div>
+                <div className="hero-panel-screen-card small">
+                  <span>Textura</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section className="intro-band" id="servicios">
+        <div className="section-shell">
+          <SectionTitle
+            eyebrow="Lo que hacemos"
+            title="Diseno y tecnologia para que tu empresa se vea profesional"
+            text="Osmai combina programacion web, software y diseno visual para construir una presencia digital clara, moderna y facil de usar."
+            centered
+          />
+        </div>
+      </section>
+
+      <section className="cards-section">
+        <div className="section-shell">
+          <div className="services-grid">
+            {serviceCards.map(({ icon: Icon, title, text }) => (
+              <article className="service-card" key={title}>
+                <div className="service-card-badge">
+                  <Plus size={14} />
+                </div>
+                <div className="service-card-body">
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+                <Icon className="service-card-icon" size={24} />
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="logos section">
-        <div className="container logo-grid">
-          <div>
-            <SectionHeading
-              eyebrow="Para quienes"
-              title="Osmai trabaja con negocios reales, no con marcas genericas"
-              text="Creamos soluciones para empresas que necesitan verse confiables, vender mejor y ahorrar tiempo con procesos digitales."
+      <section className="projects-section" id="proyectos">
+        <div className="section-shell projects-layout">
+          <div className="projects-copy">
+            <SectionTitle
+              eyebrow="Proyecto"
+              title="Una home armada para parecer final incluso antes de cargar las imagenes"
+              text="La estructura replica la direccion del mockup y deja la parte visual lista para completar con tus fondos, renders o fotos."
             />
-            <Button variant="ghost">
-              Ver rubros
+            <PrimaryLink href="#proceso">
+              Ver como sigue
               <ArrowRight size={18} />
-            </Button>
+            </PrimaryLink>
           </div>
-          <div className="logo-wall" aria-label="Rubros para los que trabaja Osmai">
-            {logos.map((logo) => (
-              <span key={logo}>{logo}</span>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="global section" id="proceso">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Proceso"
-            title="Un metodo claro para avanzar sin vueltas"
-            text="Cada proyecto se organiza por etapas para que sepas que se esta haciendo, quien lo lidera y que se entrega."
-            align="center"
-          />
-          <div className="global-panel">
-            <div className="global-panel-header">
-              <div>
-                <span>Flujo de trabajo Osmai</span>
-                <strong>Diseño, desarrollo y lanzamiento</strong>
-              </div>
-              <Globe2 size={28} />
+          <div className="projects-board">
+            <div className="projects-placeholder">
+              <span>Zona editable para imagen o mockup</span>
             </div>
-            <div className="global-table">
-              <div className="global-row heading">
-                <span>Etapa</span>
-                <span>Tiempo</span>
-                <span>Entrega</span>
-                <span>Responsable</span>
-              </div>
-              {processRows.map(([step, time, deliverable, owner]) => (
-                <div className="global-row" key={step}>
-                  <span>{step}</span>
-                  <span>{time}</span>
-                  <span>{deliverable}</span>
-                  <span>{owner}</span>
-                </div>
+            <div className="projects-card-grid">
+              {projectCards.map((card) => (
+                <article className="project-card" key={card.title}>
+                  <span>{card.eyebrow}</span>
+                  <h3>{card.title}</h3>
+                  <p>{card.text}</p>
+                </article>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="happy section">
-        <div className="container happy-grid">
-          <div>
-            <SectionHeading
-              eyebrow="Equipo"
-              title="Oscar programa. Maira diseña."
-              text="Dos miradas trabajando juntas para que tu empresa tenga una presencia digital funcional, linda y coherente."
-            />
-            <Button>
-              Trabajemos juntos
-              <Sparkles size={18} />
-            </Button>
+      <section className="process-section" id="proceso">
+        <div className="section-shell">
+          <SectionTitle
+            eyebrow="Proceso"
+            title="Una base visual clara para seguir construyendo"
+            text="Dejamos un sistema simple de continuar: titulos grandes, cards, placeholders y bloques listos para crecer."
+          />
+
+          <div className="process-grid">
+            {processSteps.map((item) => (
+              <article className="process-card" key={item.step}>
+                <strong>{item.step}</strong>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
           </div>
-          <div className="happy-photo">
-            <span>O.</span>
-            <img
-              alt="Maira, encargada de diseño en Osmai"
-              src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=900&q=85"
-            />
-          </div>
-          <article className="mini-story">
-            <img
-              alt=""
-              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85"
-            />
-            <h3>Oscar crea sitios web, software y bases tecnicas solidas</h3>
-          </article>
-          <article className="mini-story">
-            <img
-              alt=""
-              src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=900&q=85"
-            />
-            <h3>Maira define la estetica, piezas visuales y experiencia de marca</h3>
-          </article>
         </div>
       </section>
 
-      <section className="pricing section" id="planes">
-        <div className="container">
-          <SectionHeading
+      <section className="plans-section" id="planes">
+        <div className="section-shell">
+          <SectionTitle
             eyebrow="Planes"
-            title="Elige el punto de partida para tu proyecto"
-            text="Los planes orientan el alcance inicial. Cada propuesta se ajusta segun objetivos, contenido y funcionalidades necesarias."
-            align="center"
+            title="La misma direccion visual puede escalar a una web mas grande"
+            text="Si despues queres sumar mas pantallas o paginas, ya queda montada una base consistente para continuar."
+            centered
           />
-          <div className="pricing-grid">
-            {pricing.map((plan) => (
-              <article className={`price-card ${plan.featured ? "featured" : ""}`} key={plan.name}>
+
+          <div className="plans-grid">
+            {plans.map((plan) => (
+              <article className={`plan-card ${plan.featured ? "is-featured" : ""}`} key={plan.name}>
                 <span>{plan.name}</span>
                 <h3>{plan.price}</h3>
-                <p>{plan.description}</p>
-                <a href="#top">{plan.featured ? "Quiero este plan" : "Consultar plan"}</a>
+                <p>{plan.text}</p>
                 <ul>
                   {plan.features.map((feature) => (
                     <li key={feature}>
@@ -578,13 +340,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="faq section" id="faq">
-        <div className="container faq-grid">
-          <SectionHeading
-            eyebrow="Preguntas"
-            title="Preguntas frecuentes antes de empezar"
-            text="Algunas respuestas simples para entender como trabaja Osmai y que puede hacer por tu negocio."
+      <section className="faq-section" id="faq">
+        <div className="section-shell faq-layout">
+          <SectionTitle
+            eyebrow="FAQ"
+            title="Preguntas comunes sobre esta recreacion"
+            text="Deje la pagina pensada para que cambies el contenido visual sin tener que rehacer la estructura."
           />
+
           <div className="faq-list">
             {faqs.map((item, index) => (
               <details key={item.question} open={index === 0}>
@@ -599,63 +362,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="team section">
-        <div className="container">
-          <SectionHeading
-            eyebrow="Inspiracion"
-            title="Haz que tu empresa se vea como debe verse"
-            align="center"
-          />
-          <div className="team-strip">
-            {[
-              "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=500&q=85",
-              "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=500&q=85",
-              "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=500&q=85",
-              "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=85",
-              "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=500&q=85",
-            ].map((src, index) => (
-              <img alt="" src={src} key={src} className={index === 1 ? "active" : ""} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <footer className="footer" id="footer">
-        <img
-          alt=""
-          src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=85"
-        />
-        <div className="footer-overlay" />
-        <div className="container footer-content">
+      <footer className="site-footer">
+        <div className="section-shell footer-layout">
           <div>
-            <a className="brand footer-brand" href="#top">
-              <span>O.</span>
-              Osmai
+            <a className="brandmark footer-brandmark" href="#top">
+              <span className="brandmark-dot" />
+              osmai
             </a>
-            <h2>Tu marca, tu web y tus ideas listas para crecer</h2>
-            <p>
-              Diseño web, identidad visual y software para que pequeñas y medianas empresas
-              se vean mas profesionales y trabajen mejor.
-            </p>
-            <Button>
-              Crear mi proyecto
-              <ArrowRight size={18} />
-            </Button>
+            <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
           </div>
-          <div className="footer-links">
-            <a href="#servicios">Servicios</a>
-            <a href="#proyectos">Proyectos</a>
-            <a href="#proceso">Proceso</a>
-            <a href="#planes">Planes</a>
-          </div>
-          <div className="footer-socials" aria-label="Redes sociales">
-            <a href="#top">in</a>
-            <a href="#top">x</a>
-            <a href="#top">ig</a>
-          </div>
+          <PrimaryLink href="#top">
+            Volver arriba
+            <ArrowRight size={18} />
+          </PrimaryLink>
         </div>
       </footer>
-      <Chatbot />
     </main>
   );
 }
