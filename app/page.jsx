@@ -10,6 +10,7 @@ import {
   Search,
   Sparkles,
 } from "lucide-react";
+import Reveal from "./components/Reveal";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
@@ -125,11 +126,21 @@ const faqs = [
 ];
 
 function SectionTitle({ eyebrow, title, text, centered = false }) {
+  const direction = centered ? "up" : "left";
+
   return (
     <div className={`section-title ${centered ? "is-centered" : ""}`}>
-      <span>{eyebrow}</span>
-      <h2>{title}</h2>
-      {text ? <p>{text}</p> : null}
+      <Reveal as="span" direction={direction} delay={0.05}>
+        {eyebrow}
+      </Reveal>
+      <Reveal as="h2" direction={direction} delay={0.12}>
+        {title}
+      </Reveal>
+      {text ? (
+        <Reveal as="p" direction={direction} delay={0.18}>
+          {text}
+        </Reveal>
+      ) : null}
     </div>
   );
 }
@@ -147,12 +158,12 @@ export default function Home() {
     <main className="landing-shell">
       <section className="hero-section" id="top">
         <div className="hero-background" aria-hidden="true">
-          <div className="hero-image-frame">
+          <Reveal className="hero-image-frame" direction="center" scale={1.04}>
             <img className="hero-image" src="/img/herosection.jpg" alt="" />
-          </div>
+          </Reveal>
         </div>
 
-        <nav className="hero-nav" aria-label="Navegacion principal">
+        <Reveal as="nav" className="hero-nav" aria-label="Navegacion principal" direction="up" delay={0.1}>
           <a className="brandmark" href="#top" aria-label="Inicio de Osmai">
             <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
             <img className="brandmark-word" src="/img/osmaitext.svg" alt="Osmai" />
@@ -174,19 +185,23 @@ export default function Home() {
           <a className="hero-nav-cta" href="#planes">
             Pedi propuesta
           </a>
-        </nav>
+        </Reveal>
 
         <div className="hero-content">
           <div className="hero-copy">
-            <p className="hero-eyebrow">Web design y diseno integral</p>
-            <h1>osmai</h1>
-            <p className="hero-description">
+            <Reveal as="p" className="hero-eyebrow" direction="left" delay={0.18}>
+              Web design y diseno integral
+            </Reveal>
+            <Reveal as="h1" direction="left" delay={0.25}>
+              osmai
+            </Reveal>
+            <Reveal as="p" className="hero-description" direction="left" delay={0.32}>
               Creamos sitios web, disenos visuales y soluciones de software para
               pequenas y medianas empresas que quieren mejorar su identidad
               visual, vender mas y trabajar con herramientas propias.
-            </p>
+            </Reveal>
 
-            <div className="hero-actions">
+            <Reveal className="hero-actions" direction="left" delay={0.39}>
               <PrimaryLink href="#proyectos">Empezar proyecto</PrimaryLink>
               <a className="hero-service-link" href="#servicios">
                 <span>
@@ -194,16 +209,16 @@ export default function Home() {
                 </span>
                 Ver servicios
               </a>
-            </div>
+            </Reveal>
 
-            <div className="hero-stats" aria-label="Servicios principales de Osmai">
+            <Reveal className="hero-stats" aria-label="Servicios principales de Osmai" direction="left" delay={0.46}>
               {heroStats.map((item) => (
                 <div key={item.label}>
                   <strong>{item.label}</strong>
                   <span>{item.value}</span>
                 </div>
               ))}
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -222,8 +237,14 @@ export default function Home() {
       <section className="cards-section">
         <div className="section-shell">
           <div className="services-grid">
-            {serviceCards.map(({ icon: Icon, title, text }) => (
-              <article className="service-card" key={title}>
+            {serviceCards.map(({ icon: Icon, title, text }, index) => (
+              <Reveal
+                as="article"
+                className="service-card"
+                direction={index % 2 === 0 ? "left" : "right"}
+                delay={(index % 2) * 0.08}
+                key={title}
+              >
                 <div className="service-card-badge">
                   <Plus size={14} />
                 </div>
@@ -232,7 +253,7 @@ export default function Home() {
                   <p>{text}</p>
                 </div>
                 <Icon className="service-card-icon" size={24} />
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -246,23 +267,31 @@ export default function Home() {
               title="Una home armada para parecer final incluso antes de cargar las imagenes"
               text="La estructura replica la direccion del mockup y deja la parte visual lista para completar con tus fondos, renders o fotos."
             />
-            <PrimaryLink href="#proceso">
-              Ver como sigue
-              <ArrowRight size={18} />
-            </PrimaryLink>
+            <Reveal direction="left" delay={0.25}>
+              <PrimaryLink href="#proceso">
+                Ver como sigue
+                <ArrowRight size={18} />
+              </PrimaryLink>
+            </Reveal>
           </div>
 
           <div className="projects-board">
-            <div className="projects-placeholder">
+            <Reveal className="projects-placeholder" direction="right">
               <span>Zona editable para imagen o mockup</span>
-            </div>
+            </Reveal>
             <div className="projects-card-grid">
-              {projectCards.map((card) => (
-                <article className="project-card" key={card.title}>
+              {projectCards.map((card, index) => (
+                <Reveal
+                  as="article"
+                  className="project-card"
+                  direction={index === 0 ? "up" : "right"}
+                  delay={index * 0.08}
+                  key={card.title}
+                >
                   <span>{card.eyebrow}</span>
                   <h3>{card.title}</h3>
                   <p>{card.text}</p>
-                </article>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -278,12 +307,18 @@ export default function Home() {
           />
 
           <div className="process-grid">
-            {processSteps.map((item) => (
-              <article className="process-card" key={item.step}>
+            {processSteps.map((item, index) => (
+              <Reveal
+                as="article"
+                className="process-card"
+                direction={index === 0 ? "left" : index === 1 ? "up" : "right"}
+                delay={index * 0.08}
+                key={item.step}
+              >
                 <strong>{item.step}</strong>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -299,8 +334,14 @@ export default function Home() {
           />
 
           <div className="plans-grid">
-            {plans.map((plan) => (
-              <article className={`plan-card ${plan.featured ? "is-featured" : ""}`} key={plan.name}>
+            {plans.map((plan, index) => (
+              <Reveal
+                as="article"
+                className={`plan-card ${plan.featured ? "is-featured" : ""}`}
+                direction={index === 0 ? "left" : index === 1 ? "up" : "right"}
+                delay={index * 0.08}
+                key={plan.name}
+              >
                 <span>{plan.name}</span>
                 <h3>{plan.price}</h3>
                 <p>{plan.text}</p>
@@ -312,7 +353,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -328,13 +369,15 @@ export default function Home() {
 
           <div className="faq-list">
             {faqs.map((item, index) => (
-              <details key={item.question} open={index === 0}>
+              <Reveal as="div" direction="right" delay={index * 0.08} key={item.question}>
+                <details open={index === 0}>
                 <summary>
                   {item.question}
                   <ChevronDown size={18} />
                 </summary>
                 <p>{item.answer}</p>
-              </details>
+                </details>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -342,17 +385,19 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="section-shell footer-layout">
-          <div>
+          <Reveal direction="left">
             <a className="brandmark footer-brandmark" href="#top">
               <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
               <img className="brandmark-word" src="/img/osmaitext.svg" alt="Osmai" />
             </a>
             <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
-          </div>
-          <PrimaryLink href="#top">
-            Volver arriba
-            <ArrowRight size={18} />
-          </PrimaryLink>
+          </Reveal>
+          <Reveal direction="right" delay={0.12}>
+            <PrimaryLink href="#top">
+              Volver arriba
+              <ArrowRight size={18} />
+            </PrimaryLink>
+          </Reveal>
         </div>
       </footer>
     </main>
