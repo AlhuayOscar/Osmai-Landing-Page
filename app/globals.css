@@ -85,64 +85,50 @@ svg {
   filter: blur(22px);
 }
 
-.hero-image-placeholder {
+.hero-image-frame {
   position: absolute;
   inset: 8px 8px auto auto;
   width: min(58vw, 760px);
   height: calc(100% - 16px);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background:
-    linear-gradient(140deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.03)),
-    radial-gradient(circle at 66% 36%, rgba(255, 255, 255, 0.22), transparent 30%),
-    linear-gradient(180deg, rgba(8, 29, 106, 0.2), rgba(8, 29, 106, 0.48));
+  background: linear-gradient(180deg, rgba(8, 29, 106, 0.2), rgba(8, 29, 106, 0.48));
   backdrop-filter: blur(10px);
   overflow: hidden;
 }
 
-.hero-image-placeholder::before,
-.hero-image-placeholder::after {
+.hero-image-frame::before {
   content: "";
   position: absolute;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(14, 69, 255, 0.72) 0%, rgba(14, 69, 255, 0.26) 34%, rgba(14, 69, 255, 0.12) 100%),
+    linear-gradient(180deg, rgba(10, 33, 113, 0.12), rgba(10, 33, 113, 0.6));
 }
 
-.hero-image-placeholder::before {
-  right: 24%;
-  top: 18%;
-  width: 300px;
-  height: 300px;
-  filter: blur(8px);
-}
-
-.hero-image-placeholder::after {
-  left: 14%;
-  bottom: 10%;
+.hero-image-frame::after {
+  content: "";
+  position: absolute;
+  inset: auto auto 10% 14%;
   width: 440px;
   height: 120px;
-  border-radius: 36px;
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.08);
+  z-index: 2;
 }
 
-.hero-image-placeholder span,
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.88) contrast(1.02);
+}
+
 .projects-placeholder span,
 .hero-panel-screen-card span {
   position: relative;
   z-index: 1;
-}
-
-.hero-image-placeholder span {
-  position: absolute;
-  right: 30px;
-  bottom: 30px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  border: 1px dashed rgba(255, 255, 255, 0.44);
-  color: rgba(255, 255, 255, 0.86);
-  font-size: 0.86rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  background: rgba(4, 18, 71, 0.26);
 }
 
 .hero-nav,
@@ -787,7 +773,7 @@ svg {
     padding-top: 18px;
   }
 
-  .hero-image-placeholder {
+  .hero-image-frame {
     inset: 0;
     width: 100%;
     opacity: 0.42;

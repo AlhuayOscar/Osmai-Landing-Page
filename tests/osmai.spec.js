@@ -10,7 +10,7 @@ test.describe("Osmai landing page", () => {
     await expect(page.getByRole("link", { name: "Pedi propuesta" })).toBeVisible();
     await expect(navigation.getByRole("link", { name: "Servicios" })).toBeVisible();
     await expect(navigation.getByRole("link", { name: "Proyectos" })).toBeVisible();
-    await expect(page.getByText("Agrega aqui tu imagen de portada")).toBeVisible();
+    await expect(page.locator('img[src="/img/herosection.jpg"]')).toBeVisible();
   });
 
   test("navigates to projects and plans sections", async ({ page }) => {
