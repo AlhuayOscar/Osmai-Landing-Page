@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Bot, MessageCircle, PhoneCall, Send, X } from "lucide-react";
 
 const whatsappUrl =
-  "https://wa.me/543487477269?text=Hola%20equipo%20Osmai%2C%20quiero%20consultar%20por%20un%20proyecto.";
+  "https://wa.me/543487477269?text=Hola%20equipo%20omcreativos%2C%20quiero%20consultar%20por%20un%20proyecto.";
 
 const quickQuestions = [
   "Que servicios ofrecen?",
@@ -16,7 +16,7 @@ const quickQuestions = [
 const initialMessages = [
   {
     role: "bot",
-    text: "Hola, soy el asistente de prueba de Osmai. Puedo responder sobre servicios, planes, tiempos, Oscar, Maira y contacto.",
+    text: "Hola, soy el asistente de prueba de omcreativos. Puedo responder sobre servicios, planes, tiempos, Oscar, Maira y contacto.",
   },
 ];
 
@@ -32,19 +32,19 @@ function getAnswer(input) {
 
   if (text.includes("oscar") || text.includes("programador") || text.includes("software")) {
     return {
-      text: "Oscar es el creador y programador web/software de Osmai. Se encarga de la parte tecnica, desarrollo, estructura, funcionalidades y publicacion.",
+      text: "Oscar es el creador y programador web/software de omcreativos. Se encarga de la parte tecnica, desarrollo, estructura, funcionalidades y publicacion.",
     };
   }
 
   if (text.includes("maira") || text.includes("diseno") || text.includes("diseño") || text.includes("marca")) {
     return {
-      text: "Maira lidera la parte visual de Osmai: identidad, composicion, piezas graficas, estilo de marca y diseño general.",
+      text: "Maira lidera la parte visual de omcreativos: identidad, composicion, piezas graficas, estilo de marca y diseño general.",
     };
   }
 
   if (text.includes("servicio") || text.includes("hacen") || text.includes("ofrecen")) {
     return {
-      text: "Osmai ofrece diseño web, sitios para empresas, identidad visual, piezas graficas, catalogos, formularios, integraciones y software a medida.",
+      text: "omcreativos ofrece diseño web, sitios para empresas, identidad visual, piezas graficas, catalogos, formularios, integraciones y software a medida.",
     };
   }
 
@@ -70,13 +70,13 @@ function getAnswer(input) {
 
   if (text.includes("contacto") || text.includes("whatsapp") || text.includes("hablar")) {
     return {
-      text: "Puedes hablar directamente con el equipo de Osmai por WhatsApp para contar tu idea y recibir una orientacion mas precisa.",
+      text: "Puedes hablar directamente con el equipo de omcreativos por WhatsApp para contar tu idea y recibir una orientacion mas precisa.",
       contact: true,
     };
   }
 
   return {
-    text: "No tengo esa respuesta exacta en esta prueba, pero el equipo de Osmai puede ayudarte directamente por WhatsApp.",
+    text: "No tengo esa respuesta exacta en esta prueba, pero el equipo de omcreativos puede ayudarte directamente por WhatsApp.",
     contact: true,
   };
 }
@@ -106,14 +106,14 @@ export default function Chatbot() {
   return (
     <div className={`chatbot ${isOpen ? "is-open" : ""}`}>
       {isOpen ? (
-        <section className="chatbot-panel" aria-label="Chatbot de prueba de Osmai">
+        <section className="chatbot-panel" aria-label="Chatbot de prueba de omcreativos">
           <header className="chatbot-header">
             <div>
               <span>
                 <Bot size={16} />
               </span>
               <div>
-                <strong>Asistente Osmai</strong>
+                <strong>Asistente omcreativos</strong>
                 <small>Respuesta de prueba</small>
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function Chatbot() {
         className="chatbot-toggle"
         type="button"
         onClick={() => setIsOpen((currentValue) => !currentValue)}
-        aria-label={isOpen ? "Cerrar chat de Osmai" : "Abrir chat de Osmai"}
+        aria-label={isOpen ? "Cerrar chat de omcreativos" : "Abrir chat de omcreativos"}
       >
         <MessageCircle size={24} />
       </button>

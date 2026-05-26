@@ -1,30 +1,30 @@
-# Osmai Landing Page
+# omcreativos Landing Page
 
-Landing page desarrollada con **Next.js 16** para **Osmai**, una propuesta de web design, diseño visual y desarrollo de software orientada a pequeñas y medianas empresas.
+Landing page desarrollada con **Next.js 16** para **omcreativos**, una propuesta de web design, diseño visual y desarrollo de software orientada a pequeñas y medianas empresas.
 
 
 
-El sitio presenta a Osmai como un equipo que combina la parte técnica de **Oscar**, creador, programador web y desarrollador de software, con la mirada visual de **Maira**, encargada de diseño, identidad y piezas gráficas.
+El sitio presenta a omcreativos como un equipo que combina la parte técnica de **Oscar**, creador, programador web y desarrollador de software, con la mirada visual de **Maira**, encargada de diseño, identidad y piezas gráficas.
 
 ### Vista previa
 
-![Hero de Osmai](docs/screenshots/hero.png)
+![Hero de omcreativos](docs/screenshots/hero.png)
 
-![Panel de proyecto Osmai](docs/screenshots/project-panel.png)
+![Panel de proyecto omcreativos](docs/screenshots/project-panel.png)
 
-![Footer de Osmai](docs/screenshots/footer.png)
+![Footer de omcreativos](docs/screenshots/footer.png)
 
 ## Sitio en producción
 
-`https://osmai-landing-page.vercel.app`
+`https://www.omcreativos.com`
 
 ## Repositorio
 
-`https://github.com/AlhuayOscar/Osmai-Landing-Page`
+`https://github.com/AlhuayOscar/omcreativos-landing-page`
 
 ## De qué trata la página
 
-La landing comunica los servicios principales de Osmai para negocios que necesitan mejorar su presencia digital, verse más profesionales y trabajar con herramientas propias.
+La landing comunica los servicios principales de omcreativos para negocios que necesitan mejorar su presencia digital, verse más profesionales y trabajar con herramientas propias.
 
 Servicios destacados:
 
@@ -35,13 +35,13 @@ Servicios destacados:
 
 ## Secciones incluidas
 
-- **Hero principal:** presentación de Osmai con propuesta de valor, navegación y CTA.
+- **Hero principal:** presentación de omcreativos con propuesta de valor, navegación y CTA.
 - **Servicios:** bloques de diseño web, identidad visual, UX/contenido y soporte cercano.
 - **Proyecto completo:** panel visual que muestra métricas, entregables y estado de proyecto.
 - **Ideas que venden:** tarjetas editoriales para reforzar el valor de una presencia digital profesional.
 - **Beneficios:** ventajas pensadas para pymes, como presencia rápida, escalabilidad y trabajo prolijo.
 - **Servicios visuales:** cards para web, branding y software a medida.
-- **Rubros:** grilla con tipos de negocios a los que puede servir Osmai.
+- **Rubros:** grilla con tipos de negocios a los que puede servir omcreativos.
 - **Proceso:** tabla con etapas de trabajo, tiempos, entregables y responsables.
 - **Equipo:** presentación de Oscar y Maira como dupla técnica y creativa.
 - **Planes:** tres puntos de partida: Landing, Web Pro y Software.
@@ -101,7 +101,7 @@ npm run test:e2e:ui
 
 ## Pruebas end-to-end
 
-El proyecto incluye pruebas de Playwright en `tests/osmai.spec.js`.
+El proyecto incluye pruebas de Playwright en `tests/omcreativos.spec.js`.
 
 Las pruebas validan:
 
@@ -136,7 +136,7 @@ El workflow hace:
 
 ## Deploy manual en Vercel
 
-1. Importar el repositorio `AlhuayOscar/Osmai-Landing-Page` desde Vercel.
+1. Importar el repositorio `AlhuayOscar/omcreativos-landing-page` desde Vercel.
 2. Seleccionar framework preset `Next.js`.
 3. Usar `npm run build` como build command.
 4. Dejar el output con la configuración automática de Vercel para Next.js.

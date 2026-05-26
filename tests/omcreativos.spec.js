@@ -1,11 +1,11 @@
 import { expect, test } from "@playwright/test";
 
-test.describe("Osmai landing page", () => {
+test.describe("omcreativos landing page", () => {
   test("renders the recreated hero and navigation", async ({ page }) => {
     await page.goto("/");
     const navigation = page.getByLabel("Navegacion principal");
 
-    await expect(page.getByRole("heading", { name: "osmai", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "omcreativos", level: 1 })).toBeVisible();
     await expect(page.getByText("Creamos sitios web, disenos visuales")).toBeVisible();
     await expect(page.getByRole("link", { name: "Pedi propuesta" })).toBeVisible();
     await expect(navigation.getByRole("link", { name: "Servicios" })).toBeVisible();
