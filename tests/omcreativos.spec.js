@@ -5,7 +5,7 @@ test.describe("omcreativos landing page", () => {
     await page.goto("/");
     const navigation = page.getByLabel("Navegacion principal");
 
-    await expect(page.getByRole("heading", { name: "omcreativos", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "seamos creativos", level: 1 })).toBeVisible();
     await expect(page.getByText("Creamos sitios web, disenos visuales")).toBeVisible();
     await expect(page.getByRole("link", { name: "Pedi propuesta" })).toBeVisible();
     await expect(navigation.getByRole("link", { name: "Servicios" })).toBeVisible();

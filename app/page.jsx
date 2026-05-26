@@ -34,6 +34,23 @@ const navItems = [
   { label: "FAQ", href: "#faq" },
 ];
 
+const creativeFonts = [
+  "var(--font-bungee-shade)",
+  "var(--font-monoton)",
+  "var(--font-rubik-moonrocks)",
+  "var(--font-rubik-glitch)",
+  "var(--font-pirata-one)",
+  "var(--font-ewert)",
+  "var(--font-fascinate-inline)",
+  "var(--font-unifraktur)",
+];
+
+const creativeColorSets = [
+  ["#ffd166", "#ff8c42", "#f25f5c", "#ffffff", "#b8f7ff", "#f7d6ff", "#fff2b8", "#7fffd4", "#ffb3c7"],
+  ["#f9f871", "#ff6b6b", "#ff9f1c", "#ffffff", "#9bf6ff", "#caffbf", "#ffd6ff", "#fdffb6", "#bdb2ff"],
+  ["#ffffff", "#ffe66d", "#ff70a6", "#70d6ff", "#ff9770", "#e9ff70", "#c77dff", "#64dfdf", "#f4f1de"],
+];
+
 const heroStats = [
   { label: "WEB", value: "Marca digital" },
   { label: "MARCA", value: "Visual y verbal" },
@@ -296,6 +313,9 @@ export default function Home() {
   const [hasNavBackdrop, setHasNavBackdrop] = useState(false);
   const [navTone, setNavTone] = useState("on-dark");
   const [activeNavIndex, setActiveNavIndex] = useState(0);
+  const [creativeFontIndex, setCreativeFontIndex] = useState(0);
+  const [creativeColorSetIndex, setCreativeColorSetIndex] = useState(0);
+  const [typedCreativeCount, setTypedCreativeCount] = useState(0);
   const [navIndicatorStyle, setNavIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const navLinksRef = useRef(null);
   const navLinkRefs = useRef([]);
@@ -303,6 +323,36 @@ export default function Home() {
   const navPointerInsideRef = useRef(false);
   const lastNavActivityRef = useRef(Date.now());
   const lastScrollYRef = useRef(0);
+
+  useEffect(() => {
+    const fontTimer = window.setInterval(() => {
+      setCreativeFontIndex((currentIndex) => (currentIndex + 1) % creativeFonts.length);
+      setCreativeColorSetIndex((currentIndex) => (currentIndex + 1) % creativeColorSets.length);
+    }, 3000);
+
+    return () => {
+      window.clearInterval(fontTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    setTypedCreativeCount(0);
+
+    const typeTimer = window.setInterval(() => {
+      setTypedCreativeCount((currentCount) => {
+        if (currentCount >= "creativos".length) {
+          window.clearInterval(typeTimer);
+          return currentCount;
+        }
+
+        return currentCount + 1;
+      });
+    }, 95);
+
+    return () => {
+      window.clearInterval(typeTimer);
+    };
+  }, [creativeFontIndex]);
 
   useEffect(() => {
     const showNav = () => {
@@ -484,8 +534,25 @@ export default function Home() {
             <Reveal as="p" className="hero-eyebrow" direction="left" delay={0.18}>
               Web design y diseno integral
             </Reveal>
-            <Reveal as="h1" direction="left" delay={0.25}>
-              seamos creativos
+            <Reveal as="h1" aria-label="seamos creativos" direction="left" delay={0.25}>
+              <span className="hero-static-word">seamos</span>{" "}
+              <span
+                className="hero-typed-word"
+                style={{ fontFamily: creativeFonts[creativeFontIndex] }}
+              >
+                {"creativos".split("").map((letter, index) => (
+                  <span
+                    className={index < typedCreativeCount ? "is-typed" : ""}
+                    key={`${creativeFontIndex}-${letter}-${index}`}
+                    style={{
+                      "--letter-color": creativeColorSets[creativeColorSetIndex][index],
+                      transitionDelay: `${index * 55}ms`,
+                    }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </span>
             </Reveal>
             <Reveal as="p" className="hero-description" direction="left" delay={0.32}>
               Creamos sitios web, disenos visuales y soluciones de software para
