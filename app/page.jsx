@@ -240,6 +240,28 @@ const faqs = [
   },
 ];
 
+const emailSubject = "Consulta desde la pagina web";
+const emailBody = [
+  "Hola! Buenas tardes,",
+  "",
+  "Vengo de la pagina web y quisiera contratar sus servicios.",
+  "",
+  "Me interesa recibir informacion sobre:",
+  "- Diseno web",
+  "- Identidad visual",
+  "- Software a medida",
+  "",
+  "Mi nombre es:",
+  "Mi empresa o proyecto es:",
+  "Mi telefono o WhatsApp es:",
+  "",
+  "Muchas gracias.",
+].join("\n");
+
+const contactEmailHref = `mailto:info@omcreativos.com?subject=${encodeURIComponent(
+  emailSubject
+)}&body=${encodeURIComponent(emailBody)}`;
+
 function SectionTitle({ eyebrow, title, text, centered = false }) {
   const direction = centered ? "up" : "left";
 
@@ -659,7 +681,7 @@ export default function Home() {
             <div>
               <h3>Conectate</h3>
               <span>Buenos Aires, Argentina</span>
-              <span>info@omcreativos.com</span>
+              <a href={contactEmailHref}>info@omcreativos.com</a>
               <PrimaryLink href="#top">
                 Volver arriba
                 <ArrowRight size={18} />
