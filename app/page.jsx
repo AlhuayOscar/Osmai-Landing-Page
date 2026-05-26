@@ -45,11 +45,9 @@ const creativeFonts = [
   "var(--font-unifraktur)",
 ];
 
-const creativeColorSets = [
-  ["#ffd166", "#ff8c42", "#f25f5c", "#ffffff", "#b8f7ff", "#f7d6ff", "#fff2b8", "#7fffd4", "#ffb3c7"],
-  ["#f9f871", "#ff6b6b", "#ff9f1c", "#ffffff", "#9bf6ff", "#caffbf", "#ffd6ff", "#fdffb6", "#bdb2ff"],
-  ["#ffffff", "#ffe66d", "#ff70a6", "#70d6ff", "#ff9770", "#e9ff70", "#c77dff", "#64dfdf", "#f4f1de"],
-];
+const creativeAnimationModes = ["forward", "backward", "fade", "edges"];
+const creativeWord = "creativos";
+const creativeEdgeOrder = [0, 8, 1, 7, 2, 6, 3, 5, 4];
 
 const heroStats = [
   { label: "WEB", value: "Marca digital" },
@@ -314,7 +312,7 @@ export default function Home() {
   const [navTone, setNavTone] = useState("on-dark");
   const [activeNavIndex, setActiveNavIndex] = useState(0);
   const [creativeFontIndex, setCreativeFontIndex] = useState(0);
-  const [creativeColorSetIndex, setCreativeColorSetIndex] = useState(0);
+  const [creativeAnimationModeIndex, setCreativeAnimationModeIndex] = useState(0);
   const [typedCreativeCount, setTypedCreativeCount] = useState(0);
   const [navIndicatorStyle, setNavIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const navLinksRef = useRef(null);
@@ -327,7 +325,7 @@ export default function Home() {
   useEffect(() => {
     const fontTimer = window.setInterval(() => {
       setCreativeFontIndex((currentIndex) => (currentIndex + 1) % creativeFonts.length);
-      setCreativeColorSetIndex((currentIndex) => (currentIndex + 1) % creativeColorSets.length);
+      setCreativeAnimationModeIndex((currentIndex) => (currentIndex + 1) % creativeAnimationModes.length);
     }, 3000);
 
     return () => {
@@ -340,7 +338,7 @@ export default function Home() {
 
     const typeTimer = window.setInterval(() => {
       setTypedCreativeCount((currentCount) => {
-        if (currentCount >= "creativos".length) {
+        if (currentCount >= creativeWord.length) {
           window.clearInterval(typeTimer);
           return currentCount;
         }
@@ -353,6 +351,8 @@ export default function Home() {
       window.clearInterval(typeTimer);
     };
   }, [creativeFontIndex]);
+
+  const creativeAnimationMode = creativeAnimationModes[creativeAnimationModeIndex];
 
   useEffect(() => {
     const showNav = () => {
@@ -540,18 +540,40 @@ export default function Home() {
                 className="hero-typed-word"
                 style={{ fontFamily: creativeFonts[creativeFontIndex] }}
               >
-                {"creativos".split("").map((letter, index) => (
+                {creativeWord.split("").map((letter, index) => {
+                  const orderedIndex =
+                    creativeAnimationMode === "backward"
+                      ? creativeWord.length - 1 - index
+                      : creativeAnimationMode === "edges"
+                        ? creativeEdgeOrder.indexOf(index)
+                        : index;
+                  const isTyped = creativeAnimationMode === "fade" || orderedIndex < typedCreativeCount;
+                  const delay =
+                    creativeAnimationMode === "fade"
+                      ? index * 70
+                      : creativeAnimationMode === "backward"
+                        ? orderedIndex * 70
+                        : creativeAnimationMode === "edges"
+                          ? orderedIndex * 85
+                          : index * 55;
+
+                  return (
                   <span
-                    className={index < typedCreativeCount ? "is-typed" : ""}
-                    key={`${creativeFontIndex}-${letter}-${index}`}
+                    className={isTyped ? `is-typed mode-${creativeAnimationMode}` : `mode-${creativeAnimationMode}`}
+                    key={`${creativeFontIndex}-${creativeAnimationMode}-${letter}-${index}`}
                     style={{
-                      "--letter-color": creativeColorSets[creativeColorSetIndex][index],
-                      transitionDelay: `${index * 55}ms`,
+                      "--letter-x":
+                        creativeAnimationMode === "backward" || (creativeAnimationMode === "edges" && index > 4)
+                          ? "0.14em"
+                          : "-0.14em",
+                      transitionDelay: `${delay}ms`,
+                      animationDelay: `${delay}ms`,
                     }}
                   >
                     {letter}
                   </span>
-                ))}
+                  );
+                })}
               </span>
             </Reveal>
             <Reveal as="p" className="hero-description" direction="left" delay={0.32}>
