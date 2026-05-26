@@ -645,7 +645,7 @@ export default function Home() {
             <div>
               <h3>Conectate</h3>
               <span>Buenos Aires, Argentina</span>
-              <span>consultas@omcreativos.com</span>
+              <span>info@omcreativos.com</span>
               <PrimaryLink href="#top">
                 Volver arriba
                 <ArrowRight size={18} />
