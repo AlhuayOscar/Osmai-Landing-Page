@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -266,6 +269,8 @@ function PrimaryLink({ href, children, variant = "primary" }) {
 }
 
 export default function Home() {
+  const [openFaqIndex, setOpenFaqIndex] = useState(0);
+
   return (
     <main className="landing-shell">
       <section className="hero-section" id="top">
@@ -606,12 +611,21 @@ export default function Home() {
           <div className="faq-list">
             {faqs.map((item, index) => (
               <Reveal as="div" direction="right" delay={index * 0.08} key={item.question}>
-                <details open={index === 0}>
-                <summary>
-                  {item.question}
-                  <ChevronDown size={18} />
-                </summary>
-                <p>{item.answer}</p>
+                <details open={openFaqIndex === index}>
+                  <summary
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setOpenFaqIndex((currentIndex) => (currentIndex === index ? -1 : index));
+                    }}
+                  >
+                    {item.question}
+                    <ChevronDown size={18} />
+                  </summary>
+                  <div className="faq-content">
+                    <div className="faq-content-inner">
+                      <p>{item.answer}</p>
+                    </div>
+                  </div>
                 </details>
               </Reveal>
             ))}

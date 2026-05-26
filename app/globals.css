@@ -41,6 +41,29 @@ a {
 
 button {
   font: inherit;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  opacity: 0.96;
+}
+
+button:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.86);
+  outline-offset: 3px;
 }
 
 img,
@@ -385,7 +408,7 @@ svg {
 .section-title h2 {
   margin: 0;
   font-family: var(--font-display), sans-serif;
-  font-size: 86px;
+  font-size: 80px;
   line-height: 0.94;
   letter-spacing: 0;
   text-wrap: balance;
@@ -974,8 +997,16 @@ svg {
 }
 
 .faq-list details {
+  border: 1px solid rgba(17, 71, 239, 0.1);
   border-radius: 20px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.74);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    opacity 220ms ease;
 }
 
 .faq-list summary {
@@ -988,18 +1019,270 @@ svg {
   cursor: pointer;
   color: var(--ink);
   font-weight: 700;
+  opacity: 0.82;
+  transition:
+    transform 240ms ease,
+    opacity 240ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    padding 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .faq-list summary::marker {
   content: "";
 }
 
-.faq-list details p {
+.faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-list summary:hover {
+  opacity: 1;
+  background: rgba(17, 71, 239, 0.05);
+  transform: translateY(-1px);
+}
+
+.faq-list summary svg {
+  opacity: 0.7;
+  transform: translateY(0) scale(0.94);
+  transition:
+    transform 260ms ease,
+    opacity 220ms ease;
+}
+
+.faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-10px) scaleY(0.96);
+  transform-origin: top;
+  transition:
+    grid-template-rows 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-content-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.faq-content p {
+  margin: 0;
   padding: 0 24px 24px;
 }
 
+.faq-list details[open] {
+  border-color: rgba(17, 71, 239, 0.2);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 44px rgba(10, 42, 133, 0.12);
+}
+
+.faq-list details[open] .faq-content {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
 .faq-list details[open] summary svg {
-  transform: rotate(180deg);
+  opacity: 1;
+  transform: rotate(180deg) scale(1);
+}
+
+.faq-list details[open] summary {
+  color: var(--page-blue-deep);
+  opacity: 1;
+}
+
+.faq-list details[open] summary:hover {
+  background: rgba(17, 71, 239, 0.08);
+}
+
+.chatbot {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 30;
+  display: grid;
+  justify-items: end;
+  gap: 12px;
+}
+
+.chatbot-toggle {
+  width: 58px;
+  height: 58px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--page-blue);
+  color: var(--text);
+  opacity: 0.88;
+  box-shadow: 0 18px 40px rgba(11, 54, 200, 0.3);
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+
+.chatbot-toggle:hover {
+  transform: translateY(-2px) scale(1.02);
+  opacity: 1;
+  box-shadow: 0 24px 52px rgba(11, 54, 200, 0.34);
+}
+
+.chatbot-panel {
+  width: min(360px, calc(100vw - 44px));
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
+  box-shadow: var(--shadow-strong);
+  border: 1px solid rgba(17, 71, 239, 0.08);
+  backdrop-filter: blur(18px);
+  animation: chatbot-pop 240ms ease both;
+}
+
+.chatbot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chatbot-header > div,
+.chatbot-header > div > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chatbot-header span {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--page-blue);
+  color: var(--text);
+}
+
+.chatbot-header small {
+  display: block;
+  color: rgba(17, 71, 239, 0.68);
+}
+
+.chatbot-header button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(17, 71, 239, 0.08);
+  color: var(--ink);
+  opacity: 0.8;
+}
+
+.chatbot-messages {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.chatbot-message {
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(17, 71, 239, 0.06);
+  opacity: 0.98;
+}
+
+.chatbot-message.user {
+  background: rgba(17, 71, 239, 0.1);
+}
+
+.chatbot-message p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.chatbot-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  color: var(--page-blue-deep);
+  font-weight: 700;
+}
+
+.chatbot-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chatbot-quick button,
+.chatbot-form button,
+.chatbot-contact {
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.chatbot-quick button {
+  border: 1px solid rgba(17, 71, 239, 0.12);
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(17, 71, 239, 0.05);
+  color: var(--ink);
+  opacity: 0.82;
+}
+
+.chatbot-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chatbot-form input {
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid rgba(17, 71, 239, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+}
+
+.chatbot-form button {
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--page-blue);
+  color: var(--text);
+  opacity: 0.88;
+}
+
+.chatbot-header button:hover,
+.chatbot-quick button:hover,
+.chatbot-form button:hover,
+.chatbot-contact:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+@keyframes chatbot-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .site-footer {
@@ -1206,7 +1489,7 @@ svg {
     min-height: 66px;
   }
 
-  .faq-list details p {
+  .faq-content p {
     padding-inline: 18px;
   }
 

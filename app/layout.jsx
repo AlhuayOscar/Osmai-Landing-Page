@@ -15,6 +15,11 @@ export const metadata = {
   title: "omcreativos | Diseno web, identidad y software",
   description:
     "Landing de omcreativos recreada con una direccion visual clara, modular y lista para completar con fondos finales.",
+  icons: {
+    icon: "/img/favicon/favicon.png",
+    shortcut: "/img/favicon/favicon.png",
+    apple: "/img/favicon/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
