@@ -12,9 +12,9 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "Osmai | Diseno web, identidad y software",
+  title: "omcreativos | Diseno web, identidad y software",
   description:
-    "Landing de Osmai recreada con una direccion visual clara, modular y lista para completar con fondos finales.",
+    "Landing de omcreativos recreada con una direccion visual clara, modular y lista para completar con fondos finales.",
 };
 
 export default function RootLayout({ children }) {

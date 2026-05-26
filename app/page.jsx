@@ -276,9 +276,8 @@ export default function Home() {
         </div>
 
         <Reveal as="nav" className="hero-nav" aria-label="Navegacion principal" direction="up" delay={0.1}>
-          <a className="brandmark" href="#top" aria-label="Inicio de Osmai">
+          <a className="brandmark" href="#top" aria-label="Inicio de omcreativos">
             <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
-            <img className="brandmark-word" src="/img/osmaitext.svg" alt="Osmai" />
           </a>
 
           <div className="hero-nav-center">
@@ -305,7 +304,7 @@ export default function Home() {
               Web design y diseno integral
             </Reveal>
             <Reveal as="h1" direction="left" delay={0.25}>
-              osmai
+              omcreativos
             </Reveal>
             <Reveal as="p" className="hero-description" direction="left" delay={0.32}>
               Creamos sitios web, disenos visuales y soluciones de software para
@@ -323,7 +322,7 @@ export default function Home() {
               </a>
             </Reveal>
 
-            <Reveal className="hero-stats" aria-label="Servicios principales de Osmai" direction="left" delay={0.46}>
+            <Reveal className="hero-stats" aria-label="Servicios principales de omcreativos" direction="left" delay={0.46}>
               {heroStats.map((item) => (
                 <div key={item.label}>
                   <strong>{item.label}</strong>
@@ -340,7 +339,7 @@ export default function Home() {
           <SectionTitle
             eyebrow="Lo que hacemos"
             title="Diseno y tecnologia para que tu empresa se vea profesional"
-            text="Osmai combina programacion web, software y diseno visual para construir una presencia digital clara, moderna y facil de usar."
+            text="omcreativos combina programacion web, software y diseno visual para construir una presencia digital clara, moderna y facil de usar."
             centered
           />
         </div>
@@ -377,7 +376,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Expertos digitales"
               title="Todo lo que necesita una marca para salir mejor parada online"
-              text="Tomamos la idea de una agencia integral y la llevamos al lenguaje Osmai: simple, moderno, azul, modular y listo para reemplazar placeholders por material real."
+              text="Tomamos la idea de una agencia integral y la llevamos al lenguaje omcreativos: simple, moderno, azul, modular y listo para reemplazar placeholders por material real."
             />
             <Reveal className="agency-note" direction="left" delay={0.25}>
               <strong>Mas de una sola landing.</strong>
@@ -482,7 +481,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Por que elegirnos"
               title="Cercania, criterio tecnico y una web pensada para vender mejor"
-              text="La referencia trabaja mucho la confianza. En Osmai lo traducimos a beneficios concretos: propiedad, tiempos claros, soporte y una base que puede evolucionar."
+              text="La referencia trabaja mucho la confianza. En omcreativos lo traducimos a beneficios concretos: propiedad, tiempos claros, soporte y una base que puede evolucionar."
             />
           </div>
 
@@ -625,7 +624,7 @@ export default function Home() {
           <Reveal className="footer-main" direction="left">
             <a className="brandmark footer-brandmark" href="#top">
               <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
-              <img className="brandmark-word" src="/img/osmaitext.svg" alt="Osmai" />
+              <img className="brandmark-word" src="/img/osmaitext.svg" alt="omcreativos" />
             </a>
             <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
           </Reveal>
@@ -646,7 +645,7 @@ export default function Home() {
             <div>
               <h3>Conectate</h3>
               <span>Buenos Aires, Argentina</span>
-              <span>consultas@osmai.dev</span>
+              <span>consultas@omcreativos.com</span>
               <PrimaryLink href="#top">
                 Volver arriba
                 <ArrowRight size={18} />
