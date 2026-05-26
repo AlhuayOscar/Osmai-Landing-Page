@@ -84,8 +84,19 @@ svg {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(90deg, rgba(0, 74, 255, 0.96) 0%, rgba(0, 74, 255, 0.8) 24%, rgba(0, 74, 255, 0.36) 50%, rgba(2, 10, 30, 0.42) 100%),
-    linear-gradient(180deg, rgba(0, 37, 150, 0.1) 0%, rgba(0, 37, 150, 0.06) 64%, var(--page-blue) 100%);
+    linear-gradient(
+      90deg,
+      rgba(0, 74, 255, 0.96) 0%,
+      rgba(0, 74, 255, 0.8) 24%,
+      rgba(0, 74, 255, 0.36) 50%,
+      rgba(2, 10, 30, 0.42) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 37, 150, 0.1) 0%,
+      rgba(0, 37, 150, 0.06) 64%,
+      var(--page-blue) 100%
+    );
 }
 
 .hero-image-frame::after {
@@ -93,7 +104,11 @@ svg {
   position: absolute;
   inset: auto 0 0;
   height: 180px;
-  background: linear-gradient(180deg, rgba(14, 69, 255, 0), var(--page-blue) 82%);
+  background: linear-gradient(
+    180deg,
+    rgba(14, 69, 255, 0),
+    var(--page-blue) 82%
+  );
   z-index: 2;
 }
 
@@ -131,12 +146,12 @@ svg {
   align-items: center;
   gap: 6px;
   width: auto;
-  height: 18px;
+  height: 28px;
 }
 
 .brandmark-symbol {
-  width: 31px;
-  height: 12px;
+  width: 81px;
+  height: 22px;
 }
 
 .brandmark-word {
@@ -274,7 +289,11 @@ svg {
   border-radius: var(--radius-sm);
   font-size: 0.76rem;
   font-weight: 700;
-  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
 .cta-link:hover {
@@ -570,7 +589,11 @@ svg {
   border-radius: var(--radius-xl);
   background:
     linear-gradient(180deg, rgba(14, 69, 255, 0.88), rgba(11, 54, 200, 0.92)),
-    radial-gradient(circle at 70% 28%, rgba(255, 255, 255, 0.2), transparent 26%);
+    radial-gradient(
+      circle at 70% 28%,
+      rgba(255, 255, 255, 0.2),
+      transparent 26%
+    );
   box-shadow: var(--shadow);
 }
 
@@ -680,7 +703,11 @@ svg {
   border-radius: 18px;
   background:
     linear-gradient(135deg, rgba(14, 69, 255, 0.92), rgba(11, 54, 200, 0.78)),
-    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.24), transparent 26%);
+    radial-gradient(
+      circle at 78% 18%,
+      rgba(255, 255, 255, 0.24),
+      transparent 26%
+    );
 }
 
 .case-image-placeholder span {
@@ -765,7 +792,11 @@ svg {
 .process-section {
   padding: 84px 0;
   background:
-    radial-gradient(circle at 14% 0%, rgba(147, 179, 255, 0.18), transparent 28%),
+    radial-gradient(
+      circle at 14% 0%,
+      rgba(147, 179, 255, 0.18),
+      transparent 28%
+    ),
     linear-gradient(180deg, var(--page-blue), var(--page-blue-deep));
   color: var(--text);
 }
@@ -816,7 +847,11 @@ svg {
   place-items: center;
   border-radius: var(--radius-xl);
   background:
-    radial-gradient(circle at 24% 22%, rgba(255, 255, 255, 0.28), transparent 26%),
+    radial-gradient(
+      circle at 24% 22%,
+      rgba(255, 255, 255, 0.28),
+      transparent 26%
+    ),
     linear-gradient(180deg, var(--page-blue), var(--page-blue-deep));
   box-shadow: var(--shadow-strong);
   overflow: hidden;
