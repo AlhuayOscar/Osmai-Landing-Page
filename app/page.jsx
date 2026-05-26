@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -292,6 +292,72 @@ function PrimaryLink({ href, children, variant = "primary" }) {
 
 export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [isNavVisible, setIsNavVisible] = useState(true);
+  const [activeNavIndex, setActiveNavIndex] = useState(0);
+  const [navIndicatorStyle, setNavIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const navLinksRef = useRef(null);
+  const navLinkRefs = useRef([]);
+  const navTimerRef = useRef(null);
+  const navPointerInsideRef = useRef(false);
+  const lastNavActivityRef = useRef(Date.now());
+
+  useEffect(() => {
+    const showNav = () => {
+      lastNavActivityRef.current = Date.now();
+      setIsNavVisible(true);
+    };
+
+    const handleMouseMove = (event) => {
+      if (event.clientY < 112) {
+        showNav();
+      }
+    };
+
+    showNav();
+    navTimerRef.current = window.setInterval(() => {
+      const hasBeenIdle = Date.now() - lastNavActivityRef.current > 3000;
+
+      if (hasBeenIdle && !navPointerInsideRef.current) {
+        setIsNavVisible(false);
+      }
+    }, 250);
+
+    window.addEventListener("scroll", showNav, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+    return () => {
+      window.clearInterval(navTimerRef.current);
+      window.removeEventListener("scroll", showNav);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    const updateIndicator = () => {
+      const linksBox = navLinksRef.current;
+      const activeLink = navLinkRefs.current[activeNavIndex];
+
+      if (!linksBox || !activeLink) {
+        return;
+      }
+
+      const parentRect = linksBox.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+
+      setNavIndicatorStyle({
+        left: linkRect.left - parentRect.left,
+        width: linkRect.width,
+        opacity: 1,
+      });
+    };
+
+    updateIndicator();
+    window.addEventListener("resize", updateIndicator);
+
+    return () => {
+      window.removeEventListener("resize", updateIndicator);
+    };
+  }, [activeNavIndex, isNavVisible]);
 
   return (
     <main className="landing-shell">
@@ -302,20 +368,59 @@ export default function Home() {
           </Reveal>
         </div>
 
-        <Reveal as="nav" className="hero-nav" aria-label="Navegacion principal" direction="up" delay={0.1}>
+        <nav
+          className={`hero-nav ${isNavVisible ? "is-visible" : "is-hidden"}`}
+          aria-label="Navegacion principal"
+          onMouseEnter={() => {
+            navPointerInsideRef.current = true;
+            lastNavActivityRef.current = Date.now();
+            setIsNavVisible(true);
+          }}
+          onMouseLeave={() => {
+            navPointerInsideRef.current = false;
+            lastNavActivityRef.current = Date.now();
+          }}
+        >
           <a className="brandmark" href="#top" aria-label="Inicio de omcreativos">
             <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
           </a>
 
           <div className="hero-nav-center">
-            <div className="hero-nav-links">
-              {navItems.map((item) => (
-                <a href={item.href} key={item.label}>
+            <div className="hero-nav-links" ref={navLinksRef}>
+              <span
+                className="hero-nav-indicator"
+                style={{
+                  opacity: navIndicatorStyle.opacity,
+                  transform: `translateX(${navIndicatorStyle.left}px)`,
+                  width: `${navIndicatorStyle.width}px`,
+                }}
+                aria-hidden="true"
+              />
+              {navItems.map((item, index) => (
+                <a
+                  href={item.href}
+                  key={item.label}
+                  ref={(node) => {
+                    navLinkRefs.current[index] = node;
+                  }}
+                  onMouseEnter={() => {
+                    lastNavActivityRef.current = Date.now();
+                    setActiveNavIndex(index);
+                  }}
+                  onFocus={() => {
+                    lastNavActivityRef.current = Date.now();
+                    setActiveNavIndex(index);
+                  }}
+                  onClick={() => {
+                    lastNavActivityRef.current = Date.now();
+                    setActiveNavIndex(index);
+                  }}
+                >
                   {item.label}
                 </a>
               ))}
             </div>
-            <button className="hero-search" type="button" aria-label="Buscar">
+            <button className="hero-search" type="button" aria-label="Buscar" >
               <Search size={15} />
             </button>
           </div>
@@ -323,7 +428,7 @@ export default function Home() {
           <a className="hero-nav-cta" href="#planes">
             Pedi propuesta
           </a>
-        </Reveal>
+        </nav>
 
         <div className="hero-content">
           <div className="hero-copy">
@@ -633,22 +738,25 @@ export default function Home() {
           <div className="faq-list">
             {faqs.map((item, index) => (
               <Reveal as="div" direction="right" delay={index * 0.08} key={item.question}>
-                <details open={openFaqIndex === index}>
-                  <summary
-                    onClick={(event) => {
-                      event.preventDefault();
+                <article className={`faq-item ${openFaqIndex === index ? "is-open" : ""}`}>
+                  <button
+                    className="faq-trigger"
+                    type="button"
+                    aria-expanded={openFaqIndex === index}
+                    aria-controls={`faq-answer-${index}`}
+                    onClick={() => {
                       setOpenFaqIndex((currentIndex) => (currentIndex === index ? -1 : index));
                     }}
                   >
                     {item.question}
                     <ChevronDown size={18} />
-                  </summary>
-                  <div className="faq-content">
+                  </button>
+                  <div className="faq-content" id={`faq-answer-${index}`}>
                     <div className="faq-content-inner">
                       <p>{item.answer}</p>
                     </div>
                   </div>
-                </details>
+                </article>
               </Reveal>
             ))}
           </div>
