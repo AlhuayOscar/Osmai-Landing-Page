@@ -293,6 +293,8 @@ function PrimaryLink({ href, children, variant = "primary" }) {
 export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
+  const [hasNavBackdrop, setHasNavBackdrop] = useState(false);
+  const [navTone, setNavTone] = useState("on-dark");
   const [activeNavIndex, setActiveNavIndex] = useState(0);
   const [navIndicatorStyle, setNavIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
   const navLinksRef = useRef(null);
@@ -300,11 +302,45 @@ export default function Home() {
   const navTimerRef = useRef(null);
   const navPointerInsideRef = useRef(false);
   const lastNavActivityRef = useRef(Date.now());
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     const showNav = () => {
       lastNavActivityRef.current = Date.now();
       setIsNavVisible(true);
+    };
+
+    const updateNavTone = () => {
+      const sampleY = 54;
+      const darkSections = ["hero-section", "intro-band", "why-section", "process-section"];
+      const currentSection = [...document.querySelectorAll("section, footer")].find((element) => {
+        const rect = element.getBoundingClientRect();
+
+        return rect.top <= sampleY && rect.bottom >= sampleY;
+      });
+      const isOverDarkSection = darkSections.some((className) => currentSection?.classList.contains(className));
+
+      setNavTone(isOverDarkSection ? "on-dark" : "on-light");
+    };
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollYRef.current;
+
+      setHasNavBackdrop(currentScrollY > 50);
+      updateNavTone();
+
+      if (Math.abs(scrollDelta) < 8) {
+        return;
+      }
+
+      if (scrollDelta > 0 && !navPointerInsideRef.current) {
+        setIsNavVisible(false);
+      } else {
+        showNav();
+      }
+
+      lastScrollYRef.current = currentScrollY;
     };
 
     const handleMouseMove = (event) => {
@@ -313,22 +349,33 @@ export default function Home() {
       }
     };
 
+    lastScrollYRef.current = window.scrollY;
+    setHasNavBackdrop(window.scrollY > 50);
+    updateNavTone();
     showNav();
     navTimerRef.current = window.setInterval(() => {
       const hasBeenIdle = Date.now() - lastNavActivityRef.current > 3000;
+      const isAtPageStart = window.scrollY <= 50;
+
+      if (isAtPageStart) {
+        setIsNavVisible(true);
+        return;
+      }
 
       if (hasBeenIdle && !navPointerInsideRef.current) {
         setIsNavVisible(false);
       }
     }, 250);
 
-    window.addEventListener("scroll", showNav, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("resize", updateNavTone);
 
     return () => {
       window.clearInterval(navTimerRef.current);
-      window.removeEventListener("scroll", showNav);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", updateNavTone);
     };
   }, []);
 
@@ -369,7 +416,9 @@ export default function Home() {
         </div>
 
         <nav
-          className={`hero-nav ${isNavVisible ? "is-visible" : "is-hidden"}`}
+          className={`hero-nav nav-${navTone} ${hasNavBackdrop ? "has-backdrop" : ""} ${
+            isNavVisible ? "is-visible" : "is-hidden"
+          }`}
           aria-label="Navegacion principal"
           onMouseEnter={() => {
             navPointerInsideRef.current = true;
@@ -436,7 +485,7 @@ export default function Home() {
               Web design y diseno integral
             </Reveal>
             <Reveal as="h1" direction="left" delay={0.25}>
-              omcreativos
+              seamos creativos
             </Reveal>
             <Reveal as="p" className="hero-description" direction="left" delay={0.32}>
               Creamos sitios web, disenos visuales y soluciones de software para
