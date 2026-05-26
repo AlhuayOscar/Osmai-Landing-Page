@@ -71,9 +71,9 @@ const unifraktur = UnifrakturMaguntia({
 });
 
 export const metadata = {
-  title: "omcreativos | Diseno web, identidad y software",
+  title: "omcreativos | Diseño web, identidad y software",
   description:
-    "Landing de omcreativos recreada con una direccion visual clara, modular y lista para completar con fondos finales.",
+    "Landing de omcreativos recreada con una dirección visual clara, modular y lista para completar con fondos finales.",
   icons: {
     icon: "/img/favicon/favicon.png",
     shortcut: "/img/favicon/favicon.png",

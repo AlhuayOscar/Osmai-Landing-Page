@@ -105,8 +105,8 @@ El proyecto incluye pruebas de Playwright en `tests/omcreativos.spec.js`.
 
 Las pruebas validan:
 
-- Render del hero principal y navegacion.
-- Navegacion hacia las secciones de proyectos y planes.
+- Render del hero principal y navegación.
+- Navegación hacia las secciones de proyectos y planes.
 - Apertura de respuestas en FAQ.
 - Funcionamiento del chatbot y enlace de WhatsApp.
 

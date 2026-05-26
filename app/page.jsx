@@ -23,6 +23,7 @@ import {
   Sparkles,
   UsersRound,
 } from "lucide-react";
+import Chatbot from "./components/Chatbot";
 import Reveal from "./components/Reveal";
 
 const navItems = [
@@ -58,23 +59,23 @@ const heroStats = [
 const serviceCards = [
   {
     icon: MonitorSmartphone,
-    title: "Diseno web",
+    title: "Diseño web",
     text: "Landing pages, sitios institucionales y experiencias digitales preparadas para convertir visitas en consultas.",
   },
   {
     icon: PenTool,
-    title: "Diseno grafico",
-    text: "Diseno y rediseno, creando de tu marca la identidad de recorrido, lugar y propuesta visual.",
+    title: "Diseño gráfico",
+    text: "Diseño y rediseño, creando de tu marca la identidad de recorrido, lugar y propuesta visual.",
   },
   {
     icon: LayoutGrid,
     title: "UX",
-    text: "Ordenamos la informacion para que tus clientes entiendan rapido que haces y por que elegirte.",
+    text: "Ordenamos la información para que tus clientes entiendan rápido qué haces y por qué elegirte.",
   },
   {
     icon: MessageCircleMore,
     title: "Soporte cercano",
-    text: "Somos Oscar y Maira y te acompanamos en cada etapa con criterio tecnico, mirada visual y comunicacion simple.",
+    text: "Somos Oscar y Maira y te acompañamos en cada etapa con criterio técnico, mirada visual y comunicación simple.",
   },
 ];
 
@@ -92,22 +93,22 @@ const specialtyCards = [
   {
     icon: Globe2,
     title: "Sitios institucionales",
-    text: "Paginas de empresa, servicios, portfolio y contacto con estructura profesional y lista para posicionar.",
+    text: "Páginas de empresa, servicios, portfolio y contacto con estructura profesional y lista para posicionar.",
   },
   {
     icon: ShoppingCart,
     title: "E-commerce",
-    text: "Placeholders para tiendas, catalogos y flujos de compra que despues podemos conectar a pagos, stock o envios.",
+    text: "Placeholders para tiendas, catálogos y flujos de compra que después podemos conectar a pagos, stock o envíos.",
   },
   {
     icon: Megaphone,
     title: "Social media",
-    text: "Bases para contenido, campanas y piezas digitales que mantengan coherencia con la web y la identidad.",
+    text: "Bases para contenido, campañas y piezas digitales que mantengan coherencia con la web y la identidad.",
   },
   {
     icon: Rocket,
     title: "Marketing digital",
-    text: "Secciones preparadas para sumar Google Ads, Meta, SEO y llamados a la accion con seguimiento comercial.",
+    text: "Secciones preparadas para sumar Google Ads, Meta, SEO y llamados a la acción con seguimiento comercial.",
   },
 ];
 
@@ -120,7 +121,7 @@ const projectCards = [
   {
     eyebrow: "Servicios",
     title: "Cards modulares",
-    text: "Cada bloque puede crecer con mas items, links o ejemplos sin romper la composicion.",
+    text: "Cada bloque puede crecer con más items, links o ejemplos sin romper la composición.",
   },
   {
     eyebrow: "Mensaje",
@@ -133,17 +134,17 @@ const caseStudies = [
   {
     type: "Sitio institucional",
     title: "Empresa de servicios",
-    text: "Home, servicios, beneficios, formulario y area visual preparada para fotos reales del equipo.",
+    text: "Home, servicios, beneficios, formulario y área visual preparada para fotos reales del equipo.",
   },
   {
-    type: "Catalogo online",
+    type: "Catálogo online",
     title: "Marca de productos",
-    text: "Grilla de productos, categorias, fichas y llamadas para consultar por WhatsApp o integrar carrito.",
+    text: "Grilla de productos, categorías, fichas y llamadas para consultar por WhatsApp o integrar carrito.",
   },
   {
     type: "Identidad + web",
     title: "Proyecto nuevo",
-    text: "Naming, tono, sistema grafico y landing de lanzamiento con contenido listo para campanas.",
+    text: "Naming, tono, sistema gráfico y landing de lanzamiento con contenido listo para campañas.",
   },
   {
     type: "Software a medida",
@@ -155,8 +156,8 @@ const caseStudies = [
 const whyItems = [
   {
     icon: PenTool,
-    title: "Diseno a medida",
-    text: "No partimos de una plantilla generica: la estructura se adapta a tu mensaje, rubro y objetivo comercial.",
+    title: "Diseño a medida",
+    text: "No partimos de una plantilla genérica: la estructura se adapta a tu mensaje, rubro y objetivo comercial.",
   },
   {
     icon: ShieldCheck,
@@ -166,17 +167,17 @@ const whyItems = [
   {
     icon: Clock,
     title: "Tiempos pactados",
-    text: "Trabajamos por etapas visibles para que sepas que falta, que esta listo y que decision viene despues.",
+    text: "Trabajamos por etapas visibles para que sepas qué falta, qué está listo y qué decisión viene después.",
   },
   {
     icon: UsersRound,
-    title: "Atencion cercana",
-    text: "Acompanamiento real durante el proceso, con comunicacion directa y explicaciones sin vueltas.",
+    title: "Atención cercana",
+    text: "Acompañamiento real durante el proceso, con comunicación directa y explicaciones sin vueltas.",
   },
   {
     icon: Megaphone,
-    title: "Difusion",
-    text: "La web queda preparada para campanas, redes, SEO basico y llamados a la accion medibles.",
+    title: "Difusión",
+    text: "La web queda preparada para campañas, redes, SEO básico y llamados a la acción medibles.",
   },
   {
     icon: ServerCog,
@@ -189,12 +190,12 @@ const processSteps = [
   {
     step: "01",
     title: "Definimos la estructura",
-    text: "Armamos la home y las secciones internas con una grilla clara y jerarquia visual estable.",
+    text: "Armamos la home y las secciones internas con una grilla clara y jerarquía visual estable.",
   },
   {
     step: "02",
     title: "Aplicamos el estilo",
-    text: "Colores, botones, sombras y tipografia quedan listos para extender el sistema a nuevas pantallas.",
+    text: "Colores, botones, sombras y tipografía quedan listos para extender el sistema a nuevas pantallas.",
   },
   {
     step: "03",
@@ -204,9 +205,9 @@ const processSteps = [
 ];
 
 const commerceFeatures = [
-  "Catalogo editable con categorias y productos destacados",
-  "Bloques preparados para medios de pago, envios y promociones",
-  "Consultas por WhatsApp o carrito integrado segun la etapa del negocio",
+  "Catálogo editable con categorías y productos destacados",
+  "Bloques preparados para medios de pago, envíos y promociones",
+  "Consultas por WhatsApp o carrito integrado según la etapa del negocio",
   "Paneles y automatizaciones posibles cuando la tienda necesite crecer",
 ];
 
@@ -214,61 +215,61 @@ const plans = [
   {
     name: "Base",
     price: "Landing",
-    text: "La pagina principal con el sistema visual listo para presentar la marca.",
-    features: ["Hero editable", "Secciones responsivas", "CTA y navegacion"],
+    text: "La página principal con el sistema visual listo para presentar la marca.",
+    features: ["Hero editable", "Secciones responsivas", "CTA y navegación"],
   },
   {
     name: "Expandida",
     price: "Web completa",
-    text: "La misma direccion visual extendida a mas paginas, modulos y contenido comercial.",
-    features: ["Mas secciones", "Bloques reutilizables", "Escala para portfolio o servicios"],
+    text: "La misma dirección visual extendida a más páginas, módulos y contenido comercial.",
+    features: ["Más secciones", "Bloques reutilizables", "Escala para portfolio o servicios"],
     featured: true,
   },
   {
     name: "Custom",
     price: "Sistema",
-    text: "Una base pensada para sumar paneles, integraciones o herramientas internas despues.",
+    text: "Una base pensada para sumar paneles, integraciones o herramientas internas después.",
     features: ["Arquitectura clara", "Listo para crecer", "Soporte para nuevas vistas"],
   },
 ];
 
 const faqs = [
   {
-    question: "Puedo cambiar las imagenes despues?",
+    question: "¿Puedo cambiar las imágenes después?",
     answer:
-      "Si. La home deja zonas de fondo preparadas para que reemplaces cada placeholder con la imagen final que quieras usar.",
+      "Sí. La home deja zonas de fondo preparadas para que reemplaces cada placeholder con la imagen final que quieras usar.",
   },
   {
     question: "El estilo queda adaptado a celular?",
     answer:
-      "Si. La composicion se reorganiza para mobile con tipografia, botones y cards ajustadas a pantallas chicas.",
+      "Sí. La composición se reorganiza para mobile con tipografía, botones y cards ajustadas a pantallas chicas.",
   },
   {
-    question: "Se puede seguir sumando paginas con este mismo look?",
+    question: "¿Se puede seguir sumando páginas con este mismo look?",
     answer:
-      "Si. La idea es dejar una base visual consistente para extender servicios, proyectos, planes o formularios.",
+      "Sí. La idea es dejar una base visual consistente para extender servicios, proyectos, planes o formularios.",
   },
   {
-    question: "Pueden sumar tienda online o catalogo mas adelante?",
+    question: "¿Pueden sumar tienda online o catálogo más adelante?",
     answer:
-      "Si. Esta version deja contenido y placeholders para e-commerce, catalogos y flujos comerciales que pueden integrarse en una etapa posterior.",
+      "Sí. Esta versión deja contenido y placeholders para e-commerce, catálogos y flujos comerciales que pueden integrarse en una etapa posterior.",
   },
 ];
 
-const emailSubject = "Consulta desde la pagina web";
+const emailSubject = "Consulta desde la página web";
 const emailBody = [
   "Hola! Buenas tardes,",
   "",
-  "Vengo de la pagina web y quisiera contratar sus servicios.",
+  "Vengo de la página web y quisiera contratar sus servicios.",
   "",
-  "Me interesa recibir informacion sobre:",
-  "- Diseno web",
+  "Me interesa recibir información sobre:",
+  "- Diseño web",
   "- Identidad visual",
   "- Software a medida",
   "",
   "Mi nombre es:",
   "Mi empresa o proyecto es:",
-  "Mi telefono o WhatsApp es:",
+  "Mi teléfono o WhatsApp es:",
   "",
   "Muchas gracias.",
 ].join("\n");
@@ -469,7 +470,7 @@ export default function Home() {
           className={`hero-nav nav-${navTone} ${hasNavBackdrop ? "has-backdrop" : ""} ${
             isNavVisible ? "is-visible" : "is-hidden"
           }`}
-          aria-label="Navegacion principal"
+          aria-label="Navegación principal"
           onMouseEnter={() => {
             navPointerInsideRef.current = true;
             lastNavActivityRef.current = Date.now();
@@ -525,14 +526,14 @@ export default function Home() {
           </div>
 
           <a className="hero-nav-cta" href="#planes">
-            Pedi propuesta
+            Pedí propuesta
           </a>
         </nav>
 
         <div className="hero-content">
           <div className="hero-copy">
             <Reveal as="p" className="hero-eyebrow" direction="left" delay={0.18}>
-              Web design y diseno integral
+              Web design y diseño integral
             </Reveal>
             <Reveal as="h1" aria-label="seamos creativos" direction="left" delay={0.25}>
               <span className="hero-static-word">seamos</span>{" "}
@@ -577,9 +578,9 @@ export default function Home() {
               </span>
             </Reveal>
             <Reveal as="p" className="hero-description" direction="left" delay={0.32}>
-              Creamos sitios web, disenos visuales y soluciones de software para
-              pequenas y medianas empresas que quieren mejorar su identidad
-              visual, vender mas y trabajar con herramientas propias.
+              Creamos sitios web, diseños visuales y soluciones de software para
+              pequeñas y medianas empresas que quieren mejorar su identidad
+              visual, vender más y trabajar con herramientas propias.
             </Reveal>
 
             <Reveal className="hero-actions" direction="left" delay={0.39}>
@@ -608,8 +609,8 @@ export default function Home() {
         <div className="section-shell">
           <SectionTitle
             eyebrow="Lo que hacemos"
-            title="Diseno y tecnologia para que tu empresa se vea profesional"
-            text="omcreativos combina programacion web, software y diseno visual para construir una presencia digital clara, moderna y facil de usar."
+            title="Diseño y tecnología para que tu empresa se vea profesional"
+            text="omcreativos combina programación web, software y diseño visual para construir una presencia digital clara, moderna y fácil de usar."
             centered
           />
         </div>
@@ -649,10 +650,10 @@ export default function Home() {
               text="Tomamos la idea de una agencia integral y la llevamos al lenguaje omcreativos: simple, moderno, azul, modular y listo para reemplazar placeholders por material real."
             />
             <Reveal className="agency-note" direction="left" delay={0.25}>
-              <strong>Mas de una sola landing.</strong>
+              <strong>Más de una sola landing.</strong>
               <p>
                 La estructura queda preparada para crecer hacia identidad,
-                contenido, campanas, tienda online, soporte o software propio
+                contenido, campañas, tienda online, soporte o software propio
                 sin perder coherencia visual.
               </p>
             </Reveal>
@@ -681,12 +682,12 @@ export default function Home() {
           <div className="projects-copy">
             <SectionTitle
               eyebrow="Proyecto"
-              title="Una home armada para parecer final incluso antes de cargar las imagenes"
-              text="La estructura replica la direccion del mockup y deja la parte visual lista para completar con tus fondos, renders o fotos."
+              title="Una home armada para parecer final incluso antes de cargar las imágenes"
+              text="La estructura replica la dirección del mockup y deja la parte visual lista para completar con tus fondos, renders o fotos."
             />
             <Reveal direction="left" delay={0.25}>
               <PrimaryLink href="#proceso">
-                Ver como sigue
+                Ver cómo sigue
                 <ArrowRight size={18} />
               </PrimaryLink>
             </Reveal>
@@ -717,8 +718,8 @@ export default function Home() {
         <div className="section-shell project-cases">
           <SectionTitle
             eyebrow="Casos de exito"
-            title="Proyectos placeholder para mostrar alcance sin depender todavia de imagenes finales"
-            text="Inspirado en una grilla de portfolio: cada card puede transformarse luego en una ficha real con captura, enlace y tecnologias usadas."
+            title="Proyectos placeholder para mostrar alcance sin depender todavía de imágenes finales"
+            text="Inspirado en una grilla de portfolio: cada card puede transformarse luego en una ficha real con captura, enlace y tecnologías usadas."
           />
 
           <div className="case-study-grid">
@@ -749,8 +750,8 @@ export default function Home() {
         <div className="section-shell why-layout">
           <div>
             <SectionTitle
-              eyebrow="Por que elegirnos"
-              title="Cercania, criterio tecnico y una web pensada para vender mejor"
+              eyebrow="Por qué elegirnos"
+              title="Cercanía, criterio técnico y una web pensada para vender mejor"
               text="La referencia trabaja mucho la confianza. En omcreativos lo traducimos a beneficios concretos: propiedad, tiempos claros, soporte y una base que puede evolucionar."
             />
           </div>
@@ -780,7 +781,7 @@ export default function Home() {
           <SectionTitle
             eyebrow="Proceso"
             title="Una base visual clara para seguir construyendo"
-            text="Dejamos un sistema simple de continuar: titulos grandes, cards, placeholders y bloques listos para crecer."
+            text="Dejamos un sistema simple de continuar: títulos grandes, cards, placeholders y bloques listos para crecer."
           />
 
           <div className="process-grid">
@@ -805,7 +806,7 @@ export default function Home() {
         <div className="section-shell commerce-layout">
           <Reveal className="commerce-visual" direction="left">
             <div className="commerce-window">
-              <span>Catalogo / tienda</span>
+              <span>Catálogo / tienda</span>
               <div />
               <div />
               <div />
@@ -815,8 +816,8 @@ export default function Home() {
           <div className="commerce-copy">
             <SectionTitle
               eyebrow="Tiendas online"
-              title="Impulsa tu negocio con catalogos, ventas y automatizaciones"
-              text="Dejamos esta seccion como punto de partida para e-commerce: productos, pagos, envios, consultas y mejoras de gestion cuando el proyecto lo necesite."
+              title="Impulsa tu negocio con catálogos, ventas y automatizaciones"
+              text="Dejamos esta sección como punto de partida para e-commerce: productos, pagos, envíos, consultas y mejoras de gestión cuando el proyecto lo necesite."
             />
             <Reveal as="ul" className="commerce-list" direction="right" delay={0.2}>
               {commerceFeatures.map((feature) => (
@@ -834,8 +835,8 @@ export default function Home() {
         <div className="section-shell">
           <SectionTitle
             eyebrow="Planes"
-            title="La misma direccion visual puede escalar a una web mas grande"
-            text="Si despues queres sumar mas pantallas o paginas, ya queda montada una base consistente para continuar."
+            title="La misma dirección visual puede escalar a una web más grande"
+            text="Si después querés sumar más pantallas o páginas, ya queda montada una base consistente para continuar."
             centered
           />
 
@@ -869,8 +870,8 @@ export default function Home() {
         <div className="section-shell faq-layout">
           <SectionTitle
             eyebrow="FAQ"
-            title="Preguntas comunes sobre esta recreacion"
-            text="Deje la pagina pensada para que cambies el contenido visual sin tener que rehacer la estructura."
+            title="Preguntas comunes sobre esta recreación"
+            text="Dejé la página pensada para que cambies el contenido visual sin tener que rehacer la estructura."
           />
 
           <div className="faq-list">
@@ -906,7 +907,6 @@ export default function Home() {
           <Reveal className="footer-main" direction="left">
             <a className="brandmark footer-brandmark" href="#top">
               <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
-              <img className="brandmark-word" src="/img/osmaitext.svg" alt="omcreativos" />
             </a>
             <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
           </Reveal>
@@ -914,7 +914,7 @@ export default function Home() {
           <Reveal className="footer-columns" direction="right" delay={0.12}>
             <div>
               <h3>Aumenta tus ventas</h3>
-              <a href="#especialidades">Diseno web</a>
+              <a href="#especialidades">Diseño web</a>
               <a href="#especialidades">Marketing digital</a>
               <a href="#planes">Planes</a>
             </div>
@@ -936,6 +936,7 @@ export default function Home() {
           </Reveal>
         </div>
       </footer>
+      <Chatbot />
     </main>
   );
 }

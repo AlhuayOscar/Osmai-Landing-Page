@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Bot, MessageCircle, PhoneCall, Send, X } from "lucide-react";
 
 const whatsappUrl =
   "https://wa.me/543487477269?text=Hola%20equipo%20omcreativos%2C%20quiero%20consultar%20por%20un%20proyecto.";
 
 const quickQuestions = [
-  "Que servicios ofrecen?",
-  "Quien es Oscar?",
-  "Quien es Maira?",
-  "Cuanto tarda una web?",
+  "¿Qué servicios ofrecen?",
+  "¿Quién es Oscar?",
+  "¿Quién es Maira?",
+  "¿Cuánto tarda una web?",
 ];
 
 const initialMessages = [
@@ -32,19 +32,19 @@ function getAnswer(input) {
 
   if (text.includes("oscar") || text.includes("programador") || text.includes("software")) {
     return {
-      text: "Oscar es el creador y programador web/software de omcreativos. Se encarga de la parte tecnica, desarrollo, estructura, funcionalidades y publicacion.",
+      text: "Oscar es el creador y programador web/software de omcreativos. Se encarga de la parte técnica, desarrollo, estructura, funcionalidades y publicación.",
     };
   }
 
   if (text.includes("maira") || text.includes("diseno") || text.includes("diseño") || text.includes("marca")) {
     return {
-      text: "Maira lidera la parte visual de omcreativos: identidad, composicion, piezas graficas, estilo de marca y diseño general.",
+      text: "Maira lidera la parte visual de omcreativos: identidad, composición, piezas gráficas, estilo de marca y diseño general.",
     };
   }
 
   if (text.includes("servicio") || text.includes("hacen") || text.includes("ofrecen")) {
     return {
-      text: "omcreativos ofrece diseño web, sitios para empresas, identidad visual, piezas graficas, catalogos, formularios, integraciones y software a medida.",
+      text: "omcreativos ofrece diseño web, sitios para empresas, identidad visual, piezas gráficas, catálogos, formularios, integraciones y software a medida.",
     };
   }
 
@@ -57,20 +57,20 @@ function getAnswer(input) {
 
   if (text.includes("tiempo") || text.includes("tarda") || text.includes("demora") || text.includes("entrega")) {
     return {
-      text: "Una landing puede resolverse en pocos dias si el contenido esta claro. Una web completa suele requerir mas etapas de diseño, desarrollo y revision.",
+      text: "Una landing puede resolverse en pocos días si el contenido está claro. Una web completa suele requerir más etapas de diseño, desarrollo y revisión.",
       contact: true,
     };
   }
 
-  if (text.includes("web") || text.includes("pagina") || text.includes("sitio")) {
+  if (text.includes("web") || text.includes("pagina") || text.includes("página") || text.includes("sitio")) {
     return {
-      text: "Podemos crear una landing, sitio institucional, catalogo, web con WhatsApp, formularios o una base preparada para sumar funciones despues.",
+      text: "Podemos crear una landing, sitio institucional, catálogo, web con WhatsApp, formularios o una base preparada para sumar funciones después.",
     };
   }
 
   if (text.includes("contacto") || text.includes("whatsapp") || text.includes("hablar")) {
     return {
-      text: "Puedes hablar directamente con el equipo de omcreativos por WhatsApp para contar tu idea y recibir una orientacion mas precisa.",
+      text: "Puedes hablar directamente con el equipo de omcreativos por WhatsApp para contar tu idea y recibir una orientación más precisa.",
       contact: true,
     };
   }
@@ -83,8 +83,50 @@ function getAnswer(input) {
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState(initialMessages);
   const [input, setInput] = useState("");
+  const [tone, setTone] = useState("dark");
+  const messagesRef = useRef(null);
+  const typingTimerRef = useRef(null);
+
+  useEffect(() => {
+    const updateTone = () => {
+      const sampleX = window.innerWidth - 46;
+      const sampleY = window.innerHeight - 46;
+      const darkSections = ["hero-section", "intro-band", "why-section", "process-section"];
+      const currentSection = [...document.querySelectorAll("section, footer")].find((element) => {
+        const rect = element.getBoundingClientRect();
+
+        return rect.left <= sampleX && rect.right >= sampleX && rect.top <= sampleY && rect.bottom >= sampleY;
+      });
+      const isOverDarkSection = darkSections.some((className) => currentSection?.classList.contains(className));
+
+      setTone(isOverDarkSection ? "dark" : "light");
+    };
+
+    updateTone();
+    window.addEventListener("scroll", updateTone, { passive: true });
+    window.addEventListener("resize", updateTone);
+
+    return () => {
+      window.removeEventListener("scroll", updateTone);
+      window.removeEventListener("resize", updateTone);
+    };
+  }, []);
+
+  useEffect(() => {
+    const messagesElement = messagesRef.current;
+
+    if (!messagesElement) {
+      return;
+    }
+
+    messagesElement.scrollTo({
+      top: messagesElement.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [messages, isTyping]);
 
   const sendMessage = (value = input) => {
     const cleanValue = value.trim();
@@ -93,28 +135,38 @@ export default function Chatbot() {
       return;
     }
 
+    window.clearTimeout(typingTimerRef.current);
     const answer = getAnswer(cleanValue);
+
     setMessages((currentMessages) => [
       ...currentMessages,
       { role: "user", text: cleanValue },
-      { role: "bot", ...answer },
     ]);
     setInput("");
     setIsOpen(true);
+    setIsTyping(true);
+
+    typingTimerRef.current = window.setTimeout(() => {
+      setMessages((currentMessages) => [
+        ...currentMessages,
+        { role: "bot", ...answer },
+      ]);
+      setIsTyping(false);
+    }, 720);
   };
 
   return (
-    <div className={`chatbot ${isOpen ? "is-open" : ""}`}>
+    <div className={`chatbot chatbot-${tone} ${isOpen ? "is-open" : ""}`}>
       {isOpen ? (
         <section className="chatbot-panel" aria-label="Chatbot de prueba de omcreativos">
           <header className="chatbot-header">
             <div>
               <span>
-                <Bot size={16} />
+                <Bot size={17} />
               </span>
               <div>
                 <strong>Asistente omcreativos</strong>
-                <small>Respuesta de prueba</small>
+                <small>{isTyping ? "Escribiendo..." : "Respuesta de prueba"}</small>
               </div>
             </div>
             <button type="button" onClick={() => setIsOpen(false)} aria-label="Cerrar chat">
@@ -122,7 +174,7 @@ export default function Chatbot() {
             </button>
           </header>
 
-          <div className="chatbot-messages">
+          <div className="chatbot-messages" ref={messagesRef}>
             {messages.map((message, index) => (
               <div className={`chatbot-message ${message.role}`} key={`${message.role}-${index}`}>
                 <p>{message.text}</p>
@@ -134,11 +186,18 @@ export default function Chatbot() {
                 ) : null}
               </div>
             ))}
+            {isTyping ? (
+              <div className="chatbot-message bot is-typing" aria-label="El asistente está escribiendo">
+                <span />
+                <span />
+                <span />
+              </div>
+            ) : null}
           </div>
 
           <div className="chatbot-quick">
             {quickQuestions.map((question) => (
-              <button type="button" key={question} onClick={() => sendMessage(question)}>
+              <button type="button" key={question} onClick={() => sendMessage(question)} disabled={isTyping}>
                 {question}
               </button>
             ))}
@@ -156,8 +215,9 @@ export default function Chatbot() {
               onChange={(event) => setInput(event.target.value)}
               placeholder="Escribe tu pregunta"
               aria-label="Pregunta para el chatbot"
+              disabled={isTyping}
             />
-            <button type="submit" aria-label="Enviar pregunta">
+            <button type="submit" aria-label="Enviar pregunta" disabled={isTyping}>
               <Send size={18} />
             </button>
           </form>
@@ -170,7 +230,7 @@ export default function Chatbot() {
         onClick={() => setIsOpen((currentValue) => !currentValue)}
         aria-label={isOpen ? "Cerrar chat de omcreativos" : "Abrir chat de omcreativos"}
       >
-        <MessageCircle size={24} />
+        <MessageCircle size={25} />
       </button>
     </div>
   );
