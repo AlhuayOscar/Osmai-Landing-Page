@@ -543,7 +543,7 @@ export default function Home() {
               }}
             >
               {theme === "day" ? <Moon size={15} /> : <Sun size={15} />}
-              <span>{theme === "day" ? "Noche" : "Día"}</span>
+
             </button>
           </div>
 
