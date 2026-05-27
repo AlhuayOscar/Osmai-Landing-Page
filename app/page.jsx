@@ -21,6 +21,8 @@ import {
   ShieldCheck,
   ShoppingCart,
   Sparkles,
+  Moon,
+  Sun,
   UsersRound,
 } from "lucide-react";
 import Chatbot from "./components/Chatbot";
@@ -312,6 +314,7 @@ export default function Home() {
   const [hasNavBackdrop, setHasNavBackdrop] = useState(false);
   const [navTone, setNavTone] = useState("on-dark");
   const [activeNavIndex, setActiveNavIndex] = useState(0);
+  const [theme, setTheme] = useState("day");
   const [creativeFontIndex, setCreativeFontIndex] = useState(0);
   const [creativeAnimationModeIndex, setCreativeAnimationModeIndex] = useState(0);
   const [typedCreativeCount, setTypedCreativeCount] = useState(0);
@@ -458,7 +461,7 @@ export default function Home() {
   }, [activeNavIndex, isNavVisible]);
 
   return (
-    <main className="landing-shell">
+    <main className={`landing-shell theme-${theme}`}>
       <section className="hero-section" id="top">
         <div className="hero-background" aria-hidden="true">
           <Reveal className="hero-image-frame" direction="center" scale={1.04}>
@@ -481,7 +484,11 @@ export default function Home() {
             lastNavActivityRef.current = Date.now();
           }}
         >
-          <a className="brandmark" href="#top" aria-label="Inicio de omcreativos">
+          <a
+            className="brandmark"
+            href="#top"
+            aria-label="Inicio de omcreativos"
+          >
             <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
           </a>
 
@@ -520,8 +527,23 @@ export default function Home() {
                 </a>
               ))}
             </div>
-            <button className="hero-search" type="button" aria-label="Buscar" >
+            <button className="hero-search" type="button" aria-label="Buscar">
               <Search size={15} />
+            </button>
+            <button
+              className="theme-toggle"
+              type="button"
+              aria-label={
+                theme === "day" ? "Activar modo noche" : "Activar modo día"
+              }
+              onClick={() => {
+                setTheme((currentTheme) =>
+                  currentTheme === "day" ? "night" : "day",
+                );
+              }}
+            >
+              {theme === "day" ? <Moon size={15} /> : <Sun size={15} />}
+              <span>{theme === "day" ? "Noche" : "Día"}</span>
             </button>
           </div>
 
@@ -532,10 +554,20 @@ export default function Home() {
 
         <div className="hero-content">
           <div className="hero-copy">
-            <Reveal as="p" className="hero-eyebrow" direction="left" delay={0.18}>
+            <Reveal
+              as="p"
+              className="hero-eyebrow"
+              direction="left"
+              delay={0.18}
+            >
               Web design y diseño integral
             </Reveal>
-            <Reveal as="h1" aria-label="seamos creativos" direction="left" delay={0.25}>
+            <Reveal
+              as="h1"
+              aria-label="seamos creativos"
+              direction="left"
+              delay={0.25}
+            >
               <span className="hero-static-word">seamos</span>{" "}
               <span
                 className="hero-typed-word"
@@ -548,7 +580,9 @@ export default function Home() {
                       : creativeAnimationMode === "edges"
                         ? creativeEdgeOrder.indexOf(index)
                         : index;
-                  const isTyped = creativeAnimationMode === "fade" || orderedIndex < typedCreativeCount;
+                  const isTyped =
+                    creativeAnimationMode === "fade" ||
+                    orderedIndex < typedCreativeCount;
                   const delay =
                     creativeAnimationMode === "fade"
                       ? index * 70
@@ -559,25 +593,35 @@ export default function Home() {
                           : index * 55;
 
                   return (
-                  <span
-                    className={isTyped ? `is-typed mode-${creativeAnimationMode}` : `mode-${creativeAnimationMode}`}
-                    key={`${creativeFontIndex}-${creativeAnimationMode}-${letter}-${index}`}
-                    style={{
-                      "--letter-x":
-                        creativeAnimationMode === "backward" || (creativeAnimationMode === "edges" && index > 4)
-                          ? "0.14em"
-                          : "-0.14em",
-                      transitionDelay: `${delay}ms`,
-                      animationDelay: `${delay}ms`,
-                    }}
-                  >
-                    {letter}
-                  </span>
+                    <span
+                      className={
+                        isTyped
+                          ? `is-typed mode-${creativeAnimationMode}`
+                          : `mode-${creativeAnimationMode}`
+                      }
+                      key={`${creativeFontIndex}-${creativeAnimationMode}-${letter}-${index}`}
+                      style={{
+                        "--letter-x":
+                          creativeAnimationMode === "backward" ||
+                          (creativeAnimationMode === "edges" && index > 4)
+                            ? "0.14em"
+                            : "-0.14em",
+                        transitionDelay: `${delay}ms`,
+                        animationDelay: `${delay}ms`,
+                      }}
+                    >
+                      {letter}
+                    </span>
                   );
                 })}
               </span>
             </Reveal>
-            <Reveal as="p" className="hero-description" direction="left" delay={0.32}>
+            <Reveal
+              as="p"
+              className="hero-description"
+              direction="left"
+              delay={0.32}
+            >
               Creamos sitios web, diseños visuales y soluciones de software para
               pequeñas y medianas empresas que quieren mejorar su identidad
               visual, vender más y trabajar con herramientas propias.
@@ -593,7 +637,12 @@ export default function Home() {
               </a>
             </Reveal>
 
-            <Reveal className="hero-stats" aria-label="Servicios principales de omcreativos" direction="left" delay={0.46}>
+            <Reveal
+              className="hero-stats"
+              aria-label="Servicios principales de omcreativos"
+              direction="left"
+              delay={0.46}
+            >
               {heroStats.map((item) => (
                 <div key={item.label}>
                   <strong>{item.label}</strong>
@@ -819,7 +868,12 @@ export default function Home() {
               title="Impulsa tu negocio con catálogos, ventas y automatizaciones"
               text="Dejamos esta sección como punto de partida para e-commerce: productos, pagos, envíos, consultas y mejoras de gestión cuando el proyecto lo necesite."
             />
-            <Reveal as="ul" className="commerce-list" direction="right" delay={0.2}>
+            <Reveal
+              as="ul"
+              className="commerce-list"
+              direction="right"
+              delay={0.2}
+            >
               {commerceFeatures.map((feature) => (
                 <li key={feature}>
                   <Check size={16} />
@@ -876,15 +930,24 @@ export default function Home() {
 
           <div className="faq-list">
             {faqs.map((item, index) => (
-              <Reveal as="div" direction="right" delay={index * 0.08} key={item.question}>
-                <article className={`faq-item ${openFaqIndex === index ? "is-open" : ""}`}>
+              <Reveal
+                as="div"
+                direction="right"
+                delay={index * 0.08}
+                key={item.question}
+              >
+                <article
+                  className={`faq-item ${openFaqIndex === index ? "is-open" : ""}`}
+                >
                   <button
                     className="faq-trigger"
                     type="button"
                     aria-expanded={openFaqIndex === index}
                     aria-controls={`faq-answer-${index}`}
                     onClick={() => {
-                      setOpenFaqIndex((currentIndex) => (currentIndex === index ? -1 : index));
+                      setOpenFaqIndex((currentIndex) =>
+                        currentIndex === index ? -1 : index,
+                      );
                     }}
                   >
                     {item.question}
@@ -906,7 +969,11 @@ export default function Home() {
         <div className="section-shell footer-layout">
           <Reveal className="footer-main" direction="left">
             <a className="brandmark footer-brandmark" href="#top">
-              <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
+              <img
+                className="brandmark-symbol"
+                src="/img/osmailogo.svg"
+                alt=""
+              />
             </a>
             <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
           </Reveal>
@@ -932,6 +999,36 @@ export default function Home() {
                 Volver arriba
                 <ArrowRight size={18} />
               </PrimaryLink>
+            </div>
+          </Reveal>
+          <Reveal className="footer-credits" direction="up" delay={0.2}>
+            <p>
+              {" "}
+              © 2026 omcreativos. Todos los
+              derechos reservados.
+            </p>
+            <div>
+              <a
+                href="https://www.linkedin.com/in/alhuayoscar/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Oscar
+              </a>
+              <a
+                href="https://www.instagram.com/arstycal/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Maira Instagram
+              </a>
+              <a
+                href="https://arstycal.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnsjza57-WB4EOsWAV4BPiIKveHYkAUw-PqICFZqHT44i5pZmR6q0W3eQOpt8_aem_y0ELh17ppjYUbivfscco-w"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Maira Card
+              </a>
             </div>
           </Reveal>
         </div>

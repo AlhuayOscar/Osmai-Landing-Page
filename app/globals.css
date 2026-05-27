@@ -39,6 +39,23 @@ a {
   text-decoration: none;
 }
 
+section,
+article,
+.service-card,
+.specialty-card,
+.why-card,
+.case-study-card,
+.plan-card,
+.faq-item,
+.footer-layout,
+.chatbot-panel {
+  transition:
+    background-color 320ms ease,
+    color 320ms ease,
+    border-color 320ms ease,
+    box-shadow 320ms ease;
+}
+
 button {
   font: inherit;
   transition:
@@ -73,6 +90,27 @@ svg {
 
 .landing-shell {
   overflow-x: clip;
+  background: var(--page-white);
+  transition:
+    background-color 320ms ease,
+    color 320ms ease;
+}
+
+.landing-shell.theme-night {
+  --page-blue: #07112f;
+  --page-blue-deep: #030815;
+  --page-blue-soft: #5b7dff;
+  --page-white: #070b16;
+  --card-white: #11192b;
+  --ink: #dbe7ff;
+  --ink-deep: #ffffff;
+  --text: #ffffff;
+  --text-soft: rgba(255, 255, 255, 0.78);
+  --muted: rgba(219, 231, 255, 0.72);
+  --line: rgba(255, 255, 255, 0.16);
+  --surface-line: rgba(255, 255, 255, 0.1);
+  --shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
+  --shadow-strong: 0 34px 80px rgba(0, 0, 0, 0.42);
 }
 
 .section-shell {
@@ -268,7 +306,8 @@ svg {
 }
 
 .hero-nav-links,
-.hero-search {
+.hero-search,
+.theme-toggle {
   border: 1px solid rgba(255, 255, 255, 0.46);
   background: rgba(255, 255, 255, 0.66);
   backdrop-filter: blur(18px);
@@ -330,7 +369,8 @@ svg {
 }
 
 .hero-search,
-.hero-nav-cta {
+.hero-nav-cta,
+.theme-toggle {
   display: inline-grid;
   place-items: center;
   min-width: 38px;
@@ -338,8 +378,22 @@ svg {
   border-radius: var(--radius-sm);
 }
 
-.hero-search {
+.hero-search,
+.theme-toggle {
   color: #050505;
+}
+
+.theme-toggle {
+  grid-auto-flow: column;
+  gap: 7px;
+  padding: 0 14px;
+  color: #050505;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.theme-toggle span {
+  line-height: 1;
 }
 
 .hero-nav-cta {
@@ -372,7 +426,8 @@ svg {
 }
 
 .hero-nav.nav-on-dark .hero-nav-links,
-.hero-nav.nav-on-dark .hero-search {
+.hero-nav.nav-on-dark .hero-search,
+.hero-nav.nav-on-dark .theme-toggle {
   border-color: rgba(255, 255, 255, 0.46);
   background: rgba(255, 255, 255, 0.66);
   box-shadow: none;
@@ -398,10 +453,20 @@ svg {
 }
 
 .hero-nav.nav-on-light .hero-nav-links,
-.hero-nav.nav-on-light .hero-search {
+.hero-nav.nav-on-light .hero-search,
+.hero-nav.nav-on-light .theme-toggle {
   border-color: rgba(17, 71, 239, 0.16);
   background: rgba(255, 255, 255, 0.86);
   box-shadow: 0 14px 36px rgba(10, 42, 133, 0.1);
+}
+
+.theme-night .hero-nav.nav-on-light .hero-nav-links,
+.theme-night .hero-nav.nav-on-light .hero-search,
+.theme-night .hero-nav.nav-on-light .theme-toggle {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(17, 25, 43, 0.86);
+  color: #ffffff;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
 }
 
 .hero-nav.nav-on-light .hero-nav-cta {
@@ -1406,7 +1471,7 @@ svg {
   position: fixed;
   right: max(18px, env(safe-area-inset-right));
   bottom: max(18px, env(safe-area-inset-bottom));
-  z-index: 30;
+  z-index: 100;
   display: grid;
   justify-items: end;
   gap: 12px;
@@ -1710,6 +1775,42 @@ svg {
   box-shadow: var(--shadow-strong);
 }
 
+.footer-credits {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(229, 231, 235, 0.82);
+  font-size: 0.78rem;
+}
+
+.footer-credits p {
+  margin: 0;
+}
+
+.footer-credits div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.footer-credits a {
+  color: rgba(243, 244, 246, 0.9);
+  font-weight: 700;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.footer-credits a:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
 .footer-brandmark {
   margin-bottom: 20px;
 }
@@ -1773,6 +1874,15 @@ svg {
   .footer-columns {
     grid-template-columns: 1fr;
   }
+
+  .footer-credits {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-credits div {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 860px) {
@@ -1804,6 +1914,15 @@ svg {
     flex: 1;
     justify-content: space-between;
     overflow-x: auto;
+  }
+
+  .theme-toggle {
+    min-width: 38px;
+    padding: 0;
+  }
+
+  .theme-toggle span {
+    display: none;
   }
 
   .services-grid {
