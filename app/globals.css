@@ -39,23 +39,6 @@ a {
   text-decoration: none;
 }
 
-section,
-article,
-.service-card,
-.specialty-card,
-.why-card,
-.case-study-card,
-.plan-card,
-.faq-item,
-.footer-layout,
-.chatbot-panel {
-  transition:
-    background-color 320ms ease,
-    color 320ms ease,
-    border-color 320ms ease,
-    box-shadow 320ms ease;
-}
-
 button {
   font: inherit;
   transition:
