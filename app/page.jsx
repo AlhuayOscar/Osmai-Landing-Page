@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   ArrowRight,
   BadgeCheck,
@@ -38,14 +39,8 @@ const navItems = [
 ];
 
 const creativeFonts = [
-  "var(--font-bungee-shade)",
   "var(--font-monoton)",
-  "var(--font-rubik-moonrocks)",
   "var(--font-rubik-glitch)",
-  "var(--font-pirata-one)",
-  "var(--font-ewert)",
-  "var(--font-fascinate-inline)",
-  "var(--font-unifraktur)",
 ];
 
 const creativeAnimationModes = ["forward", "backward", "fade", "edges"];
@@ -464,9 +459,16 @@ export default function Home() {
     <main className={`landing-shell theme-${theme}`}>
       <section className="hero-section" id="top">
         <div className="hero-background" aria-hidden="true">
-          <Reveal className="hero-image-frame" direction="center" scale={1.04}>
-            <img className="hero-image" src="/img/herosection.jpg" alt="" />
-          </Reveal>
+          <div className="hero-image-frame">
+            <Image
+              className="hero-image"
+              src="/img/herosection.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+            />
+          </div>
         </div>
 
         <nav
@@ -968,7 +970,7 @@ export default function Home() {
       <footer className="site-footer">
         <div className="section-shell footer-layout">
           <Reveal className="footer-main" direction="left">
-            <a className="brandmark footer-brandmark" href="#top">
+            <a className="brandmark footer-brandmark" href="#top" aria-label="Volver al inicio">
               <img
                 className="brandmark-symbol"
                 src="/img/osmailogo.svg"
