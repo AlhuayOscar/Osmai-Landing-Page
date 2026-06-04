@@ -46,6 +46,15 @@ const creativeFonts = [
 const creativeAnimationModes = ["forward", "backward", "fade", "edges"];
 const creativeWord = "creativos";
 const creativeEdgeOrder = [0, 8, 1, 7, 2, 6, 3, 5, 4];
+const darkNavSections = ["hero-section", "intro-band", "why-section", "process-section"];
+const navToneSampleY = 54;
+const navRevealZoneY = 112;
+const navScrollThreshold = 8;
+const navBackdropOffset = 50;
+const navIdleDelayMs = 3000;
+const navIdleCheckIntervalMs = 250;
+const creativeCycleIntervalMs = 3000;
+const creativeTypeIntervalMs = 95;
 
 const heroStats = [
   { label: "WEB", value: "Marca digital" },
@@ -313,7 +322,11 @@ export default function Home() {
   const [creativeFontIndex, setCreativeFontIndex] = useState(0);
   const [creativeAnimationModeIndex, setCreativeAnimationModeIndex] = useState(0);
   const [typedCreativeCount, setTypedCreativeCount] = useState(0);
-  const [navIndicatorStyle, setNavIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [navIndicatorStyle, setNavIndicatorStyle] = useState({
+    left: 0,
+    width: 0,
+    opacity: 0,
+  });
   const navLinksRef = useRef(null);
   const navLinkRefs = useRef([]);
   const navTimerRef = useRef(null);
@@ -325,7 +338,7 @@ export default function Home() {
     const fontTimer = window.setInterval(() => {
       setCreativeFontIndex((currentIndex) => (currentIndex + 1) % creativeFonts.length);
       setCreativeAnimationModeIndex((currentIndex) => (currentIndex + 1) % creativeAnimationModes.length);
-    }, 3000);
+    }, creativeCycleIntervalMs);
 
     return () => {
       window.clearInterval(fontTimer);
@@ -344,7 +357,7 @@ export default function Home() {
 
         return currentCount + 1;
       });
-    }, 95);
+    }, creativeTypeIntervalMs);
 
     return () => {
       window.clearInterval(typeTimer);
@@ -360,14 +373,14 @@ export default function Home() {
     };
 
     const updateNavTone = () => {
-      const sampleY = 54;
-      const darkSections = ["hero-section", "intro-band", "why-section", "process-section"];
       const currentSection = [...document.querySelectorAll("section, footer")].find((element) => {
         const rect = element.getBoundingClientRect();
 
-        return rect.top <= sampleY && rect.bottom >= sampleY;
+        return rect.top <= navToneSampleY && rect.bottom >= navToneSampleY;
       });
-      const isOverDarkSection = darkSections.some((className) => currentSection?.classList.contains(className));
+      const isOverDarkSection = darkNavSections.some((className) =>
+        currentSection?.classList.contains(className),
+      );
 
       setNavTone(isOverDarkSection ? "on-dark" : "on-light");
     };
@@ -376,10 +389,10 @@ export default function Home() {
       const currentScrollY = window.scrollY;
       const scrollDelta = currentScrollY - lastScrollYRef.current;
 
-      setHasNavBackdrop(currentScrollY > 50);
+      setHasNavBackdrop(currentScrollY > navBackdropOffset);
       updateNavTone();
 
-      if (Math.abs(scrollDelta) < 8) {
+      if (Math.abs(scrollDelta) < navScrollThreshold) {
         return;
       }
 
@@ -393,18 +406,18 @@ export default function Home() {
     };
 
     const handleMouseMove = (event) => {
-      if (event.clientY < 112) {
+      if (event.clientY < navRevealZoneY) {
         showNav();
       }
     };
 
     lastScrollYRef.current = window.scrollY;
-    setHasNavBackdrop(window.scrollY > 50);
+    setHasNavBackdrop(window.scrollY > navBackdropOffset);
     updateNavTone();
     showNav();
     navTimerRef.current = window.setInterval(() => {
-      const hasBeenIdle = Date.now() - lastNavActivityRef.current > 3000;
-      const isAtPageStart = window.scrollY <= 50;
+      const hasBeenIdle = Date.now() - lastNavActivityRef.current > navIdleDelayMs;
+      const isAtPageStart = window.scrollY <= navBackdropOffset;
 
       if (isAtPageStart) {
         setIsNavVisible(true);
@@ -414,7 +427,7 @@ export default function Home() {
       if (hasBeenIdle && !navPointerInsideRef.current) {
         setIsNavVisible(false);
       }
-    }, 250);
+    }, navIdleCheckIntervalMs);
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
@@ -942,6 +955,7 @@ export default function Home() {
                   className={`faq-item ${openFaqIndex === index ? "is-open" : ""}`}
                 >
                   <button
+                    id={`faq-trigger-${index}`}
                     className="faq-trigger"
                     type="button"
                     aria-expanded={openFaqIndex === index}
@@ -955,7 +969,12 @@ export default function Home() {
                     {item.question}
                     <ChevronDown size={18} />
                   </button>
-                  <div className="faq-content" id={`faq-answer-${index}`}>
+                  <div
+                    className="faq-content"
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-trigger-${index}`}
+                  >
                     <div className="faq-content-inner">
                       <p>{item.answer}</p>
                     </div>
@@ -1013,21 +1032,21 @@ export default function Home() {
               <a
                 href="https://www.linkedin.com/in/alhuayoscar/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Oscar
               </a>
               <a
                 href="https://www.instagram.com/arstycal/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Maira Instagram
               </a>
               <a
                 href="https://arstycal.carrd.co/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnsjza57-WB4EOsWAV4BPiIKveHYkAUw-PqICFZqHT44i5pZmR6q0W3eQOpt8_aem_y0ELh17ppjYUbivfscco-w"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 Maira Card
               </a>

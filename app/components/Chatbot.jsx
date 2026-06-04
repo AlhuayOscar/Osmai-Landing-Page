@@ -6,6 +6,10 @@ import { Bot, MessageCircle, PhoneCall, Send, X } from "lucide-react";
 const whatsappUrl =
   "https://wa.me/543487477269?text=Hola%20equipo%20omcreativos%2C%20quiero%20consultar%20por%20un%20proyecto.";
 
+const botTypingDelayMs = 720;
+const toneSampleOffset = 46;
+const darkSections = ["hero-section", "intro-band", "why-section", "process-section"];
+
 const quickQuestions = [
   "¿Qué servicios ofrecen?",
   "¿Quién es Oscar?",
@@ -92,9 +96,8 @@ export default function Chatbot() {
 
   useEffect(() => {
     const updateTone = () => {
-      const sampleX = window.innerWidth - 46;
-      const sampleY = window.innerHeight - 46;
-      const darkSections = ["hero-section", "intro-band", "why-section", "process-section"];
+      const sampleX = window.innerWidth - toneSampleOffset;
+      const sampleY = window.innerHeight - toneSampleOffset;
       const currentSection = [...document.querySelectorAll("section, footer")].find((element) => {
         const rect = element.getBoundingClientRect();
 
@@ -112,6 +115,12 @@ export default function Chatbot() {
     return () => {
       window.removeEventListener("scroll", updateTone);
       window.removeEventListener("resize", updateTone);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(typingTimerRef.current);
     };
   }, []);
 
@@ -152,7 +161,7 @@ export default function Chatbot() {
         { role: "bot", ...answer },
       ]);
       setIsTyping(false);
-    }, 720);
+    }, botTypingDelayMs);
   };
 
   return (
@@ -179,7 +188,7 @@ export default function Chatbot() {
               <div className={`chatbot-message ${message.role}`} key={`${message.role}-${index}`}>
                 <p>{message.text}</p>
                 {message.contact ? (
-                  <a className="chatbot-contact" href={whatsappUrl} target="_blank" rel="noreferrer">
+                  <a className="chatbot-contact" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                     <PhoneCall size={15} />
                     Contactar con equipo
                   </a>
