@@ -11,6 +11,7 @@ import {
   ExternalLink,
   Globe2,
   LayoutGrid,
+  Menu,
   Megaphone,
   MessageCircleMore,
   MonitorSmartphone,
@@ -23,6 +24,7 @@ import {
   ShoppingCart,
   Sparkles,
   Moon,
+  X,
   Sun,
   UsersRound,
 } from "lucide-react";
@@ -319,6 +321,7 @@ export default function Home() {
   const [navTone, setNavTone] = useState("on-dark");
   const [activeNavIndex, setActiveNavIndex] = useState(0);
   const [theme, setTheme] = useState("day");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [creativeFontIndex, setCreativeFontIndex] = useState(0);
   const [creativeAnimationModeIndex, setCreativeAnimationModeIndex] = useState(0);
   const [typedCreativeCount, setTypedCreativeCount] = useState(0);
@@ -333,6 +336,14 @@ export default function Home() {
   const navPointerInsideRef = useRef(false);
   const lastNavActivityRef = useRef(Date.now());
   const lastScrollYRef = useRef(0);
+
+  useEffect(() => {
+    document.body.classList.toggle("mobile-menu-open", isMobileMenuOpen);
+
+    return () => {
+      document.body.classList.remove("mobile-menu-open");
+    };
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const fontTimer = window.setInterval(() => {
@@ -468,6 +479,42 @@ export default function Home() {
     };
   }, [activeNavIndex, isNavVisible]);
 
+  useEffect(() => {
+    const updateActiveSection = () => {
+      const sampleY = window.innerHeight * 0.28;
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      navItems.forEach((item, index) => {
+        const section = document.querySelector(item.href);
+
+        if (!section) {
+          return;
+        }
+
+        const rect = section.getBoundingClientRect();
+        const distance = Math.abs(rect.top - sampleY);
+        const isVisible = rect.top <= sampleY && rect.bottom >= sampleY;
+
+        if (isVisible || distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      setActiveNavIndex(closestIndex);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, []);
+
   return (
     <main className={`landing-shell theme-${theme}`}>
       <section className="hero-section" id="top">
@@ -507,6 +554,16 @@ export default function Home() {
             <img className="brandmark-symbol" src="/img/osmailogo.svg" alt="" />
           </a>
 
+          <button
+            className="mobile-menu-toggle"
+            type="button"
+            aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen((isOpen) => !isOpen)}
+          >
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+
           <div className="hero-nav-center">
             <div className="hero-nav-links" ref={navLinksRef}>
               <span
@@ -522,6 +579,8 @@ export default function Home() {
                 <a
                   href={item.href}
                   key={item.label}
+                  className={activeNavIndex === index ? "is-active" : ""}
+                  aria-current={activeNavIndex === index ? "location" : undefined}
                   ref={(node) => {
                     navLinkRefs.current[index] = node;
                   }}
@@ -536,6 +595,7 @@ export default function Home() {
                   onClick={() => {
                     lastNavActivityRef.current = Date.now();
                     setActiveNavIndex(index);
+                    setIsMobileMenuOpen(false);
                   }}
                 >
                   {item.label}
@@ -566,6 +626,59 @@ export default function Home() {
             Pedí propuesta
           </a>
         </nav>
+
+        <div
+          className={`mobile-menu-backdrop ${isMobileMenuOpen ? "is-open" : ""}`}
+          aria-hidden="true"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+        <aside
+          className={`mobile-sidebar ${isMobileMenuOpen ? "is-open" : ""}`}
+          aria-label="Menú móvil"
+          aria-hidden={!isMobileMenuOpen}
+        >
+          <div className="mobile-sidebar-header">
+            <span>Menú</span>
+            <button
+              type="button"
+              aria-label="Cerrar menú"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <X size={22} />
+            </button>
+          </div>
+          <div className="mobile-sidebar-links">
+            {navItems.map((item, index) => (
+              <a
+                href={item.href}
+                key={item.label}
+                className={activeNavIndex === index ? "is-active" : ""}
+                aria-current={activeNavIndex === index ? "location" : undefined}
+                onClick={() => {
+                  setActiveNavIndex(index);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <span>0{index + 1}</span>
+                {item.label}
+                <ArrowRight size={18} />
+              </a>
+            ))}
+          </div>
+          <div className="mobile-sidebar-footer">
+            <button
+              className="mobile-sidebar-theme"
+              type="button"
+              onClick={() => setTheme((currentTheme) => currentTheme === "day" ? "night" : "day")}
+            >
+              {theme === "day" ? <Moon size={17} /> : <Sun size={17} />}
+              {theme === "day" ? "Tema oscuro" : "Tema claro"}
+            </button>
+            <a className="mobile-sidebar-cta" href="#planes" onClick={() => setIsMobileMenuOpen(false)}>
+              Pedí propuesta <ArrowRight size={17} />
+            </a>
+          </div>
+        </aside>
 
         <div className="hero-content">
           <div className="hero-copy">
@@ -996,8 +1109,7 @@ export default function Home() {
                 alt=""
               />
             </a>
-            <h2>Frontend recreado con placeholders listos para tus fondos.</h2>
-          </Reveal>
+            <h2>Tu lugar ideal para despegar tu emprendimiento, refrescar la identidad, y ser competitivo </h2>     </Reveal>
 
           <Reveal className="footer-columns" direction="right" delay={0.12}>
             <div>
