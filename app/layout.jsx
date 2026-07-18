@@ -29,9 +29,16 @@ const rubikGlitch = Rubik_Glitch({
 });
 
 export const metadata = {
-  title: "omcreativos | Diseño web, identidad y software",
+  title: "OMCreativos. Seamos creativos",
   description:
-    "Landing de omcreativos recreada con una dirección visual clara, modular y lista para completar con fondos finales.",
+    "OMCreativos crea sitios web, identidad visual y soluciones de software para empresas que quieren mejorar su presencia, vender más y trabajar mejor.",
+  keywords: [
+    "diseño web",
+    "identidad visual",
+    "desarrollo web",
+    "software a medida",
+    "OMCreativos",
+  ],
   icons: {
     icon: "/img/favicon/favicon.png",
     shortcut: "/img/favicon/favicon.png",
