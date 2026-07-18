@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 import Chatbot from "./components/Chatbot";
 import Reveal from "./components/Reveal";
+import InitialLoader from "./components/InitialLoader";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
@@ -117,6 +118,26 @@ const specialtyCards = [
     icon: Rocket,
     title: "Marketing digital",
     text: "Secciones preparadas para sumar Google Ads, Meta, SEO y llamados a la acción con seguimiento comercial.",
+  },
+  {
+    icon: ServerCog,
+    title: "Desarrollo web",
+    text: "Construimos experiencias rápidas y mantenibles con una base moderna que puede crecer junto al negocio.",
+  },
+  {
+    icon: Search,
+    title: "SEO y contenido",
+    text: "Ordenamos páginas, mensajes y metadatos para que las personas encuentren la propuesta y entiendan qué ofrecés.",
+  },
+  {
+    icon: LayoutGrid,
+    title: "Integraciones",
+    text: "Conectamos formularios, catálogos y herramientas del negocio para reducir tareas repetitivas y mejorar el seguimiento.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Mantenimiento",
+    text: "Acompañamos la evolución del sitio con ajustes, mejoras de contenido y soporte cuando el proyecto lo necesita.",
   },
 ];
 
@@ -486,6 +507,10 @@ export default function Home() {
       let closestDistance = Number.POSITIVE_INFINITY;
 
       navItems.forEach((item, index) => {
+        if (!item.href.startsWith("#")) {
+          return;
+        }
+
         const section = document.querySelector(item.href);
 
         if (!section) {
@@ -517,6 +542,7 @@ export default function Home() {
 
   return (
     <main className={`landing-shell theme-${theme}`}>
+      <InitialLoader theme={theme} />
       <section className="hero-section" id="top">
         <div className="hero-background" aria-hidden="true">
           <div className="hero-image-frame">
@@ -800,7 +826,7 @@ export default function Home() {
               <Reveal
                 as="article"
                 className="service-card"
-                direction={index % 2 === 0 ? "left" : "right"}
+                direction={index === 0 || index === 3 ? "up" : index % 2 === 0 ? "left" : "right"}
                 delay={(index % 2) * 0.08}
                 key={title}
               >
@@ -840,10 +866,11 @@ export default function Home() {
             {specialtyCards.map(({ icon: Icon, title, text }, index) => (
               <Reveal
                 as="article"
-                className="specialty-card"
+                className="specialty-card specialty-card-animated"
                 direction={index % 2 === 0 ? "up" : "right"}
                 delay={(index % 3) * 0.06}
                 key={title}
+                style={{ "--specialty-index": String(index) }}
               >
                 <Icon size={21} />
                 <h3>{title}</h3>
@@ -867,11 +894,32 @@ export default function Home() {
                 Ver cómo sigue
                 <ArrowRight size={18} />
               </PrimaryLink>
+              <a className="projects-route-link" href="/proyectos">
+                Abrir ruta para clientes <ArrowRight size={16} />
+              </a>
             </Reveal>
           </div>
 
           <div className="projects-board">
-            <Reveal className="projects-placeholder" direction="right">
+            <Reveal
+              as="a"
+              href="/proyectos"
+              className="projects-placeholder floating-element"
+              direction="right"
+              aria-label="Abrir ruta de proyectos"
+            >
+              <video
+                className="projects-preview-video"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/media/web-design-ui.jpg"
+                aria-label="Video de prueba de trabajo de diseño web"
+              >
+                <source src="/media/web-design-work.mp4" type="video/mp4" />
+              </video>
               <span>Zona editable para imagen o mockup</span>
             </Reveal>
             <div className="projects-card-grid">
@@ -904,11 +952,23 @@ export default function Home() {
               <Reveal
                 as="article"
                 className="case-study-card"
-                direction={index % 2 === 0 ? "left" : "right"}
+                direction={index % 2 === 0 ? "up" : "right"}
                 delay={(index % 2) * 0.08}
                 key={item.title}
               >
                 <div className="case-image-placeholder">
+                  <img
+                    className="case-image-media"
+                    src={
+                      index === 0
+                        ? "/media/web-design-drag-drop.gif"
+                        : index % 2 === 0
+                          ? "/media/web-design-code.jpg"
+                          : "/media/web-design-ui.jpg"
+                    }
+                    alt={`Visual de prueba para ${item.title}`}
+                    loading="lazy"
+                  />
                   <span>Imagen / captura</span>
                 </div>
                 <div>
@@ -981,9 +1041,15 @@ export default function Home() {
 
       <section className="commerce-section">
         <div className="section-shell commerce-layout">
-          <Reveal className="commerce-visual" direction="left">
+          <Reveal className="commerce-visual floating-element" direction="left">
             <div className="commerce-window">
               <span>Catálogo / tienda</span>
+              <img
+                className="commerce-preview-image"
+                src="/media/web-design-ui.jpg"
+                alt="Interfaz web de prueba"
+                loading="lazy"
+              />
               <div />
               <div />
               <div />

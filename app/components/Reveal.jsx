@@ -19,12 +19,11 @@ export default function Reveal({
   ...props
 }) {
   const MotionElement = motion[as] || motion.div;
-  const offset = directionOffset[direction] || directionOffset.up;
 
   return (
     <MotionElement
       className={className}
-      initial={{ opacity: 0, scale, ...offset }}
+      initial={false}
       whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
       viewport={{ once: true, amount: 0.18, margin: "0px 0px -10% 0px" }}
       transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
