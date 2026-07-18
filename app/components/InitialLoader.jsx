@@ -2,11 +2,34 @@
 
 import { useEffect, useState } from "react";
 
+const LOADER_SESSION_KEY = "omcreativos-loader-last-shown";
+const LOADER_MIN_INTERVAL = 60 * 60 * 1000;
+
 export default function InitialLoader({ theme = "day" }) {
   const [leaving, setLeaving] = useState(false);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(null);
 
   useEffect(() => {
+    const now = Date.now();
+    let lastShown = 0;
+    try {
+      lastShown = Number(window.sessionStorage.getItem(LOADER_SESSION_KEY) || 0);
+    } catch {
+      // Si el navegador bloquea storage, el loader conserva el comportamiento normal.
+    }
+
+    if (lastShown && now - lastShown < LOADER_MIN_INTERVAL) {
+      setVisible(false);
+      return undefined;
+    }
+
+    try {
+      window.sessionStorage.setItem(LOADER_SESSION_KEY, String(now));
+    } catch {
+      // El loader sigue funcionando aunque storage esté deshabilitado.
+    }
+    setVisible(true);
+
     const leaveTimer = window.setTimeout(() => setLeaving(true), 1900);
     const removeTimer = window.setTimeout(() => setVisible(false), 2600);
     return () => {
@@ -15,7 +38,7 @@ export default function InitialLoader({ theme = "day" }) {
     };
   }, []);
 
-  if (!visible) return null;
+  if (visible !== true) return null;
 
   const renderWord = (word, className, offset = 0) => [...word].map((letter, index) => (
     <span
