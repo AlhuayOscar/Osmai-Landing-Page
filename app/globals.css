@@ -2805,7 +2805,7 @@ svg {
   position: absolute;
   inset-block: 0;
   z-index: -1;
-  width: 40%;
+  width: 50%;
   background: rgba(23, 72, 232, .56);
   animation: initial-loader-breathe 1.4s ease-in-out infinite alternate;
 }
@@ -2820,8 +2820,9 @@ svg {
   transform-origin: right center;
   background: linear-gradient(270deg, #fff 0%, #fff 78%, rgba(255,255,255,.88) 100%);
 }
-.initial-loader.is-leaving .initial-loader-curtain-left { animation: initial-loader-open-left .7s cubic-bezier(.76,0,.24,1) forwards; }
-.initial-loader.is-leaving .initial-loader-curtain-right { animation: initial-loader-open-right .7s cubic-bezier(.76,0,.24,1) forwards; }
+.initial-loader.is-leaving { background: transparent; animation: none; }
+.initial-loader.is-leaving .initial-loader-curtain-left { animation: initial-loader-open-left .72s cubic-bezier(.76,0,.24,1) forwards; }
+.initial-loader.is-leaving .initial-loader-curtain-right { animation: initial-loader-open-right .72s cubic-bezier(.76,0,.24,1) forwards; }
 
 .initial-loader-mark { display: flex; align-items: center; gap: .02em; font: 800 clamp(5rem, 14vw, 11rem)/.8 Arial, sans-serif; letter-spacing: -.12em; color: #fff; text-shadow: 0 10px 34px rgba(0, 20, 100, .48); }
 .initial-loader-svg-mark { width: min(68vw, 360px); height: auto; overflow: visible; color: #fff; filter: drop-shadow(0 10px 24px rgba(0, 20, 100, .25)); }
@@ -2863,7 +2864,7 @@ svg {
 .initial-loader-dark .initial-loader-real-mark { background: #fff; filter: drop-shadow(0 10px 24px rgba(0, 20, 100, .45)); }
 .initial-loader-dark .initial-loader-curtain-left { background: linear-gradient(90deg, #071331 0%, #071331 78%, rgba(7,19,49,.88) 100%); }
 .initial-loader-dark .initial-loader-curtain-right { background: linear-gradient(270deg, #071331 0%, #071331 78%, rgba(7,19,49,.88) 100%); }
-.initial-loader.is-leaving { animation: initial-loader-surface-out .72s .06s ease forwards; }
+.initial-loader.is-leaving { animation: initial-loader-open-center .72s cubic-bezier(.76,0,.24,1) .06s forwards; }
 .initial-loader.is-leaving .initial-loader-mark { opacity: 0; transform: scale(1.08); transition: opacity .38s ease, transform .38s ease; }
 .initial-loader.is-leaving .initial-loader-caption, .initial-loader.is-leaving .initial-loader-brand { animation: initial-loader-mark-out .38s ease forwards; }
 
@@ -2876,10 +2877,9 @@ svg {
 @keyframes initial-loader-radial-counterclockwise { from { --loader-reveal: 360deg; } to { --loader-reveal: 0deg; } }
 @keyframes initial-loader-svg-draw { to { stroke-dashoffset: 0; } }
 @keyframes initial-loader-real-draw { from { clip-path: inset(0 100% 0 0); transform: scale(.94); opacity: .2; } to { clip-path: inset(0 0 0 0); transform: scale(1); opacity: 1; } }
-@keyframes initial-loader-open-left { to { transform: translateX(-102%); } }
-@keyframes initial-loader-open-right { to { transform: translateX(102%); } }
+@keyframes initial-loader-open-left { to { transform: scaleX(0); } }
+@keyframes initial-loader-open-right { to { transform: scaleX(0); } }
 @keyframes initial-loader-mark-out { to { opacity: 0; transform: scale(1.08); } }
-@keyframes initial-loader-surface-out { to { opacity: 0; visibility: hidden; } }
 
 @media (prefers-reduced-motion: reduce) {
   .initial-loader-curtain, .initial-loader-mark, .initial-loader-caption, .initial-loader-brand, .initial-loader-word, .initial-loader-character, .initial-loader-letter-o, .initial-loader-letter-m { animation: none; opacity: 1; }
