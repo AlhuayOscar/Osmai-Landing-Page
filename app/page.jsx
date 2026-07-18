@@ -920,7 +920,7 @@ export default function Home() {
               >
                 <source src="/media/web-design-work.mp4" type="video/mp4" />
               </video>
-              <span>Zona editable para imagen o mockup</span>
+              <span>Veamos algunos proyectos</span>
             </Reveal>
             <div className="projects-card-grid">
               {projectCards.map((card, index) => (
@@ -969,7 +969,13 @@ export default function Home() {
                     alt={`Visual de prueba para ${item.title}`}
                     loading="lazy"
                   />
-                  <span>Imagen / captura</span>
+                  <span className="case-image-overlay">
+                    {index === 0
+                      ? "Acá podría estar tu plato principal"
+                      : index === 1
+                        ? "Podría estar tu producto estrella acá"
+                        : "Es más fácil conocerse con imágenes"}
+                  </span>
                 </div>
                 <div>
                   <span>{item.type}</span>
@@ -1013,31 +1019,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="process-section" id="proceso">
-        <div className="section-shell">
-          <SectionTitle
-            eyebrow="Proceso"
-            title="Una base visual clara para seguir construyendo"
-            text="Dejamos un sistema simple de continuar: títulos grandes, cards, placeholders y bloques listos para crecer."
-          />
-
-          <div className="process-grid">
-            {processSteps.map((item, index) => (
-              <Reveal
-                as="article"
-                className="process-card"
-                direction={index === 0 ? "left" : index === 1 ? "up" : "right"}
-                delay={index * 0.08}
-                key={item.step}
-              >
-                <strong>{item.step}</strong>
-                <h3>{item.title}</h3>
-                <p>{item.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="commerce-section">
         <div className="section-shell commerce-layout">
