@@ -31,6 +31,7 @@ import {
 import Chatbot from "./components/Chatbot";
 import Reveal from "./components/Reveal";
 import InitialLoader from "./components/InitialLoader";
+import AgencyGlobe from "./components/AgencyGlobe";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
@@ -846,20 +847,7 @@ export default function Home() {
 
       <section className="agency-section" id="especialidades">
         <div className="section-shell agency-layout specialty-orbit-layout">
-          <svg className="specialty-world" viewBox="0 0 900 700" aria-hidden="true">
-            <ellipse className="world-ring world-ring-a" cx="450" cy="350" rx="310" ry="190" />
-            <ellipse className="world-ring world-ring-b" cx="450" cy="350" rx="220" ry="310" />
-            <ellipse className="world-ring world-ring-c" cx="450" cy="350" rx="310" ry="310" />
-            <g className="world-network">
-              <path d="M176 350 300 178 450 118 602 178 724 350 602 522 450 582 300 522Z" />
-              <path d="M300 178 450 350 602 178M176 350 450 350 724 350M300 522 450 350 602 522" />
-            </g>
-            <g className="world-nodes">
-              <circle cx="176" cy="350" r="6" /><circle cx="300" cy="178" r="6" /><circle cx="450" cy="118" r="6" />
-              <circle cx="602" cy="178" r="6" /><circle cx="724" cy="350" r="6" /><circle cx="602" cy="522" r="6" />
-              <circle cx="450" cy="582" r="6" /><circle cx="300" cy="522" r="6" /><circle cx="450" cy="350" r="8" />
-            </g>
-          </svg>
+          <AgencyGlobe theme={theme} />
           <div className="agency-copy specialty-orbit-copy">
             <SectionTitle
               eyebrow="Expertos digitales"
@@ -878,29 +866,18 @@ export default function Home() {
 
           <div className="specialty-grid specialty-orbit" aria-label="Especialidades de omcreativos">
             {specialtyCards.map(({ icon: Icon, title, text }, index) => (
-              <Reveal
-                as="article"
+              <article
                 className="specialty-card specialty-card-animated"
-                direction={index % 2 === 0 ? "up" : "right"}
-                delay={(index % 3) * 0.06}
                 key={title}
                 style={{ "--specialty-index": String(index) }}
-                onMouseMove={(event) => {
-                  const rect = event.currentTarget.getBoundingClientRect();
-                  const x = Math.max(-50, Math.min(50, (event.clientX - (rect.left + rect.width / 2)) * 0.22));
-                  const y = Math.max(-50, Math.min(50, (event.clientY - (rect.top + rect.height / 2)) * 0.22));
-                  event.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-                  event.currentTarget.style.setProperty("--mouse-y", `${y}px`);
-                }}
-                onMouseLeave={(event) => {
-                  event.currentTarget.style.setProperty("--mouse-x", "0px");
-                  event.currentTarget.style.setProperty("--mouse-y", "0px");
-                }}
+                tabIndex={0}
+                aria-label={`${title}: ${text}`}
               >
+                <span className="specialty-node-index">{String(index + 1).padStart(2, "0")}</span>
                 <Icon size={21} />
                 <h3>{title}</h3>
                 <p>{text}</p>
-              </Reveal>
+              </article>
             ))}
           </div>
         </div>
@@ -1181,8 +1158,7 @@ export default function Home() {
                 alt=""
               />
             </a>
-            <h2>Tu lugar ideal para despegar tu emprendimiento, refrescar la identidad, y ser competitivo </h2>     </Reveal>
-
+            <h2>Tu lugar ideal para despegar tu emprendimiento, refrescar la identidad, y ser competitivo. </h2>     </Reveal>
           <Reveal className="footer-columns" direction="right" delay={0.12}>
             <div>
               <h3>Aumenta tus ventas</h3>
