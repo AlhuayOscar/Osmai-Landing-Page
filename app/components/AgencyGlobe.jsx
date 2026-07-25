@@ -79,14 +79,16 @@ function createStars(THREE, amount, radius) {
 
 export default function AgencyGlobe({ theme }) {
   const mountRef = useRef(null);
+  const interactionRef = useRef(null);
   const [isReady, setIsReady] = useState(false);
   const [hasWebGl, setHasWebGl] = useState(true);
 
   useEffect(() => {
     const mount = mountRef.current;
+    const interactionSurface = interactionRef.current;
     const desktopQuery = window.matchMedia("(min-width: 861px)");
 
-    if (!mount || !desktopQuery.matches) {
+    if (!mount || !interactionSurface || !desktopQuery.matches) {
       return undefined;
     }
 
@@ -134,7 +136,11 @@ export default function AgencyGlobe({ theme }) {
           waitForGlobeReady: false,
           animateIn: !reducedMotion,
         })
-          .globeImageUrl(`${TEXTURE_ROOT}/earth-night.jpg`)
+          .globeImageUrl(
+            `${TEXTURE_ROOT}/${
+              theme === "night" ? "earth-night.jpg" : "earth-blue-marble.jpg"
+            }`,
+          )
           .bumpImageUrl(`${TEXTURE_ROOT}/earth-topology.png`)
           .showGraticules(true)
           .showAtmosphere(true)
@@ -170,11 +176,11 @@ export default function AgencyGlobe({ theme }) {
           });
 
         const material = globe.globeMaterial();
-        material.bumpScale = 3.6;
-        material.color = new THREE.Color(theme === "night" ? "#b8c5ff" : "#8198ff");
-        material.emissive = new THREE.Color(theme === "night" ? "#173a91" : "#153fba");
-        material.emissiveIntensity = theme === "night" ? 0.48 : 0.28;
-        material.shininess = 28;
+        material.bumpScale = theme === "night" ? 3.6 : 4.4;
+        material.color = new THREE.Color(theme === "night" ? "#b8c5ff" : "#ffffff");
+        material.emissive = new THREE.Color(theme === "night" ? "#173a91" : "#071d54");
+        material.emissiveIntensity = theme === "night" ? 0.48 : 0.12;
+        material.shininess = theme === "night" ? 28 : 42;
 
         globe.rotation.set(0.04, -0.72, -0.035);
         globe.position.set(-16, 10, 0);
@@ -185,9 +191,12 @@ export default function AgencyGlobe({ theme }) {
         stars.rotation.z = -0.15;
         scene.add(stars);
 
-        scene.add(new THREE.AmbientLight(0x8ea4ff, theme === "night" ? 1.6 : 2.1));
+        scene.add(new THREE.AmbientLight(0x8ea4ff, theme === "night" ? 1.6 : 2.45));
 
-        const keyLight = new THREE.DirectionalLight(0xffffff, 2.8);
+        const keyLight = new THREE.DirectionalLight(
+          0xffffff,
+          theme === "night" ? 2.8 : 3.35,
+        );
         keyLight.position.set(-180, 140, 260);
         scene.add(keyLight);
 
@@ -195,14 +204,14 @@ export default function AgencyGlobe({ theme }) {
         rimLight.position.set(220, -90, 180);
         scene.add(rimLight);
 
-        controls = new OrbitControls(camera, renderer.domElement);
+        controls = new OrbitControls(camera, interactionSurface);
         controls.enableDamping = true;
-        controls.dampingFactor = 0.055;
+        controls.dampingFactor = 0.06;
         controls.enablePan = false;
         controls.enableZoom = false;
-        controls.rotateSpeed = 0.38;
+        controls.rotateSpeed = 0.32;
         controls.autoRotate = !reducedMotion;
-        controls.autoRotateSpeed = 0.34;
+        controls.autoRotateSpeed = 0.22;
 
         const resize = () => {
           const { clientWidth, clientHeight } = mount;
@@ -291,6 +300,11 @@ export default function AgencyGlobe({ theme }) {
       aria-label="Globo digital interactivo con conexiones entre ciudades"
     >
       <div className="agency-globe-canvas" ref={mountRef} />
+      <div
+        className="agency-globe-interaction"
+        ref={interactionRef}
+        aria-hidden="true"
+      />
       <div className="agency-globe-fallback" aria-hidden="true">
         <span />
       </div>

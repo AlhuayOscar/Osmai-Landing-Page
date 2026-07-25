@@ -142,6 +142,12 @@ const specialtyCards = [
   },
 ];
 
+const agencyMessages = [
+  "se vea mejor.",
+  "conecte más.",
+  "crezca online.",
+];
+
 const projectCards = [
   {
     eyebrow: "Home principal",
@@ -338,6 +344,8 @@ function PrimaryLink({ href, children, variant = "primary" }) {
 
 export default function Home() {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [openSpecialtyIndex, setOpenSpecialtyIndex] = useState(-1);
+  const [agencyMessageIndex, setAgencyMessageIndex] = useState(0);
   const [isNavVisible, setIsNavVisible] = useState(true);
   const [hasNavBackdrop, setHasNavBackdrop] = useState(false);
   const [navTone, setNavTone] = useState("on-dark");
@@ -375,6 +383,26 @@ export default function Home() {
 
     return () => {
       window.clearInterval(fontTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion) {
+      return undefined;
+    }
+
+    const messageTimer = window.setInterval(() => {
+      setAgencyMessageIndex(
+        (currentIndex) => (currentIndex + 1) % agencyMessages.length,
+      );
+    }, 3200);
+
+    return () => {
+      window.clearInterval(messageTimer);
     };
   }, []);
 
@@ -851,15 +879,23 @@ export default function Home() {
           <div className="agency-copy specialty-orbit-copy">
             <SectionTitle
               eyebrow="Expertos digitales"
-              title="Todo lo que necesita una marca para salir mejor parada online"
-              text="Tomamos la idea de una agencia integral y la llevamos al lenguaje omcreativos: simple, moderno, azul, modular y listo para reemplazar placeholders por material real."
+              title={
+                <>
+                  Todo para que tu marca{" "}
+                  <em
+                    className="agency-dynamic-message"
+                    key={agencyMessages[agencyMessageIndex]}
+                  >
+                    {agencyMessages[agencyMessageIndex]}
+                  </em>
+                </>
+              }
+              text="Estrategia, diseño y tecnología en un solo equipo."
             />
             <Reveal className="agency-note" direction="left" delay={0.25}>
-              <strong>Más de una sola landing.</strong>
+              <strong>De la idea al resultado.</strong>
               <p>
-                La estructura queda preparada para crecer hacia identidad,
-                contenido, campañas, tienda online, soporte o software propio
-                sin perder coherencia visual.
+                Una base coherente para lanzar, vender y seguir creciendo.
               </p>
             </Reveal>
           </div>
@@ -867,16 +903,36 @@ export default function Home() {
           <div className="specialty-grid specialty-orbit" aria-label="Especialidades de omcreativos">
             {specialtyCards.map(({ icon: Icon, title, text }, index) => (
               <article
-                className="specialty-card specialty-card-animated"
+                className={`specialty-card specialty-card-animated ${
+                  openSpecialtyIndex === index ? "is-open" : ""
+                }`}
                 key={title}
                 style={{ "--specialty-index": String(index) }}
-                tabIndex={0}
-                aria-label={`${title}: ${text}`}
               >
+                <button
+                  className="specialty-card-trigger"
+                  type="button"
+                  aria-expanded={openSpecialtyIndex === index}
+                  aria-controls={`specialty-detail-${index}`}
+                  aria-label={`${
+                    openSpecialtyIndex === index ? "Cerrar" : "Leer más sobre"
+                  } ${title}`}
+                  onClick={() => {
+                    setOpenSpecialtyIndex((currentIndex) =>
+                      currentIndex === index ? -1 : index,
+                    );
+                  }}
+                />
                 <span className="specialty-node-index">{String(index + 1).padStart(2, "0")}</span>
                 <Icon size={21} />
                 <h3>{title}</h3>
-                <p>{text}</p>
+                <div
+                  className="specialty-card-detail"
+                  id={`specialty-detail-${index}`}
+                  aria-hidden={openSpecialtyIndex !== index}
+                >
+                  <p>{text}</p>
+                </div>
               </article>
             ))}
           </div>
