@@ -183,7 +183,7 @@ export default function AgencyGlobe({ theme }) {
         material.shininess = theme === "night" ? 28 : 42;
 
         globe.rotation.set(0.04, -0.72, -0.035);
-        globe.position.set(-16, 10, 0);
+        globe.position.set(0, 0, 0);
         globe.scale.setScalar(1.08);
         scene.add(globe);
 
@@ -205,6 +205,7 @@ export default function AgencyGlobe({ theme }) {
         scene.add(rimLight);
 
         controls = new OrbitControls(camera, interactionSurface);
+        controls.target.set(0, 0, 0);
         controls.enableDamping = true;
         controls.dampingFactor = 0.06;
         controls.enablePan = false;
