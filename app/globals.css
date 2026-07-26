@@ -2469,53 +2469,184 @@ svg {
 }
 
 .commerce-visual {
-  min-height: 510px;
+  min-height: 560px;
   display: grid;
   place-items: center;
+  padding: clamp(24px, 4vw, 46px);
   border-radius: var(--radius-xl);
   background:
     radial-gradient(
-      circle at 24% 22%,
-      rgba(255, 255, 255, 0.28),
-      transparent 26%
+      circle at 18% 12%,
+      rgba(255, 255, 255, 0.32),
+      transparent 30%
     ),
     linear-gradient(180deg, var(--page-blue), var(--page-blue-deep));
   box-shadow: var(--shadow-strong);
   overflow: hidden;
 }
 
-.commerce-window {
-  width: min(78%, 430px);
-  padding: 18px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  backdrop-filter: blur(18px);
+.case-study-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: var(--page-blue);
+  font-size: 0.76rem;
+  font-weight: 800;
 }
 
-.commerce-window span {
+.case-study-link:hover {
+  color: var(--ink-deep);
+}
+
+.commerce-window {
+  width: min(100%, 470px);
+  padding: 12px;
+  border-radius: 28px;
+  background: rgba(248, 250, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 28px 70px rgba(3, 20, 84, 0.34);
+}
+
+.commerce-window-bar,
+.commerce-stats,
+.commerce-order {
+  display: flex;
+  align-items: center;
+}
+
+.commerce-window-bar {
+  justify-content: space-between;
+  padding: 8px 8px 14px;
+}
+
+.commerce-window-bar > div {
+  display: grid;
+  gap: 2px;
+}
+
+.commerce-window-bar span,
+.commerce-product-copy strong,
+.commerce-order strong {
+  color: var(--ink-deep);
+}
+
+.commerce-window-bar > div > span {
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.commerce-window small,
+.commerce-stats span {
+  color: var(--muted);
+  font-size: 0.66rem;
+}
+
+.commerce-cart {
   display: inline-flex;
-  margin-bottom: 16px;
-  color: var(--text);
-  font-size: 0.78rem;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 11px;
+  border-radius: 999px;
+  background: var(--page-blue);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.commerce-product {
+  position: relative;
+  min-height: 272px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e8e1d8;
+}
+
+.commerce-product::after {
+  content: "";
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(6, 14, 34, 0.78));
+}
+
+.commerce-product-copy {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 17px;
+  left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.commerce-product-copy span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.commerce-window div {
-  height: 92px;
-  margin-top: 12px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.86);
+.commerce-product-copy strong {
+  color: #fff;
+  font-size: 1.18rem;
 }
 
-.commerce-window div:nth-child(3) {
-  width: 82%;
+.commerce-product-copy small {
+  color: rgba(255, 255, 255, 0.82);
 }
 
-.commerce-window div:nth-child(4) {
-  width: 64%;
+.commerce-stats {
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.commerce-stats > div {
+  flex: 1;
+  display: grid;
+  gap: 5px;
+  padding: 13px 14px;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.commerce-stats strong {
+  color: var(--page-blue);
+  font-size: 1.12rem;
+}
+
+.commerce-order {
+  gap: 10px;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 16px;
+  background: #e9efff;
+}
+
+.commerce-order-icon {
+  display: grid;
+  flex: 0 0 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--page-blue);
+  color: #fff;
+}
+
+.commerce-order > div {
+  display: grid;
+  flex: 1;
+  gap: 2px;
+}
+
+.commerce-order strong {
+  font-size: 0.72rem;
+}
+
+.commerce-status {
+  color: var(--page-blue);
+  font-size: 0.65rem;
+  font-weight: 800;
 }
 
 .commerce-list {
@@ -3647,11 +3778,8 @@ svg {
 .commerce-preview-image {
   display: block;
   width: 100%;
-  height: 132px;
-  margin-bottom: 12px;
-  border-radius: 18px;
+  height: 272px;
   object-fit: cover;
-  opacity: 0.9;
 }
 
 @keyframes omcreativos-float {

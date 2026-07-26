@@ -945,7 +945,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Proyecto"
               title="Una home armada para parecer final incluso antes de cargar las imágenes"
-              text="La estructura replica la dirección del mockup y deja la parte visual lista para completar con tus fondos, renders o fotos."
+              text="La estructura replica la dirección del mockup y combina movimiento, casos y llamados a la acción para que el portfolio se entienda de un vistazo."
             />
             <Reveal direction="left" delay={0.25}>
               <PrimaryLink href="#proceso">
@@ -1001,8 +1001,8 @@ export default function Home() {
         <div className="section-shell project-cases">
           <SectionTitle
             eyebrow="Casos de exito"
-            title="Proyectos placeholder para mostrar alcance sin depender todavía de imágenes finales"
-            text="Inspirado en una grilla de portfolio: cada card puede transformarse luego en una ficha real con captura, enlace y tecnologías usadas."
+            title="Ejemplos de lo que podemos construir juntos"
+            text="Una grilla de portfolio clara para mostrar rubros, soluciones y resultados sin obligar a la persona a leer demasiado."
           />
 
           <div className="case-study-grid">
@@ -1020,6 +1020,8 @@ export default function Home() {
                     src={
                       index === 0
                         ? "/media/web-design-drag-drop.gif"
+                        : index === 4
+                          ? "/img/catalogo-boutique.png"
                         : index % 2 === 0
                           ? "/media/web-design-code.jpg"
                           : "/media/web-design-ui.jpg"
@@ -1029,16 +1031,26 @@ export default function Home() {
                   />
                   <span className="case-image-overlay">
                     {index === 0
-                      ? "Acá podría estar tu plato principal"
+                      ? "Presentación visual para servicios"
                       : index === 1
-                        ? "Podría estar tu producto estrella acá"
-                        : "Es más fácil conocerse con imágenes"}
+                        ? "Catálogo y producto destacado"
+                        : "Interfaces listas para crecer"}
                   </span>
                 </div>
                 <div>
                   <span>{item.type}</span>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
+                  {item.href ? (
+                    <a
+                      className="case-study-link"
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Ver repositorio <ExternalLink size={14} />
+                    </a>
+                  ) : null}
                 </div>
                 <ExternalLink size={18} />
               </Reveal>
@@ -1081,25 +1093,61 @@ export default function Home() {
       <section className="commerce-section">
         <div className="section-shell commerce-layout">
           <Reveal className="commerce-visual floating-element" direction="left">
-            <div className="commerce-window">
-              <span>Catálogo / tienda</span>
-              <img
-                className="commerce-preview-image"
-                src="/media/web-design-ui.jpg"
-                alt="Interfaz web de prueba"
-                loading="lazy"
-              />
-              <div />
-              <div />
-              <div />
+            <div className="commerce-window" aria-label="Ejemplo de catálogo online">
+              <div className="commerce-window-bar">
+                <div>
+                  <span>Casa calma</span>
+                  <small>Catálogo online</small>
+                </div>
+                <span className="commerce-cart">
+                  <ShoppingCart size={16} />
+                  2
+                </span>
+              </div>
+
+              <div className="commerce-product">
+                <img
+                  className="commerce-preview-image"
+                  src="/img/catalogo-boutique.png"
+                  alt="Productos artesanales presentados en un catálogo online"
+                  loading="lazy"
+                />
+                <div className="commerce-product-copy">
+                  <span>Selección esencial</span>
+                  <strong>Objetos para todos los días</strong>
+                  <small>Desde $18.900</small>
+                </div>
+              </div>
+
+              <div className="commerce-stats">
+                <div>
+                  <span>Ventas este mes</span>
+                  <strong>+28%</strong>
+                </div>
+                <div>
+                  <span>Pedidos activos</span>
+                  <strong>14</strong>
+                </div>
+              </div>
+
+              <div className="commerce-order">
+                <span className="commerce-order-icon">
+                  <MessageCircleMore size={17} />
+                </span>
+                <div>
+                  <strong>Nueva consulta</strong>
+                  <small>Desde el catálogo · hace 2 min</small>
+                </div>
+                <span className="commerce-status">Lista</span>
+              </div>
             </div>
           </Reveal>
 
           <div className="commerce-copy">
             <SectionTitle
               eyebrow="Tiendas online"
-              title="Impulsa tu negocio con catálogos, ventas y automatizaciones"
-              text="Dejamos esta sección como punto de partida para e-commerce: productos, pagos, envíos, consultas y mejoras de gestión cuando el proyecto lo necesite."
+              title="Tu catálogo también puede vender por vos"
+              text="Diseñamos una experiencia clara para mostrar productos, recibir pedidos y ordenar consultas. Empezá con lo que necesitás hoy y sumá funciones cuando el negocio crezca."
             />
             <Reveal
               as="ul"
