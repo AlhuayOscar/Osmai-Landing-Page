@@ -3851,7 +3851,7 @@ svg {
 .project-carousel-track {
   display: flex;
   width: max-content;
-  animation: real-projects-scroll 44s linear infinite;
+  animation: real-projects-scroll 54s linear infinite;
   will-change: transform;
 }
 
@@ -4242,6 +4242,20 @@ svg {
   color: var(--muted);
   font-size: .68rem;
   font-weight: 800;
+}
+
+.projects-case-live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 24px;
+  color: var(--page-blue);
+  font-size: .78rem;
+  font-weight: 900;
+}
+
+.projects-case-live-link:hover {
+  color: var(--ink-deep);
 }
 
 .projects-portfolio-trust {

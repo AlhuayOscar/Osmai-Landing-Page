@@ -30,7 +30,7 @@ export default function ProyectosPage() {
           </p>
           <h1>Lo que hicimos, contado desde el problema hasta la entrega.</h1>
           <p>
-            Cinco experiencias reales del portfolio técnico de Oscar Alhuay. Cada caso explica con claridad
+            Siete experiencias reales de Oscar y el equipo de omcreativos. Cada caso explica con claridad
             qué parte se diseñó, desarrolló o integró, sin métricas inventadas ni proyectos de referencia
             presentados como propios.
           </p>
@@ -77,6 +77,12 @@ export default function ProyectosPage() {
                   <span key={technology}>{technology}</span>
                 ))}
               </div>
+
+              {project.sourceUrl ? (
+                <a className="projects-case-live-link" href={project.sourceUrl} target="_blank" rel="noreferrer">
+                  Visitar sitio en vivo <ArrowUpRight size={16} />
+                </a>
+              ) : null}
             </div>
           </article>
         ))}

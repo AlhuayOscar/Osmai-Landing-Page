@@ -94,6 +94,45 @@ export const realProjects = [
     ],
     technologies: ["React", "Redux Toolkit", "PostgreSQL", "JWT", "PayPal", "Sequelize"],
   },
+  {
+    slug: "lachoco-latera",
+    name: "LaChoco Latera",
+    category: "E-commerce gastronómico",
+    image:
+      "https://www.lachoco-latera.com/_next/image?url=%2Fimages%2Fus%2Fhero2.jpg&w=1920&q=75",
+    imageAlt: "Productos de chocolate colombiano presentados en LaChoco Latera",
+    sourceUrl: "https://www.lachoco-latera.com/en-US",
+    summary:
+      "Tienda digital para comercializar chocolate colombiano en Miami, con productos, degustaciones y una experiencia adaptada al mercado estadounidense.",
+    contribution:
+      "Diseño y desarrollo de la experiencia e-commerce, catálogo visual, variantes de producto, carrito, contenidos en inglés y recorridos de compra.",
+    work: [
+      "Catálogo de bombones, barras y chocolate caliente",
+      "Carrito y opciones de compra por producto",
+      "Reservas para degustaciones y experiencias",
+      "Contenido internacional y relato sobre origen e impacto",
+    ],
+    technologies: ["Next.js", "E-commerce", "Catálogo", "i18n", "Checkout", "Responsive"],
+  },
+  {
+    slug: "punto-arte-peru",
+    name: "Punto Arte Perú",
+    category: "Restaurante y menú digital",
+    image: "https://www.puntoartperu.com/assets/images/hero-slider-1.jpg",
+    imageAlt: "Platos de cocina peruana presentados en el sitio de Punto Arte Perú",
+    sourceUrl: "https://www.puntoartperu.com/",
+    summary:
+      "Sitio gastronómico para un restaurante peruano en San Fernando, Chile, enfocado en presentar su cultura, menú y canales de contacto.",
+    contribution:
+      "Diseño y desarrollo del sitio institucional, carta digital, secciones gastronómicas, contacto por WhatsApp, ubicación y presentación de los chefs.",
+    work: [
+      "Carta completa de platos y bebidas",
+      "Acceso directo a consultas por WhatsApp",
+      "Ubicación, horarios y datos de contacto",
+      "Historia, propuesta gastronómica y equipo de cocina",
+    ],
+    technologies: ["HTML", "CSS", "JavaScript", "WhatsApp", "Google Maps", "Responsive"],
+  },
 ];
 
 export const portfolioSource = "https://oscar-fullstacker.vercel.app/#projects";

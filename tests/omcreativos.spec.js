@@ -55,5 +55,9 @@ test.describe("omcreativos landing page", () => {
     await expect(page.getByText("QA visual y funcional de todo el front-end")).toBeVisible();
     await expect(page.getByRole("heading", { name: "UrbanClub" })).toBeVisible();
     await expect(page.getByText("Compra, venta y pagos mediante PayPal")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "LaChoco Latera" })).toBeVisible();
+    await expect(page.getByText("Reservas para degustaciones y experiencias")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Punto Arte Perú" })).toBeVisible();
+    await expect(page.getByText("Acceso directo a consultas por WhatsApp")).toBeVisible();
   });
 });

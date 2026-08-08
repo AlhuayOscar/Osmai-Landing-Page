@@ -905,7 +905,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Proyectos seleccionados"
               title="Trabajo real: diseño, desarrollo e integraciones en producción"
-              text="Casos en los que Oscar participó directamente, desde la interfaz y los formularios hasta paneles, pagos, seguridad y conexión con el back-end."
+              text="Casos desarrollados por Oscar y el equipo de omcreativos: desde sitios comerciales y catálogos hasta paneles, pagos, seguridad y conexión con el back-end."
             />
           </div>
           <Reveal className="projects-showcase-actions" direction="right" delay={0.15}>
