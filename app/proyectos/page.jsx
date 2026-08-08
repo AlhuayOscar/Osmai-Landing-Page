@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Layers3, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Mail, MessageCircleMore, Layers3, Sparkles } from "lucide-react";
 import InitialLoader from "../components/InitialLoader";
 import ProjectMediaGallery from "../components/ProjectMediaGallery";
 import Reveal from "../components/Reveal";
+import { buildEmailUrl, buildWhatsAppUrl } from "../data/contact";
 import { portfolioSource, realProjects } from "../data/projects";
 
 export const metadata = {
@@ -12,6 +13,9 @@ export const metadata = {
 };
 
 export default function ProyectosPage() {
+  const proposalWhatsAppUrl = buildWhatsAppUrl("Hola Oscar, vi los proyectos de omcreativos y quiero pedir una propuesta.");
+  const testimonialWhatsAppUrl = buildWhatsAppUrl("Hola Oscar, quiero compartir un testimonio sobre mi experiencia con omcreativos.");
+
   return (
     <main className="projects-entry-page projects-portfolio-page">
       <InitialLoader />
@@ -41,6 +45,11 @@ export default function ProyectosPage() {
           </p>
         </Reveal>
         <Reveal as="aside" className="projects-portfolio-hero-aside" direction="right" delay={0.12}>
+          <img
+            className="projects-source-preview"
+            src="/img/project-captures/portfolio-live.png"
+            alt="Captura del portfolio público donde se documentan los proyectos"
+          />
           <Layers3 size={28} />
           <strong>Diseño + desarrollo</strong>
           <span>Landing pages, dashboards, plataformas, pagos, datos y seguridad.</span>
@@ -109,18 +118,24 @@ export default function ProyectosPage() {
           Esta web no atribuye frases a clientes sin su aprobación. Si ya trabajaste con Oscar o Maira,
           podés autorizar una reseña con tu nombre, rol y proyecto para incorporarla aquí.
         </p>
-        <a href="mailto:info@omcreativos.com?subject=Testimonio%20para%20omcreativos">
-          Compartir un testimonio <ArrowRight size={17} />
-        </a>
+        <div className="projects-contact-actions">
+          <a href={testimonialWhatsAppUrl} target="_blank" rel="noopener noreferrer">
+            <MessageCircleMore size={17} /> Compartir por WhatsApp
+          </a>
+          <a href={buildEmailUrl("Testimonio para omcreativos")}><Mail size={16} /> Email empresarial</a>
+        </div>
       </Reveal>
 
       <Reveal as="section" className="projects-portfolio-cta" direction="up">
         <p className="projects-entry-eyebrow">Tu proyecto puede ser el próximo</p>
         <h2>Contanos qué necesitás resolver.</h2>
         <p>Te respondemos con una recomendación concreta, un alcance entendible y próximos pasos.</p>
-        <a href="mailto:info@omcreativos.com?subject=Quiero%20cotizar%20un%20proyecto">
-          Pedir una propuesta <ArrowRight size={18} />
-        </a>
+        <div className="projects-contact-actions is-centered">
+          <a href={proposalWhatsAppUrl} target="_blank" rel="noopener noreferrer">
+            <MessageCircleMore size={18} /> Hablar con Oscar
+          </a>
+          <a href={buildEmailUrl("Quiero cotizar un proyecto")}><Mail size={17} /> Escribir por email</a>
+        </div>
       </Reveal>
 
       <footer className="projects-entry-footer">

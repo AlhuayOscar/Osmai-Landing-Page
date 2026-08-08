@@ -31,7 +31,9 @@ import Chatbot from "./components/Chatbot";
 import Reveal from "./components/Reveal";
 import InitialLoader from "./components/InitialLoader";
 import AgencyGlobe from "./components/AgencyGlobe";
+import CinematicWorkShowcase from "./components/CinematicWorkShowcase";
 import ProjectCarousel from "./components/ProjectCarousel";
+import { buildEmailUrl, buildWhatsAppUrl, businessContact } from "./data/contact";
 import { portfolioSource, realProjects } from "./data/projects";
 
 const navItems = [
@@ -270,9 +272,13 @@ const emailBody = [
   "Muchas gracias.",
 ].join("\n");
 
-const contactEmailHref = `mailto:info@omcreativos.com?subject=${encodeURIComponent(
-  emailSubject
-)}&body=${encodeURIComponent(emailBody)}`;
+const contactEmailHref = buildEmailUrl(emailSubject, emailBody);
+const contactWhatsAppHref = buildWhatsAppUrl(
+  "Hola Oscar, vengo de la web de omcreativos y quiero conversar sobre mi negocio o proyecto."
+);
+const testimonialWhatsAppHref = buildWhatsAppUrl(
+  "Hola Oscar, trabajé con omcreativos y quiero compartir mi experiencia para el sitio."
+);
 
 function SectionTitle({ eyebrow, title, text, centered = false }) {
   const direction = centered ? "up" : "left";
@@ -294,9 +300,9 @@ function SectionTitle({ eyebrow, title, text, centered = false }) {
   );
 }
 
-function PrimaryLink({ href, children, variant = "primary" }) {
+function PrimaryLink({ href, children, variant = "primary", ...props }) {
   return (
-    <a className={`cta-link cta-link-${variant}`} href={href}>
+    <a className={`cta-link cta-link-${variant}`} href={href} {...props}>
       {children}
     </a>
   );
@@ -537,7 +543,7 @@ export default function Home() {
           <div className="hero-image-frame">
             <Image
               className="hero-image"
-              src="/img/herosection.jpg"
+              src="/img/hero-studio-cinematic.png"
               alt=""
               fill
               priority
@@ -637,8 +643,8 @@ export default function Home() {
             </button>
           </div>
 
-          <a className="hero-nav-cta" href="#planes">
-            Pedí propuesta
+          <a className="hero-nav-cta" href={contactWhatsAppHref} target="_blank" rel="noopener noreferrer">
+            Hablar con Oscar
           </a>
         </nav>
 
@@ -689,8 +695,8 @@ export default function Home() {
               {theme === "day" ? <Moon size={17} /> : <Sun size={17} />}
               {theme === "day" ? "Tema oscuro" : "Tema claro"}
             </button>
-            <a className="mobile-sidebar-cta" href="#planes" onClick={() => setIsMobileMenuOpen(false)}>
-              Pedí propuesta <ArrowRight size={17} />
+            <a className="mobile-sidebar-cta" href={contactWhatsAppHref} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
+              Hablar con Oscar <ArrowRight size={17} />
             </a>
           </div>
         </aside>
@@ -771,7 +777,9 @@ export default function Home() {
             </Reveal>
 
             <Reveal className="hero-actions" direction="left" delay={0.39}>
-              <PrimaryLink href="#proyectos">Empezar proyecto</PrimaryLink>
+              <PrimaryLink href={contactWhatsAppHref} target="_blank" rel="noopener noreferrer">
+                Escribirme por WhatsApp
+              </PrimaryLink>
               <a className="hero-service-link" href="#servicios">
                 <span>
                   <Sparkles size={13} />
@@ -899,6 +907,8 @@ export default function Home() {
         </div>
       </section>
 
+      <CinematicWorkShowcase />
+
       <section className="projects-section" id="proyectos">
         <div className="section-shell projects-showcase-heading">
           <div className="projects-copy">
@@ -945,9 +955,12 @@ export default function Home() {
             <strong>Casos y testimonios, con respaldo.</strong> Publicamos trabajos comprobables y atribuimos
             testimonios únicamente cuando la persona autoriza su nombre y sus palabras.
           </p>
-          <a href="mailto:info@omcreativos.com?subject=Quiero%20compartir%20mi%20testimonio">
-            ¿Trabajaste con nosotros? Compartí tu experiencia <ArrowRight size={16} />
-          </a>
+          <div className="contact-choice-links">
+            <a href={testimonialWhatsAppHref} target="_blank" rel="noopener noreferrer">
+              Compartir por WhatsApp <ArrowRight size={16} />
+            </a>
+            <a href={buildEmailUrl("Quiero compartir mi testimonio")}>O por email</a>
+          </div>
         </div>
       </section>
 
@@ -1171,7 +1184,10 @@ export default function Home() {
             <div>
               <h3>Conectate</h3>
               <span>Buenos Aires, Argentina</span>
-              <a href={contactEmailHref}>info@omcreativos.com</a>
+              <a href={contactWhatsAppHref} target="_blank" rel="noopener noreferrer">
+                WhatsApp {businessContact.phoneDisplay}
+              </a>
+              <a href={contactEmailHref}>{businessContact.email}</a>
               <PrimaryLink href="#top">
                 Volver arriba
                 <ArrowRight size={18} />

@@ -118,6 +118,10 @@ export const realProjects = [
         src: "https://www.lachoco-latera.com/images/us/box-12.jpg",
         alt: "Caja de doce bombones artesanales lista para regalar",
       },
+      {
+        src: "/img/project-captures/lachoco-live.png",
+        alt: "Captura actual de la portada en vivo de LaChoco Latera",
+      },
     ],
     sourceUrl: "https://www.lachoco-latera.com/en-US",
     summary:
@@ -154,6 +158,10 @@ export const realProjects = [
       {
         src: "https://www.puntoartperu.com/assets/images/service-2.jpg",
         alt: "Aperitivo del menú digital de Punto Arte Perú",
+      },
+      {
+        src: "/img/project-captures/punto-arte-live.png",
+        alt: "Captura actual de la portada en vivo de Punto Arte Perú",
       },
     ],
     sourceUrl: "https://www.puntoartperu.com/",

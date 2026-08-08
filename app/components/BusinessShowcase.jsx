@@ -2,25 +2,34 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowLeft,
   ArrowRight,
   BarChart3,
+  CalendarDays,
   Check,
   CreditCard,
+  ExternalLink,
   Globe2,
   LayoutDashboard,
+  Mail,
   MessageCircleMore,
   MonitorSmartphone,
   Palette,
   QrCode,
   ShoppingCart,
   Sparkles,
+  Utensils,
   WandSparkles,
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import InitialLoader from "./InitialLoader";
 import Reveal from "./Reveal";
+import { buildEmailUrl, buildWhatsAppUrl } from "../data/contact";
+
+const qrWhatsAppUrl = buildWhatsAppUrl("Hola Oscar, escaneé el QR de omcreativos y quiero contarle sobre mi negocio.");
+const qrEmailUrl = buildEmailUrl("Consulta desde el QR de negocios");
 
 const demoModes = [
   {
@@ -47,6 +56,63 @@ const demoModes = [
     title: "Un recorrido simple para responder y seguir oportunidades.",
     icon: MessageCircleMore,
   },
+  {
+    id: "bookings",
+    label: "Reservas y turnos",
+    title: "Horarios disponibles, confirmaciones y menos mensajes repetidos.",
+    icon: CalendarDays,
+  },
+  {
+    id: "menu",
+    label: "Menú + QR",
+    title: "Una carta visual que se actualiza sin volver a imprimir.",
+    icon: Utensils,
+  },
+];
+
+const liveReferences = [
+  {
+    name: "Trajectory",
+    label: "SEO + conversión",
+    url: "https://www.trajectorywebdesign.com/",
+    image: "/img/live-references/trajectory.png",
+    text: "Título, propuesta, prueba social y llamados a la acción visibles desde el primer pantallazo.",
+  },
+  {
+    name: "Yan Hladchenko",
+    label: "Portfolio de producto",
+    url: "https://yanhladchenko.com/",
+    image: "/img/live-references/yanhladchenko.png",
+    text: "Casos presentados como productos: contexto corto, interfaz grande y recorridos fáciles de explorar.",
+  },
+  {
+    name: "Micha Brandt",
+    label: "Dirección editorial",
+    url: "https://michabrandt.de/",
+    image: "/img/live-references/michabrandt.png",
+    text: "Tipografía, aire y una imagen principal convierten una portada simple en una firma personal.",
+  },
+  {
+    name: "Studio Namma",
+    label: "Marca + movimiento",
+    url: "https://studionamma.com/",
+    image: "/img/live-references/studionamma.png",
+    text: "Una identidad expresiva que combina jerarquía tipográfica, animación y acceso directo al trabajo.",
+  },
+  {
+    name: "We Are Yellow",
+    label: "Identidad memorable",
+    url: "https://weareyellow.com/",
+    image: "/img/live-references/weareyellow.png",
+    text: "Una idea visual reconocible puede sostener el tono de toda la experiencia sin llenarla de elementos.",
+  },
+  {
+    name: "Partizan",
+    label: "Grilla audiovisual",
+    url: "https://partizan.com/",
+    image: "/img/live-references/partizan.png",
+    text: "Mucho contenido se vuelve navegable cuando la grilla, el ritmo y las miniaturas hacen el trabajo.",
+  },
 ];
 
 const businessServices = [
@@ -59,6 +125,33 @@ const businessServices = [
 ];
 
 function DemoScreen({ mode }) {
+  if (mode.id === "bookings") {
+    return (
+      <div className="business-demo-bookings">
+        <div className="business-demo-calendar-head"><CalendarDays size={18} /><span><strong>Agosto</strong><small>Elegí una fecha</small></span></div>
+        <div className="business-demo-calendar-days">
+          {["L", "M", "X", "J", "V", "S", "D"].map((day) => <small key={day}>{day}</small>)}
+          {[11, 12, 13, 14, 15, 16, 17].map((day) => <button className={day === 14 ? "is-selected" : ""} type="button" tabIndex={-1} key={day}>{day}</button>)}
+        </div>
+        <div className="business-demo-time-slots"><span>10:30</span><span>12:00</span><span>15:30</span></div>
+        <div className="business-demo-toast"><Check size={15} /> Turno listo para confirmar</div>
+      </div>
+    );
+  }
+
+  if (mode.id === "menu") {
+    return (
+      <div className="business-demo-menu">
+        <div className="business-demo-menu-head"><Utensils size={18} /><span><strong>Sabores de casa</strong><small>Menú digital</small></span><i>QR</i></div>
+        <div className="business-demo-menu-categories"><span>Entradas</span><span className="is-active">Principales</span><span>Bebidas</span></div>
+        <div className="business-demo-menu-grid">
+          <article><i /><span><strong>Especial del día</strong><small>Ingredientes y precio</small></span></article>
+          <article><i /><span><strong>Opción vegetariana</strong><small>Disponible hoy</small></span></article>
+        </div>
+      </div>
+    );
+  }
+
   if (mode.id === "catalog") {
     return (
       <div className="business-demo-catalog">
@@ -176,6 +269,66 @@ function BusinessDemo() {
   );
 }
 
+function LiveReferenceGallery() {
+  const prefersReducedMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const activeReference = liveReferences[activeIndex];
+
+  useEffect(() => {
+    if (isPaused || prefersReducedMotion) return undefined;
+    const timer = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % liveReferences.length);
+    }, 5200);
+    return () => window.clearInterval(timer);
+  }, [isPaused, prefersReducedMotion]);
+
+  return (
+    <div
+      className="business-live-gallery"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.a
+          className="business-live-stage"
+          href={activeReference.url}
+          target="_blank"
+          rel="noreferrer"
+          key={activeReference.name}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={prefersReducedMotion ? undefined : { opacity: 0, y: -12 }}
+          transition={{ duration: .48, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <img src={activeReference.image} alt={`Captura de la página pública de ${activeReference.name}`} />
+          <span>{activeReference.label}</span>
+          <div><small>Referencia en vivo</small><strong>{activeReference.name}</strong><p>{activeReference.text}</p></div>
+          <i><ExternalLink size={17} /> Abrir sitio</i>
+        </motion.a>
+      </AnimatePresence>
+
+      <div className="business-live-tabs" aria-label="Elegir referencia en vivo">
+        {liveReferences.map((reference, index) => (
+          <button
+            type="button"
+            className={index === activeIndex ? "is-active" : ""}
+            onClick={() => setActiveIndex(index)}
+            aria-pressed={index === activeIndex}
+            key={reference.name}
+          >
+            <img src={reference.image} alt="" loading="lazy" />
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <strong>{reference.name}</strong>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function BusinessShowcase() {
   return (
     <main className="business-page">
@@ -196,7 +349,8 @@ export default function BusinessShowcase() {
             Web, identidad, catálogos, pagos y software en una propuesta clara. Empezamos por lo que necesitás hoy y dejamos una base preparada para crecer.
           </p>
           <div className="business-hero-actions">
-            <a href="mailto:info@omcreativos.com?subject=Escanee%20el%20QR%20y%20quiero%20una%20propuesta">Contarles mi idea <ArrowRight size={18} /></a>
+            <a href={qrWhatsAppUrl} target="_blank" rel="noopener noreferrer">Hablar con Oscar <MessageCircleMore size={18} /></a>
+            <a href={qrEmailUrl}>Email empresarial <Mail size={16} /></a>
             <Link href="#soluciones">Ver qué podemos hacer</Link>
           </div>
           <div className="business-hero-proof"><Sparkles size={17} /><span>Atención directa de Oscar y Maira · alcance explicado sin tecnicismos</span></div>
@@ -224,6 +378,24 @@ export default function BusinessShowcase() {
         </div>
       </section>
 
+      <section className="business-editorial">
+        <Reveal className="business-editorial-image" direction="left">
+          <Image
+            src="/img/business-workshop-cinematic.png"
+            alt="Comerciante revisando un catálogo, métricas y cobros digitales con una consultora"
+            fill
+            sizes="(max-width: 1000px) 100vw, 55vw"
+          />
+          <span>Negocio real · herramientas comprensibles</span>
+        </Reveal>
+        <Reveal className="business-editorial-copy" direction="right">
+          <p className="projects-entry-eyebrow">Tecnología con contexto</p>
+          <h2>No empezamos por el software. Empezamos por cómo trabajás.</h2>
+          <p>El sitio, el QR, los cobros o el panel aparecen después de entender qué consulta se repite, qué dato se pierde y qué tarea necesita ser más simple.</p>
+          <ul><li><Check size={16} /> Menos pasos para el cliente</li><li><Check size={16} /> Información centralizada</li><li><Check size={16} /> Una base que puede crecer</li></ul>
+        </Reveal>
+      </section>
+
       <section className="business-formats">
         <Reveal className="business-section-heading" direction="left">
           <p className="projects-entry-eyebrow">Formatos que se sienten vivos</p>
@@ -248,6 +420,15 @@ export default function BusinessShowcase() {
         </div>
       </section>
 
+      <section className="business-live-references">
+        <Reveal className="business-section-heading" direction="left">
+          <p className="projects-entry-eyebrow">Referencias públicas y activas</p>
+          <h2>Buenas ideas que hoy funcionan en vivo.</h2>
+          <p>Las usamos para explicar posibilidades de estructura, diseño, movimiento y SEO visible. Son referencias externas: no se presentan como proyectos de omcreativos.</p>
+        </Reveal>
+        <Reveal direction="up" delay={.1}><LiveReferenceGallery /></Reveal>
+      </section>
+
       <section className="business-process">
         <Reveal direction="left">
           <p className="projects-entry-eyebrow">Cómo empezamos</p>
@@ -264,7 +445,10 @@ export default function BusinessShowcase() {
         <p className="projects-entry-eyebrow">Escaneaste el QR. Ya dimos el primer paso.</p>
         <h2>Ahora contanos qué querés mejorar.</h2>
         <p>Te orientamos aunque todavía no sepas si necesitás una web, un catálogo o un sistema.</p>
-        <a href="mailto:info@omcreativos.com?subject=Consulta%20desde%20el%20QR%20de%20negocios">Hablar con omcreativos <ArrowRight size={18} /></a>
+        <div className="business-final-contact">
+          <a href={qrWhatsAppUrl} target="_blank" rel="noopener noreferrer">Hablar con Oscar <MessageCircleMore size={18} /></a>
+          <a href={qrEmailUrl}>Email empresarial <Mail size={17} /></a>
+        </div>
       </Reveal>
 
       <footer className="projects-entry-footer business-footer">
