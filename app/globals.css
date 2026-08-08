@@ -3046,6 +3046,23 @@ svg {
   font-weight: 700;
 }
 
+.chatbot-contact-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.chatbot-contact-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: .75rem;
+  font-weight: 700;
+}
+
 .chatbot-quick {
   display: flex;
   flex-wrap: wrap;
@@ -3055,7 +3072,8 @@ svg {
 
 .chatbot-quick button,
 .chatbot-form button,
-.chatbot-contact {
+.chatbot-contact,
+.chatbot-contact-email {
   transition:
     transform 180ms ease,
     opacity 180ms ease,
@@ -3112,7 +3130,8 @@ svg {
 .chatbot-header button:hover,
 .chatbot-quick button:hover,
 .chatbot-form button:hover,
-.chatbot-contact:hover {
+.chatbot-contact:hover,
+.chatbot-contact-email:hover {
   opacity: 1;
   transform: translateY(-2px);
 }
@@ -4024,6 +4043,20 @@ svg {
   font-weight: 900;
 }
 
+.contact-choice-links {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px 16px;
+}
+
+.contact-choice-links > a:last-child {
+  color: var(--muted);
+  font-size: .76rem;
+}
+
 .projects-portfolio-page {
   overflow: visible;
 }
@@ -4293,8 +4326,7 @@ svg {
   line-height: 1.6;
 }
 
-.projects-portfolio-trust > a,
-.projects-portfolio-cta > a {
+.projects-contact-actions > a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4306,6 +4338,38 @@ svg {
   font-size: .78rem;
   font-weight: 900;
   white-space: nowrap;
+}
+
+.projects-contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-contact-actions.is-centered {
+  justify-content: center;
+}
+
+.projects-contact-actions > a:first-child {
+  background: var(--page-blue);
+  color: #fff;
+}
+
+.projects-portfolio-trust .projects-contact-actions > a:first-child {
+  background: #fff;
+  color: var(--ink-deep);
+}
+
+.projects-contact-actions > a:last-child {
+  border: 1px solid rgba(17, 71, 239, .2);
+  background: transparent;
+  color: var(--page-blue);
+}
+
+.projects-portfolio-trust .projects-contact-actions > a:last-child {
+  border-color: rgba(255, 255, 255, .3);
+  color: #fff;
 }
 
 .projects-portfolio-cta {
@@ -4323,11 +4387,6 @@ svg {
   margin: 22px auto 28px;
   color: var(--muted);
   line-height: 1.6;
-}
-
-.projects-portfolio-cta > a {
-  background: var(--page-blue);
-  color: #fff;
 }
 
 @media (max-width: 900px) {
@@ -4351,7 +4410,7 @@ svg {
     order: 0;
   }
 
-  .projects-portfolio-trust > a {
+  .projects-portfolio-trust .projects-contact-actions {
     justify-self: start;
   }
 }
@@ -4408,7 +4467,9 @@ svg {
     padding: 30px 24px;
   }
 
-  .projects-portfolio-trust > a {
+  .projects-portfolio-trust .projects-contact-actions,
+  .projects-portfolio-trust .projects-contact-actions > a,
+  .projects-portfolio-cta .projects-contact-actions > a {
     width: 100%;
   }
 
@@ -5333,7 +5394,7 @@ svg {
 }
 
 .business-hero-actions > a:first-child,
-.business-final-cta > a {
+.business-final-contact > a:first-child {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -5346,7 +5407,10 @@ svg {
   font-weight: 900;
 }
 
-.business-hero-actions > a:last-child {
+.business-hero-actions > a:not(:first-child) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: var(--page-blue);
   font-size: .8rem;
   font-weight: 900;
@@ -5895,7 +5959,9 @@ svg {
 .business-final-cta .projects-entry-eyebrow { justify-content: center; color: rgba(255, 255, 255, .72); }
 .business-final-cta h2 { font-size: clamp(3rem, 7vw, 6rem); }
 .business-final-cta > p:not(.projects-entry-eyebrow) { max-width: 620px; margin: 22px auto 30px; color: rgba(255, 255, 255, .74); line-height: 1.6; }
-.business-final-cta > a { background: #fff; color: var(--page-blue); box-shadow: none; }
+.business-final-contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.business-final-contact > a:first-child { background: #fff; color: var(--page-blue); box-shadow: none; }
+.business-final-contact > a:last-child { display: inline-flex; align-items: center; gap: 7px; padding: 15px 20px; border: 1px solid rgba(255, 255, 255, .38); border-radius: 999px; color: #fff; font-size: .8rem; font-weight: 900; }
 .business-footer { margin-top: 90px; }
 
 @keyframes business-orbit { to { transform: rotate(360deg); } }
@@ -5946,7 +6012,7 @@ svg {
   .business-solutions,
   .business-process { padding: 82px 0; }
   .business-final-cta { padding: 64px 22px; }
-  .business-final-cta > a { width: 100%; justify-content: center; }
+  .business-final-contact > a { width: 100%; justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {

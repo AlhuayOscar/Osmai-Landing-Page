@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Bot, MessageCircle, PhoneCall, Send, X } from "lucide-react";
+import { Bot, Mail, MessageCircle, PhoneCall, Send, X } from "lucide-react";
+import { buildEmailUrl, buildWhatsAppUrl } from "../data/contact";
 
-const whatsappUrl =
-  "https://wa.me/543487477269?text=Hola%20equipo%20omcreativos%2C%20quiero%20consultar%20por%20un%20proyecto.";
+const whatsappUrl = buildWhatsAppUrl("Hola Oscar, vengo de la web de omcreativos y quiero consultar por un proyecto.");
+const contactEmailUrl = buildEmailUrl("Consulta desde el asistente de omcreativos");
 
 const botTypingDelayMs = 720;
 const toneSampleOffset = 46;
@@ -188,10 +189,16 @@ export default function Chatbot() {
               <div className={`chatbot-message ${message.role}`} key={`${message.role}-${index}`}>
                 <p>{message.text}</p>
                 {message.contact ? (
-                  <a className="chatbot-contact" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                    <PhoneCall size={15} />
-                    Contactar con equipo
-                  </a>
+                  <div className="chatbot-contact-options">
+                    <a className="chatbot-contact" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                      <PhoneCall size={15} />
+                      Escribirle a Oscar
+                    </a>
+                    <a className="chatbot-contact-email" href={contactEmailUrl}>
+                      <Mail size={14} />
+                      Enviar email
+                    </a>
+                  </div>
                 ) : null}
               </div>
             ))}

@@ -10,6 +10,7 @@ import {
   CreditCard,
   Globe2,
   LayoutDashboard,
+  Mail,
   MessageCircleMore,
   MonitorSmartphone,
   Palette,
@@ -21,6 +22,10 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import InitialLoader from "./InitialLoader";
 import Reveal from "./Reveal";
+import { buildEmailUrl, buildWhatsAppUrl } from "../data/contact";
+
+const qrWhatsAppUrl = buildWhatsAppUrl("Hola Oscar, escaneé el QR de omcreativos y quiero contarle sobre mi negocio.");
+const qrEmailUrl = buildEmailUrl("Consulta desde el QR de negocios");
 
 const demoModes = [
   {
@@ -196,7 +201,8 @@ export default function BusinessShowcase() {
             Web, identidad, catálogos, pagos y software en una propuesta clara. Empezamos por lo que necesitás hoy y dejamos una base preparada para crecer.
           </p>
           <div className="business-hero-actions">
-            <a href="mailto:info@omcreativos.com?subject=Escanee%20el%20QR%20y%20quiero%20una%20propuesta">Contarles mi idea <ArrowRight size={18} /></a>
+            <a href={qrWhatsAppUrl} target="_blank" rel="noopener noreferrer">Hablar con Oscar <MessageCircleMore size={18} /></a>
+            <a href={qrEmailUrl}>Email empresarial <Mail size={16} /></a>
             <Link href="#soluciones">Ver qué podemos hacer</Link>
           </div>
           <div className="business-hero-proof"><Sparkles size={17} /><span>Atención directa de Oscar y Maira · alcance explicado sin tecnicismos</span></div>
@@ -264,7 +270,10 @@ export default function BusinessShowcase() {
         <p className="projects-entry-eyebrow">Escaneaste el QR. Ya dimos el primer paso.</p>
         <h2>Ahora contanos qué querés mejorar.</h2>
         <p>Te orientamos aunque todavía no sepas si necesitás una web, un catálogo o un sistema.</p>
-        <a href="mailto:info@omcreativos.com?subject=Consulta%20desde%20el%20QR%20de%20negocios">Hablar con omcreativos <ArrowRight size={18} /></a>
+        <div className="business-final-contact">
+          <a href={qrWhatsAppUrl} target="_blank" rel="noopener noreferrer">Hablar con Oscar <MessageCircleMore size={18} /></a>
+          <a href={qrEmailUrl}>Email empresarial <Mail size={17} /></a>
+        </div>
       </Reveal>
 
       <footer className="projects-entry-footer business-footer">
