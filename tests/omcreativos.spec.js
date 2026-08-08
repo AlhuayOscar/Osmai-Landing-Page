@@ -57,7 +57,71 @@ test.describe("omcreativos landing page", () => {
     await expect(page.getByText("Compra, venta y pagos mediante PayPal")).toBeVisible();
     await expect(page.getByRole("heading", { name: "LaChoco Latera" })).toBeVisible();
     await expect(page.getByText("Reservas para degustaciones y experiencias")).toBeVisible();
+    const laChocoGallery = page.locator("#lachoco-latera");
+    await laChocoGallery.getByRole("button", { name: "Mostrar imagen 2 de LaChoco Latera" }).click();
+    await expect(
+      laChocoGallery.getByRole("img", { name: "Caja de bombones frescos de LaChoco Latera" })
+    ).toBeVisible();
     await expect(page.getByRole("heading", { name: "Punto Arte Perú" })).toBeVisible();
     await expect(page.getByText("Acceso directo a consultas por WhatsApp")).toBeVisible();
+  });
+
+  test("presents the QR business card with interactive solution demos", async ({ page }) => {
+    await page.goto("/proyectos/negocios");
+
+    await expect(
+      page.getByRole("heading", { name: "Hacemos que tu negocio se vea, venda y trabaje mejor." })
+    ).toBeVisible();
+    await expect(page.getByText("Carta digital para negocios")).toBeVisible();
+
+    await page.getByRole("button", { name: "Catálogo y ventas" }).click();
+    await expect(page.getByText("Productos ordenados, carrito, WhatsApp o pago online.")).toBeVisible();
+    await expect(page.getByText("Consulta lista para responder")).toBeVisible();
+
+    await page.getByRole("button", { name: "Gestión y cobros" }).click();
+    await expect(page.getByText("Pago aprobado")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Una entrada simple para cada etapa del negocio." })).toBeVisible();
+  });
+
+  test("keeps the QR presentation usable on a small mobile viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/proyectos/negocios");
+
+    await expect(
+      page.getByRole("heading", { name: "Hacemos que tu negocio se vea, venda y trabaje mejor." })
+    ).toBeVisible();
+    await expect(page.getByLabel("Ejemplos de soluciones")).toBeVisible();
+
+    await page.getByRole("button", { name: "Catálogo y ventas" }).click();
+    await expect(page.getByText("Consulta lista para responder")).toBeVisible();
+
+    const layout = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      scrollX: window.scrollX,
+    }));
+
+    expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth);
+    expect(layout.scrollX).toBe(0);
+  });
+
+  test("keeps project transitions and galleries inside the mobile viewport", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/proyectos");
+
+    const laChocoGallery = page.locator("#lachoco-latera");
+    await laChocoGallery.getByRole("button", { name: "Imagen siguiente de LaChoco Latera" }).click();
+    await expect(
+      laChocoGallery.getByRole("img", { name: "Chocolate caliente colombiano con especias" })
+    ).toBeVisible();
+
+    const layout = await page.evaluate(() => ({
+      clientWidth: document.documentElement.clientWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      scrollX: window.scrollX,
+    }));
+
+    expect(layout.scrollWidth).toBeLessThanOrEqual(layout.clientWidth);
+    expect(layout.scrollX).toBe(0);
   });
 });

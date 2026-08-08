@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Layers3, Sparkles } from "lucide-react";
 import InitialLoader from "../components/InitialLoader";
+import ProjectMediaGallery from "../components/ProjectMediaGallery";
+import Reveal from "../components/Reveal";
 import { portfolioSource, realProjects } from "../data/projects";
 
 export const metadata = {
@@ -18,13 +20,16 @@ export default function ProyectosPage() {
         <Link className="projects-entry-brand" href="/">
           <span>om</span>creativos
         </Link>
-        <Link className="projects-entry-back" href="/#proyectos">
-          <ArrowLeft size={16} /> Volver al sitio
-        </Link>
+        <div className="projects-portfolio-header-actions">
+          <Link href="/proyectos/negocios">Presentación para negocios</Link>
+          <Link className="projects-entry-back" href="/#proyectos">
+            <ArrowLeft size={16} /> Volver al sitio
+          </Link>
+        </div>
       </header>
 
       <section className="projects-portfolio-hero">
-        <div>
+        <Reveal direction="left">
           <p className="projects-entry-eyebrow">
             <Sparkles size={15} /> Portfolio comprobable
           </p>
@@ -34,24 +39,31 @@ export default function ProyectosPage() {
             qué parte se diseñó, desarrolló o integró, sin métricas inventadas ni proyectos de referencia
             presentados como propios.
           </p>
-        </div>
-        <aside className="projects-portfolio-hero-aside">
+        </Reveal>
+        <Reveal as="aside" className="projects-portfolio-hero-aside" direction="right" delay={0.12}>
           <Layers3 size={28} />
           <strong>Diseño + desarrollo</strong>
           <span>Landing pages, dashboards, plataformas, pagos, datos y seguridad.</span>
           <a href={portfolioSource} target="_blank" rel="noreferrer">
             Consultar fuente pública <ArrowUpRight size={16} />
           </a>
-        </aside>
+          <Link className="projects-portfolio-business-link" href="/proyectos/negocios">
+            Ver carta para negocios <ArrowRight size={16} />
+          </Link>
+        </Reveal>
       </section>
 
       <section className="projects-case-list" aria-label="Casos de proyecto">
         {realProjects.map((project, index) => (
-          <article className="projects-case-detail" id={project.slug} key={project.slug}>
-            <div className="projects-case-visual">
-              <img src={project.image} alt={project.imageAlt} loading={index < 2 ? "eager" : "lazy"} />
-              <span>{String(index + 1).padStart(2, "0")} · {project.category}</span>
-            </div>
+          <Reveal
+            as="article"
+            className="projects-case-detail"
+            id={project.slug}
+            key={project.slug}
+            direction={index % 2 === 0 ? "left" : "right"}
+            delay={0.04}
+          >
+            <ProjectMediaGallery project={project} eager={index < 2} index={index} />
 
             <div className="projects-case-copy">
               <p className="projects-entry-eyebrow">Caso real</p>
@@ -84,11 +96,11 @@ export default function ProyectosPage() {
                 </a>
               ) : null}
             </div>
-          </article>
+          </Reveal>
         ))}
       </section>
 
-      <section className="projects-portfolio-trust">
+      <Reveal as="section" className="projects-portfolio-trust" direction="up">
         <div>
           <p className="projects-entry-eyebrow">Confianza verificable</p>
           <h2>Los testimonios también tienen que ser reales.</h2>
@@ -100,16 +112,16 @@ export default function ProyectosPage() {
         <a href="mailto:info@omcreativos.com?subject=Testimonio%20para%20omcreativos">
           Compartir un testimonio <ArrowRight size={17} />
         </a>
-      </section>
+      </Reveal>
 
-      <section className="projects-portfolio-cta">
+      <Reveal as="section" className="projects-portfolio-cta" direction="up">
         <p className="projects-entry-eyebrow">Tu proyecto puede ser el próximo</p>
         <h2>Contanos qué necesitás resolver.</h2>
         <p>Te respondemos con una recomendación concreta, un alcance entendible y próximos pasos.</p>
         <a href="mailto:info@omcreativos.com?subject=Quiero%20cotizar%20un%20proyecto">
           Pedir una propuesta <ArrowRight size={18} />
         </a>
-      </section>
+      </Reveal>
 
       <footer className="projects-entry-footer">
         <span>omcreativos · diseño web, identidad y software</span>

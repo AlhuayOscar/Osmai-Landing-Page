@@ -101,6 +101,24 @@ export const realProjects = [
     image:
       "https://www.lachoco-latera.com/_next/image?url=%2Fimages%2Fus%2Fhero2.jpg&w=1920&q=75",
     imageAlt: "Productos de chocolate colombiano presentados en LaChoco Latera",
+    gallery: [
+      {
+        src: "https://www.lachoco-latera.com/_next/image?url=%2Fimages%2Fus%2Fhero2.jpg&w=1920&q=75",
+        alt: "Mousse de chocolate artesanal de LaChoco Latera",
+      },
+      {
+        src: "https://www.lachoco-latera.com/_next/image?url=%2Fimages%2Fus%2Fhero1.jpg&w=1920&q=75",
+        alt: "Caja de bombones frescos de LaChoco Latera",
+      },
+      {
+        src: "https://www.lachoco-latera.com/_next/image?url=%2Fimages%2Fus%2Fhero3.jpg&w=1920&q=75",
+        alt: "Chocolate caliente colombiano con especias",
+      },
+      {
+        src: "https://www.lachoco-latera.com/images/us/box-12.jpg",
+        alt: "Caja de doce bombones artesanales lista para regalar",
+      },
+    ],
     sourceUrl: "https://www.lachoco-latera.com/en-US",
     summary:
       "Tienda digital para comercializar chocolate colombiano en Miami, con productos, degustaciones y una experiencia adaptada al mercado estadounidense.",
@@ -120,6 +138,24 @@ export const realProjects = [
     category: "Restaurante y menú digital",
     image: "https://www.puntoartperu.com/assets/images/hero-slider-1.jpg",
     imageAlt: "Platos de cocina peruana presentados en el sitio de Punto Arte Perú",
+    gallery: [
+      {
+        src: "https://www.puntoartperu.com/assets/images/hero-slider-1.jpg",
+        alt: "Presentación gastronómica de Punto Arte Perú",
+      },
+      {
+        src: "https://www.puntoartperu.com/assets/images/hero-slider-2.jpg",
+        alt: "Plato de cocina peruana servido en Punto Arte Perú",
+      },
+      {
+        src: "https://www.puntoartperu.com/assets/images/hero-slider-3.jpg",
+        alt: "Especialidad peruana destacada en la portada del restaurante",
+      },
+      {
+        src: "https://www.puntoartperu.com/assets/images/service-2.jpg",
+        alt: "Aperitivo del menú digital de Punto Arte Perú",
+      },
+    ],
     sourceUrl: "https://www.puntoartperu.com/",
     summary:
       "Sitio gastronómico para un restaurante peruano en San Fernando, Chile, enfocado en presentar su cultura, menú y canales de contacto.",

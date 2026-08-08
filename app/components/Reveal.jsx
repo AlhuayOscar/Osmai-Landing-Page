@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
 const directionOffset = {
   left: { x: -90, y: 18 },
@@ -19,11 +19,17 @@ export default function Reveal({
   ...props
 }) {
   const MotionElement = motion[as] || motion.div;
+  const prefersReducedMotion = useReducedMotion();
+  const offset = directionOffset[direction] || directionOffset.up;
 
   return (
     <MotionElement
       className={className}
-      initial={false}
+      initial={
+        prefersReducedMotion
+          ? false
+          : { opacity: 0, scale, x: offset.x, y: offset.y }
+      }
       whileInView={{ opacity: 1, scale: 1, x: 0, y: 0 }}
       viewport={{ once: true, amount: 0.18, margin: "0px 0px -10% 0px" }}
       transition={{ duration: 0.75, delay, ease: [0.16, 1, 0.3, 1] }}
