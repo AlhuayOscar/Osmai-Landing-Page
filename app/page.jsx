@@ -31,6 +31,7 @@ import Chatbot from "./components/Chatbot";
 import Reveal from "./components/Reveal";
 import InitialLoader from "./components/InitialLoader";
 import AgencyGlobe from "./components/AgencyGlobe";
+import CinematicWorkShowcase from "./components/CinematicWorkShowcase";
 import ProjectCarousel from "./components/ProjectCarousel";
 import { buildEmailUrl, buildWhatsAppUrl, businessContact } from "./data/contact";
 import { portfolioSource, realProjects } from "./data/projects";
@@ -542,7 +543,7 @@ export default function Home() {
           <div className="hero-image-frame">
             <Image
               className="hero-image"
-              src="/img/herosection.jpg"
+              src="/img/hero-studio-cinematic.png"
               alt=""
               fill
               priority
@@ -905,6 +906,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <CinematicWorkShowcase />
 
       <section className="projects-section" id="proyectos">
         <div className="section-shell projects-showcase-heading">

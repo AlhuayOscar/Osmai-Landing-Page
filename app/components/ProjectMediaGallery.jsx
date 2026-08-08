@@ -2,7 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight, Images } from "lucide-react";
+import { ChevronLeft, ChevronRight, Images, Monitor, ScanSearch, Smartphone } from "lucide-react";
+
+const singleImageViews = [
+  { id: "overview", label: "Vista completa", icon: Monitor },
+  { id: "detail", label: "Detalle", icon: ScanSearch },
+  { id: "mobile", label: "Recorte mobile", icon: Smartphone },
+];
 
 export default function ProjectMediaGallery({ project, eager = false, index = 0 }) {
   const prefersReducedMotion = useReducedMotion();
@@ -14,6 +20,7 @@ export default function ProjectMediaGallery({ project, eager = false, index = 0 
   );
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [singleView, setSingleView] = useState("overview");
   const hasMultipleImages = images.length > 1;
 
   useEffect(() => {
@@ -36,7 +43,7 @@ export default function ProjectMediaGallery({ project, eager = false, index = 0 
 
   return (
     <figure
-      className={`projects-case-visual projects-case-gallery ${hasMultipleImages ? "has-gallery" : "is-single"}`}
+      className={`projects-case-visual projects-case-gallery ${hasMultipleImages ? "has-gallery" : `is-single view-${singleView}`}`}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -45,7 +52,7 @@ export default function ProjectMediaGallery({ project, eager = false, index = 0 
     >
       <AnimatePresence initial={false} mode="sync">
         <motion.img
-          key={activeImage.src}
+          key={hasMultipleImages ? activeImage.src : `${activeImage.src}-${singleView}`}
           src={activeImage.src}
           alt={activeImage.alt}
           loading={eager ? "eager" : "lazy"}
@@ -72,6 +79,27 @@ export default function ProjectMediaGallery({ project, eager = false, index = 0 
             <button type="button" onClick={() => move(1)} aria-label={`Imagen siguiente de ${project.name}`}>
               <ChevronRight size={17} />
             </button>
+          </div>
+        </div>
+      ) : null}
+
+      {!hasMultipleImages ? (
+        <div className="projects-case-single-views" aria-label={`Explorar captura de ${project.name}`}>
+          <span>Explorar captura</span>
+          <div>
+            {singleImageViews.map(({ id, label, icon: Icon }) => (
+              <button
+                type="button"
+                className={singleView === id ? "is-active" : ""}
+                onClick={() => setSingleView(id)}
+                aria-label={`${label} de ${project.name}`}
+                aria-pressed={singleView === id}
+                title={label}
+                key={id}
+              >
+                <Icon size={15} />
+              </button>
+            ))}
           </div>
         </div>
       ) : null}

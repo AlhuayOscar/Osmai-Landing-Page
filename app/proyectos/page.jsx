@@ -45,6 +45,11 @@ export default function ProyectosPage() {
           </p>
         </Reveal>
         <Reveal as="aside" className="projects-portfolio-hero-aside" direction="right" delay={0.12}>
+          <img
+            className="projects-source-preview"
+            src="/img/project-captures/portfolio-live.png"
+            alt="Captura del portfolio público donde se documentan los proyectos"
+          />
           <Layers3 size={28} />
           <strong>Diseño + desarrollo</strong>
           <span>Landing pages, dashboards, plataformas, pagos, datos y seguridad.</span>

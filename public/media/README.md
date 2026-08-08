@@ -8,6 +8,27 @@ Estos archivos se usan sólo como material visual temporal para probar la compos
 - Descarga directa: https://videos.pexels.com/video-files/1350205/1350205-hd_1920_1080_30fps.mp4
 - Licencia: Pexels License — https://www.pexels.com/license/
 
+### Secuencia profesional de trabajo
+
+Los tres clips se sirven desde este proyecto para evitar depender de un CDN durante la reproducción.
+
+- `office-strategy.mp4` — cottonbro studio
+  - Página: https://www.pexels.com/video/people-discussing-about-their-work-as-a-team-3205674/
+  - Archivo original: https://videos.pexels.com/video-files/3205674/3205674-hd_1280_720_25fps.mp4
+- `office-collaboration.mp4` — Alena Darmel
+  - Página: https://www.pexels.com/video/colleagues-discussing-about-work-7659850/
+  - Archivo original: https://videos.pexels.com/video-files/7659850/7659850-hd_1280_720_25fps.mp4
+- `office-teamwork.mp4` — Artem Podrez
+  - Página: https://www.pexels.com/video/office-team-sitting-at-the-table-8519363/
+  - Archivo original: https://videos.pexels.com/video-files/8519363/8519363-hd_1280_720_30fps.mp4
+- Licencia de los tres clips: Pexels License — https://www.pexels.com/license/
+
+## Imágenes generadas para omcreativos
+
+- `/img/hero-studio-cinematic.png`: estudio creativo contemporáneo en Buenos Aires, dos profesionales colaborando frente a una pantalla con wireframes abstractos, luz cinematográfica azul y ámbar y espacio negativo oscuro para la portada; sin texto ni marcas.
+- `/img/business-workshop-cinematic.png`: comerciante de un pequeño negocio revisando junto a una consultora un catálogo, métricas y un lector de tarjetas, estilo documental cinematográfico, cercano y profesional; sin texto ni marcas.
+- Herramienta: generador de imágenes integrado de OpenAI.
+
 ## GIF
 
 - Página de origen: https://pixabay.com/gifs/drag-drop-drag-and-drop-web-design-6895/
