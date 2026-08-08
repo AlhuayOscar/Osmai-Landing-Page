@@ -1,204 +1,132 @@
-"use client";
-
-import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, QrCode, Sparkles } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Layers3, Sparkles } from "lucide-react";
 import InitialLoader from "../components/InitialLoader";
+import ProjectMediaGallery from "../components/ProjectMediaGallery";
+import Reveal from "../components/Reveal";
+import { portfolioSource, realProjects } from "../data/projects";
 
-const modes = [
-  {
-    id: "casual",
-    label: "Casual / Startup",
-    kicker: "Para empezar con foco",
-    description:
-      "Una presencia digital clara para validar la idea, salir al mercado y empezar a recibir consultas.",
-    recommended: "Esencial",
-  },
-  {
-    id: "estandar",
-    label: "Modo estándar",
-    kicker: "Para crecer ordenado",
-    description:
-      "Una web más completa para mostrar servicios, portfolio, equipo y llamados a la acción medibles.",
-    recommended: "Esencial o Premium",
-  },
-  {
-    id: "lujo",
-    label: "Modo lujo / Empresa establecida",
-    kicker: "Para elevar percepción",
-    description:
-      "Dirección visual distintiva, contenido estratégico y una experiencia pensada para una marca consolidada.",
-    recommended: "Premium",
-  },
-  {
-    id: "exigente",
-    label: "Nuevas necesidades exigentes",
-    kicker: "Para sistemas y escala",
-    description:
-      "Integraciones, automatizaciones, e-commerce o software a medida cuando la web ya es parte central del negocio.",
-    recommended: "Premium",
-  },
-];
-
-const tiers = [
-  {
-    id: "esencial",
-    name: "Servicio esencial",
-    priceLabel: "Inversión inicial",
-    description:
-      "Una base profesional y concreta para salir al aire sin pagar por complejidad que todavía no necesitás.",
-    features: ["Landing o web institucional", "Contenido y CTA claros", "Diseño responsive", "Entrega por etapas"],
-  },
-  {
-    id: "premium",
-    name: "Servicio premium",
-    priceLabel: "Proyecto a medida",
-    description:
-      "Una experiencia completa para marcas que necesitan diferenciarse, automatizar y sostener más tráfico o contenido.",
-    features: ["Dirección visual y UX a medida", "Integraciones y automatizaciones", "E-commerce o software propio", "Soporte y evolución"],
-  },
-];
-
-function ProjectEntry() {
-  const searchParams = useSearchParams();
-  const qrSource = searchParams.get("qr");
-  const initialMode = searchParams.get("perfil");
-  const [selectedMode, setSelectedMode] = useState(
-    modes.some((mode) => mode.id === initialMode) ? initialMode : "estandar",
-  );
-
-  useEffect(() => {
-    if (modes.some((mode) => mode.id === initialMode)) {
-      setSelectedMode(initialMode);
-    }
-  }, [initialMode]);
-
-  const currentMode = modes.find((mode) => mode.id === selectedMode) || modes[1];
-  const premiumMode = selectedMode === "lujo" || selectedMode === "exigente";
-
-  return (
-    <main className="projects-entry-page">
-      <InitialLoader />
-      <header className="projects-entry-header">
-        <Link className="projects-entry-brand" href="/">
-          <span>om</span>creativos
-        </Link>
-        <Link className="projects-entry-back" href="/">
-          Volver al sitio <ArrowRight size={16} />
-        </Link>
-      </header>
-
-      <section className="projects-entry-hero">
-        <div className="projects-entry-hero-copy">
-          <p className="projects-entry-eyebrow">
-            <Sparkles size={15} /> Ruta de proyecto personalizada
-          </p>
-          <h1>Elegí cómo querés que crezca tu presencia digital.</h1>
-          <p className="projects-entry-lead">
-            Esta tarjeta puede abrirse desde un QR en una reunión, evento o propuesta. Elegí el nivel que mejor describe a tu empresa y te mostramos por dónde empezar.
-          </p>
-          {qrSource && (
-            <div className="projects-entry-qr-note">
-              <QrCode size={18} /> Ingreso identificado por QR: <strong>{qrSource}</strong>
-            </div>
-          )}
-        </div>
-
-        <div className="projects-entry-video-card">
-          <video autoPlay muted loop playsInline poster="/media/web-design-ui.jpg">
-            <source src="/media/reference-ballena-hero.mp4" type="video/mp4" />
-            <source src="/media/web-design-work.mp4" type="video/mp4" />
-          </video>
-          <span>Visuales de referencia · reemplazables</span>
-        </div>
-      </section>
-
-      <section className="projects-entry-section">
-        <div className="projects-entry-section-heading">
-          <p className="projects-entry-eyebrow">01 · Perfil de proyecto</p>
-          <h2>¿En qué momento está tu empresa?</h2>
-        </div>
-        <div className="projects-mode-grid">
-          {modes.map((mode) => (
-            <button
-              className={`projects-mode-card ${selectedMode === mode.id ? "is-selected" : ""}`}
-              key={mode.id}
-              type="button"
-              onClick={() => setSelectedMode(mode.id)}
-              aria-pressed={selectedMode === mode.id}
-            >
-              <span>{mode.kicker}</span>
-              <h3>{mode.label}</h3>
-              <p>{mode.description}</p>
-              <strong>Elegir este perfil <ArrowRight size={16} /></strong>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="projects-entry-recommendation" aria-live="polite">
-        <div>
-          <p className="projects-entry-eyebrow">02 · Recomendación</p>
-          <h2>{currentMode.label}</h2>
-          <p>{currentMode.description}</p>
-        </div>
-        <div className="projects-entry-recommendation-badge">
-          <span>Ruta sugerida</span>
-          <strong>{currentMode.recommended}</strong>
-        </div>
-      </section>
-
-      <section className="projects-entry-section projects-entry-services">
-        <div className="projects-entry-section-heading">
-          <p className="projects-entry-eyebrow">03 · Tipo de servicio</p>
-          <h2>Dos caminos, una base bien hecha.</h2>
-        </div>
-        <div className="projects-tier-grid">
-          {tiers.map((tier) => (
-            <article className={`projects-tier-card ${tier.id === (premiumMode ? "premium" : "esencial") ? "is-recommended" : ""}`} key={tier.id}>
-              {tier.id === (premiumMode ? "premium" : "esencial") && <span className="projects-tier-tag">Recomendado para vos</span>}
-              <p className="projects-entry-eyebrow">{tier.priceLabel}</p>
-              <h3>{tier.name}</h3>
-              <p>{tier.description}</p>
-              <ul>
-                {tier.features.map((feature) => (
-                  <li key={feature}><Check size={16} /> {feature}</li>
-                ))}
-              </ul>
-              <a href="mailto:info@omcreativos.com?subject=Quiero%20una%20propuesta%20para%20mi%20proyecto">
-                Pedir propuesta <ArrowRight size={17} />
-              </a>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="projects-entry-reel">
-        <div>
-          <p className="projects-entry-eyebrow">Material de prueba</p>
-          <h2>La dirección visual también se puede probar antes de cerrar el alcance.</h2>
-        </div>
-        <div className="projects-entry-reel-grid">
-          <video autoPlay muted loop playsInline poster="/media/web-design-code.jpg">
-            <source src="/media/reference-hunan-detail.webm" type="video/webm" />
-          </video>
-          <img src="/media/web-design-drag-drop.gif" alt="Animación de interacción web" />
-        </div>
-      </section>
-
-      <footer className="projects-entry-footer">
-        <span>omcreativos · diseño web, identidad y software</span>
-        <Link href="/?from=proyectos">Hablar con el equipo <ArrowRight size={16} /></Link>
-      </footer>
-    </main>
-  );
-}
+export const metadata = {
+  title: "Proyectos reales | omcreativos",
+  description:
+    "Casos reales de diseño web, desarrollo full-stack, paneles, integraciones, pagos y seguridad realizados por el equipo de omcreativos.",
+};
 
 export default function ProyectosPage() {
   return (
-    <Suspense fallback={<main className="projects-entry-page" aria-busy="true" />}>
-      <ProjectEntry />
-    </Suspense>
+    <main className="projects-entry-page projects-portfolio-page">
+      <InitialLoader />
+
+      <header className="projects-entry-header projects-portfolio-header">
+        <Link className="projects-entry-brand" href="/">
+          <span>om</span>creativos
+        </Link>
+        <div className="projects-portfolio-header-actions">
+          <Link href="/proyectos/negocios">Presentación para negocios</Link>
+          <Link className="projects-entry-back" href="/#proyectos">
+            <ArrowLeft size={16} /> Volver al sitio
+          </Link>
+        </div>
+      </header>
+
+      <section className="projects-portfolio-hero">
+        <Reveal direction="left">
+          <p className="projects-entry-eyebrow">
+            <Sparkles size={15} /> Portfolio comprobable
+          </p>
+          <h1>Lo que hicimos, contado desde el problema hasta la entrega.</h1>
+          <p>
+            Siete experiencias reales de Oscar y el equipo de omcreativos. Cada caso explica con claridad
+            qué parte se diseñó, desarrolló o integró, sin métricas inventadas ni proyectos de referencia
+            presentados como propios.
+          </p>
+        </Reveal>
+        <Reveal as="aside" className="projects-portfolio-hero-aside" direction="right" delay={0.12}>
+          <Layers3 size={28} />
+          <strong>Diseño + desarrollo</strong>
+          <span>Landing pages, dashboards, plataformas, pagos, datos y seguridad.</span>
+          <a href={portfolioSource} target="_blank" rel="noreferrer">
+            Consultar fuente pública <ArrowUpRight size={16} />
+          </a>
+          <Link className="projects-portfolio-business-link" href="/proyectos/negocios">
+            Ver carta para negocios <ArrowRight size={16} />
+          </Link>
+        </Reveal>
+      </section>
+
+      <section className="projects-case-list" aria-label="Casos de proyecto">
+        {realProjects.map((project, index) => (
+          <Reveal
+            as="article"
+            className="projects-case-detail"
+            id={project.slug}
+            key={project.slug}
+            direction={index % 2 === 0 ? "left" : "right"}
+            delay={0.04}
+          >
+            <ProjectMediaGallery project={project} eager={index < 2} index={index} />
+
+            <div className="projects-case-copy">
+              <p className="projects-entry-eyebrow">Caso real</p>
+              <h2>{project.name}</h2>
+              <p className="projects-case-summary">{project.summary}</p>
+
+              <div className="projects-case-contribution">
+                <span>Participación</span>
+                <p>{project.contribution}</p>
+              </div>
+
+              <div className="projects-case-work">
+                <h3>Qué se hizo</h3>
+                <ul>
+                  {project.work.map((item) => (
+                    <li key={item}><Check size={16} /> {item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="projects-case-tech" aria-label={`Tecnologías usadas en ${project.name}`}>
+                {project.technologies.map((technology) => (
+                  <span key={technology}>{technology}</span>
+                ))}
+              </div>
+
+              {project.sourceUrl ? (
+                <a className="projects-case-live-link" href={project.sourceUrl} target="_blank" rel="noreferrer">
+                  Visitar sitio en vivo <ArrowUpRight size={16} />
+                </a>
+              ) : null}
+            </div>
+          </Reveal>
+        ))}
+      </section>
+
+      <Reveal as="section" className="projects-portfolio-trust" direction="up">
+        <div>
+          <p className="projects-entry-eyebrow">Confianza verificable</p>
+          <h2>Los testimonios también tienen que ser reales.</h2>
+        </div>
+        <p>
+          Esta web no atribuye frases a clientes sin su aprobación. Si ya trabajaste con Oscar o Maira,
+          podés autorizar una reseña con tu nombre, rol y proyecto para incorporarla aquí.
+        </p>
+        <a href="mailto:info@omcreativos.com?subject=Testimonio%20para%20omcreativos">
+          Compartir un testimonio <ArrowRight size={17} />
+        </a>
+      </Reveal>
+
+      <Reveal as="section" className="projects-portfolio-cta" direction="up">
+        <p className="projects-entry-eyebrow">Tu proyecto puede ser el próximo</p>
+        <h2>Contanos qué necesitás resolver.</h2>
+        <p>Te respondemos con una recomendación concreta, un alcance entendible y próximos pasos.</p>
+        <a href="mailto:info@omcreativos.com?subject=Quiero%20cotizar%20un%20proyecto">
+          Pedir una propuesta <ArrowRight size={18} />
+        </a>
+      </Reveal>
+
+      <footer className="projects-entry-footer">
+        <span>omcreativos · diseño web, identidad y software</span>
+        <Link href="/">Volver al inicio <ArrowRight size={16} /></Link>
+      </footer>
+    </main>
   );
 }

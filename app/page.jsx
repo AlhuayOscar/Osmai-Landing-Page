@@ -8,7 +8,6 @@ import {
   Check,
   ChevronDown,
   Clock,
-  ExternalLink,
   Globe2,
   LayoutGrid,
   Menu,
@@ -32,6 +31,8 @@ import Chatbot from "./components/Chatbot";
 import Reveal from "./components/Reveal";
 import InitialLoader from "./components/InitialLoader";
 import AgencyGlobe from "./components/AgencyGlobe";
+import ProjectCarousel from "./components/ProjectCarousel";
+import { portfolioSource, realProjects } from "./data/projects";
 
 const navItems = [
   { label: "Servicios", href: "#servicios" },
@@ -108,7 +109,7 @@ const specialtyCards = [
   {
     icon: ShoppingCart,
     title: "E-commerce",
-    text: "Placeholders para tiendas, catálogos y flujos de compra que después podemos conectar a pagos, stock o envíos.",
+    text: "Tiendas, catálogos y flujos de compra conectados a pagos, stock, envíos o consultas por WhatsApp.",
   },
   {
     icon: Megaphone,
@@ -146,47 +147,6 @@ const agencyMessages = [
   "se vea mejor.",
   "conecte más.",
   "crezca online.",
-];
-
-const projectCards = [
-  {
-    eyebrow: "Home principal",
-    title: "Hero con fondo editable",
-    text: "Dejamos el contenedor preparado para que sumes tu foto o render sin tocar la estructura.",
-  },
-  {
-    eyebrow: "Servicios",
-    title: "Cards modulares",
-    text: "Cada bloque puede crecer con más items, links o ejemplos sin romper la composición.",
-  },
-  {
-    eyebrow: "Mensaje",
-    title: "Titulares grandes",
-    text: "La propuesta visual mantiene una lectura fuerte, simple y clara en desktop y mobile.",
-  },
-];
-
-const caseStudies = [
-  {
-    type: "Sitio institucional",
-    title: "Empresa de servicios",
-    text: "Home, servicios, beneficios, formulario y área visual preparada para fotos reales del equipo.",
-  },
-  {
-    type: "Catálogo online",
-    title: "Marca de productos",
-    text: "Grilla de productos, categorías, fichas y llamadas para consultar por WhatsApp o integrar carrito.",
-  },
-  {
-    type: "Identidad + web",
-    title: "Proyecto nuevo",
-    text: "Naming, tono, sistema gráfico y landing de lanzamiento con contenido listo para campañas.",
-  },
-  {
-    type: "Software a medida",
-    title: "Herramienta interna",
-    text: "Dashboard, carga de datos, reportes y flujos privados para simplificar operaciones del negocio.",
-  },
 ];
 
 const whyItems = [
@@ -235,8 +195,8 @@ const processSteps = [
   },
   {
     step: "03",
-    title: "Completas los fondos",
-    text: "Los bloques de imagen quedan marcados como placeholders para que reemplaces con tus visuales finales.",
+    title: "Publicamos y acompañamos",
+    text: "Probamos la experiencia, la ponemos online y dejamos una base preparada para medir, mantener y evolucionar.",
   },
 ];
 
@@ -251,8 +211,8 @@ const plans = [
   {
     name: "Base",
     price: "Landing",
-    text: "La página principal con el sistema visual listo para presentar la marca.",
-    features: ["Hero editable", "Secciones responsivas", "CTA y navegación"],
+    text: "Una página enfocada en presentar la propuesta y convertir visitas en consultas.",
+    features: ["Mensaje y estructura", "Diseño responsive", "CTA y contacto"],
   },
   {
     name: "Expandida",
@@ -271,9 +231,9 @@ const plans = [
 
 const faqs = [
   {
-    question: "¿Puedo cambiar las imágenes después?",
+    question: "¿Puedo actualizar textos e imágenes después?",
     answer:
-      "Sí. La home deja zonas de fondo preparadas para que reemplaces cada placeholder con la imagen final que quieras usar.",
+      "Sí. Organizamos el proyecto para que el contenido pueda actualizarse sin rehacer toda la experiencia.",
   },
   {
     question: "El estilo queda adaptado a celular?",
@@ -288,7 +248,7 @@ const faqs = [
   {
     question: "¿Pueden sumar tienda online o catálogo más adelante?",
     answer:
-      "Sí. Esta versión deja contenido y placeholders para e-commerce, catálogos y flujos comerciales que pueden integrarse en una etapa posterior.",
+      "Sí. Podemos comenzar con una presencia clara y sumar catálogo, pagos, stock, automatizaciones o herramientas internas cuando el negocio lo requiera.",
   },
 ];
 
@@ -940,122 +900,54 @@ export default function Home() {
       </section>
 
       <section className="projects-section" id="proyectos">
-        <div className="section-shell projects-layout">
+        <div className="section-shell projects-showcase-heading">
           <div className="projects-copy">
             <SectionTitle
-              eyebrow="Proyecto"
-              title="Una home armada para parecer final incluso antes de cargar las imágenes"
-              text="La estructura replica la dirección del mockup y combina movimiento, casos y llamados a la acción para que el portfolio se entienda de un vistazo."
+              eyebrow="Proyectos seleccionados"
+              title="Trabajo real: diseño, desarrollo e integraciones en producción"
+              text="Casos desarrollados por Oscar y el equipo de omcreativos: desde sitios comerciales y catálogos hasta paneles, pagos, seguridad y conexión con el back-end."
             />
-            <Reveal direction="left" delay={0.25}>
-              <PrimaryLink href="#proceso">
-                Ver cómo sigue
-                <ArrowRight size={18} />
-              </PrimaryLink>
-              <a className="projects-route-link" href="/proyectos">
-                Abrir ruta para clientes <ArrowRight size={16} />
-              </a>
-            </Reveal>
           </div>
-
-          <div className="projects-board">
-            <Reveal
-              as="a"
-              href="/proyectos"
-              className="projects-placeholder floating-element"
-              direction="right"
-              aria-label="Abrir ruta de proyectos"
-            >
-              <video
-                className="projects-preview-video"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster="/media/web-design-ui.jpg"
-                aria-label="Video de prueba de trabajo de diseño web"
-              >
-                <source src="/media/web-design-work.mp4" type="video/mp4" />
-              </video>
-              <span>Veamos algunos proyectos</span>
-            </Reveal>
-            <div className="projects-card-grid">
-              {projectCards.map((card, index) => (
-                <Reveal
-                  as="article"
-                  className="project-card"
-                  direction={index === 0 ? "up" : "right"}
-                  delay={index * 0.08}
-                  key={card.title}
-                >
-                  <span>{card.eyebrow}</span>
-                  <h3>{card.title}</h3>
-                  <p>{card.text}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
+          <Reveal className="projects-showcase-actions" direction="right" delay={0.15}>
+            <a className="projects-source-link" href={portfolioSource} target="_blank" rel="noreferrer">
+              Ver fuente pública
+            </a>
+            <PrimaryLink href="/proyectos">
+              Ver todos los casos <ArrowRight size={18} />
+            </PrimaryLink>
+          </Reveal>
         </div>
 
-        <div className="section-shell project-cases">
-          <SectionTitle
-            eyebrow="Casos de exito"
-            title="Ejemplos de lo que podemos construir juntos"
-            text="Una grilla de portfolio clara para mostrar rubros, soluciones y resultados sin obligar a la persona a leer demasiado."
-          />
+        <div className="projects-carousel-shell">
+          <ProjectCarousel projects={realProjects} />
+        </div>
 
-          <div className="case-study-grid">
-            {caseStudies.map((item, index) => (
-              <Reveal
-                as="article"
-                className="case-study-card"
-                direction={index % 2 === 0 ? "up" : "right"}
-                delay={(index % 2) * 0.08}
-                key={item.title}
-              >
-                <div className="case-image-placeholder">
-                  <img
-                    className="case-image-media"
-                    src={
-                      index === 0
-                        ? "/media/web-design-drag-drop.gif"
-                        : index === 4
-                          ? "/img/catalogo-boutique.png"
-                        : index % 2 === 0
-                          ? "/media/web-design-code.jpg"
-                          : "/media/web-design-ui.jpg"
-                    }
-                    alt={`Visual de prueba para ${item.title}`}
-                    loading="lazy"
-                  />
-                  <span className="case-image-overlay">
-                    {index === 0
-                      ? "Presentación visual para servicios"
-                      : index === 1
-                        ? "Catálogo y producto destacado"
-                        : "Interfaces listas para crecer"}
-                  </span>
-                </div>
-                <div>
-                  <span>{item.type}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  {item.href ? (
-                    <a
-                      className="case-study-link"
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Ver repositorio <ExternalLink size={14} />
-                    </a>
-                  ) : null}
-                </div>
-                <ExternalLink size={18} />
-              </Reveal>
-            ))}
-          </div>
+        <div className="section-shell projects-proof-grid">
+          <article>
+            <span>01</span>
+            <h3>Interfaz que se entiende</h3>
+            <p>Jerarquía, componentes y recorridos pensados para que cada acción importante sea evidente.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Desarrollo conectado</h3>
+            <p>Formularios, APIs, autenticación, bases de datos y pagos integrados según el alcance real.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Una base para crecer</h3>
+            <p>Código mantenible y decisiones técnicas que permiten sumar funciones sin empezar de nuevo.</p>
+          </article>
+        </div>
+
+        <div className="section-shell project-transparency-note">
+          <p>
+            <strong>Casos y testimonios, con respaldo.</strong> Publicamos trabajos comprobables y atribuimos
+            testimonios únicamente cuando la persona autoriza su nombre y sus palabras.
+          </p>
+          <a href="mailto:info@omcreativos.com?subject=Quiero%20compartir%20mi%20testimonio">
+            ¿Trabajaste con nosotros? Compartí tu experiencia <ArrowRight size={16} />
+          </a>
         </div>
       </section>
 
@@ -1065,7 +957,7 @@ export default function Home() {
             <SectionTitle
               eyebrow="Por qué elegirnos"
               title="Cercanía, criterio técnico y una web pensada para vender mejor"
-              text="La referencia trabaja mucho la confianza. En omcreativos lo traducimos a beneficios concretos: propiedad, tiempos claros, soporte y una base que puede evolucionar."
+              text="Trabajamos con beneficios concretos: propiedad, tiempos claros, soporte y una base que puede evolucionar con el negocio."
             />
           </div>
 
@@ -1121,12 +1013,12 @@ export default function Home() {
 
               <div className="commerce-stats">
                 <div>
-                  <span>Ventas este mes</span>
-                  <strong>+28%</strong>
+                  <span>Modalidad</span>
+                  <strong>Catálogo o tienda</strong>
                 </div>
                 <div>
-                  <span>Pedidos activos</span>
-                  <strong>14</strong>
+                  <span>Conversión</span>
+                  <strong>WhatsApp o pago</strong>
                 </div>
               </div>
 
@@ -1136,7 +1028,7 @@ export default function Home() {
                 </span>
                 <div>
                   <strong>Nueva consulta</strong>
-                  <small>Desde el catálogo · hace 2 min</small>
+                  <small>Consulta centralizada desde la web</small>
                 </div>
                 <span className="commerce-status">Lista</span>
               </div>
@@ -1205,8 +1097,8 @@ export default function Home() {
         <div className="section-shell faq-layout">
           <SectionTitle
             eyebrow="FAQ"
-            title="Preguntas comunes sobre esta recreación"
-            text="Dejé la página pensada para que cambies el contenido visual sin tener que rehacer la estructura."
+            title="Preguntas frecuentes antes de empezar"
+            text="Alcance, tiempos y crecimiento explicados de forma clara para tomar una decisión con contexto."
           />
 
           <div className="faq-list">
